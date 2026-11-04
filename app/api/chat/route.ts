@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { buildBusinessFacts } from "@/lib/business-facts";
 import { EMAIL, PHONE_DISPLAY, WHATSAPP_HREF } from "@/lib/contact";
 import { isMailConfigured, sendMail } from "@/lib/email/send";
+import { saveLead } from "@/lib/leads";
 import { checkRateLimit } from "@/lib/security/rateLimit";
 
 /*
@@ -70,10 +71,21 @@ async function submitProjectInquiry(b: InquiryArgs, source: string) {
   if (!b.name || !b.service || (!b.phone && !b.email)) {
     return { ok: false, error: "Name, the service, and a phone number or email are required." };
   }
-  if (!isMailConfigured()) {
-    console.error("[chat] Project inquiry not delivered: email is not configured (RESEND_API_KEY).");
-    return { ok: false, error: "Sending from chat is not available right now. Ask the visitor to use WhatsApp, phone, email or the contact form instead." };
-  }
+  // The inquiry counts as delivered once it is saved for the admin dashboard OR emailed.
+  const [saved, emailed] = await Promise.all([
+    saveLead({
+      name: b.name, email: b.email, phone: b.phone, company: b.company, service: b.service,
+      timeline: b.timeline, message: b.description, source: "ai-chat", sourcePage: source.replace(/^AI chat \(|\)$/g, ""),
+    }),
+    emailProjectInquiry(b, source),
+  ]);
+  if (saved || emailed) return { ok: true };
+  console.error("[chat] Project inquiry not delivered: lead storage and email both unavailable.");
+  return { ok: false, error: "Sending from chat is not available right now. Ask the visitor to use WhatsApp, phone, email or the contact form instead." };
+}
+
+async function emailProjectInquiry(b: InquiryArgs, source: string) {
+  if (!isMailConfigured()) return false;
   try {
     const rows = [
       ["Name", b.name],
@@ -104,10 +116,10 @@ async function submitProjectInquiry(b: InquiryArgs, source: string) {
       `,
       replyTo: b.email || undefined,
     });
-    return { ok: true };
+    return true;
   } catch (error) {
     console.error("[chat] Email send failed:", error);
-    return { ok: false, error: "Failed to send." };
+    return false;
   }
 }
 
@@ -132,9 +144,40 @@ const TOOLS = [
           required: ["name", "service"],
         },
       },
+      {
+        name: "prefill_contact_form",
+        description:
+          "Fill in the website's contact form for the visitor so they can review it and press Send themselves. Use this when the visitor wants to contact the team or start a project and prefers the form, or after they give their details. It only fills the form, it sends nothing.",
+        parameters: {
+          type: "OBJECT",
+          properties: {
+            name: { type: "STRING", description: "Visitor's full name if given, otherwise empty string." },
+            email: { type: "STRING", description: "Visitor's email if given, otherwise empty string." },
+            company: { type: "STRING", description: "Company name if given, otherwise empty string." },
+            service: { type: "STRING", enum: ["mobile", "web", "custom", "uiux", "api", "ai", "seo", "unsure"], description: "Closest matching service: mobile app, web app, custom software, UI/UX design, backend/API, AI automation, SEO, or unsure." },
+            message: { type: "STRING", description: "2-4 sentence project description written in first person from what the visitor said (what they want built, who it's for, any timeline)." },
+          },
+          required: ["service", "message"],
+        },
+      },
     ],
   },
 ];
+
+const FORM_SERVICES = new Set(["mobile", "web", "custom", "uiux", "api", "ai", "seo", "unsure"]);
+
+/** Model-supplied form values: strings only, trimmed and capped to the form's limits. */
+function cleanPrefill(args: Record<string, unknown>) {
+  const s = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+  const service = s(args.service, 20);
+  return {
+    name: s(args.name, 120),
+    email: s(args.email, 160),
+    company: s(args.company, 160),
+    service: FORM_SERVICES.has(service) ? service : "unsure",
+    message: s(args.message, 1500),
+  };
+}
 
 const SYSTEM_INSTRUCTION = `You are Kamboh AI, the friendly, knowledgeable AI assistant on the website of Kamboh Technologies (Private) Limited, a software house in Johar Town, Lahore, Pakistan.
 
@@ -171,6 +214,13 @@ You can send a project inquiry to the team directly from this chat. When a visit
 
 IMPORTANT: Do NOT call submit_project_inquiry until the visitor explicitly confirms. Always confirm details first.
 
+FILLING THE CONTACT FORM FOR THE VISITOR
+You can also fill in the website's contact form for the visitor with prefill_contact_form; they review it and press Send themselves.
+- When a visitor describes a project or says they want to get in touch, offer: "I can fill in the contact form for you, or send your inquiry straight from this chat. Which do you prefer?"
+- If they choose the form (or just want to fill it themselves), call prefill_contact_form right away with whatever you know: service and a 2-4 sentence first-person project description are enough; name, email and company are optional.
+- Never invent a name, email or company. Leave them empty if the visitor has not given them.
+- After calling it, reply in one short sentence, e.g. "I've filled in the contact form for you. Check the details and press Send Inquiry."
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 BUSINESS FACTS (generated from the website — your only source of truth)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -187,7 +237,9 @@ GOLDEN RULE: NEVER assume, invent, or add ANY information that is not in the BUS
 - The projects page shows EXAMPLE CONCEPTS, not real client work. Never describe them as past clients or real case studies. Never invent client names, project counts, years of experience, team size, ratings or reviews.
 - Do not make up timelines, guarantees, discounts, certifications or partnerships.
 - If a visitor asks something the facts do not answer, use the RULE 2 line.
-- Keep most answers under 100 words. Use simple hyphen bullets when helpful.
+- BE SHORT AND CONCISE. Answer in 1-3 short sentences (about 60 words at most). Use up to 4 short hyphen bullets only for lists. Never repeat the question, never add filler or long introductions.
+- Answer the exact question first, then at most one helpful next step (a page link, or an offer to fill the form or send an inquiry).
+- When a visitor asks about a specific service, give a one-line answer and link its detail page from the facts (e.g. ${"https://kambohtechnologies.com/services/mobile-app-development"}) for full details.
 - Plain text only — no Markdown, no bold, no headers, no code fences. You may include a page link or the WhatsApp link as plain text.
 - Be warm, professional, never pushy.
 - When a visitor describes a project, offer: "Would you like me to send your details to the team so they can set up a short discovery call?"
@@ -279,7 +331,7 @@ export async function POST(request: Request) {
       contents,
       tools: TOOLS,
       // Low temperature: answers must stick to the business facts, not improvise.
-      generationConfig: { temperature: 0.1, maxOutputTokens: 500 },
+      generationConfig: { temperature: 0.1, maxOutputTokens: 350 },
     });
 
     const callGemini = (reqBody: string) =>
@@ -305,6 +357,18 @@ export async function POST(request: Request) {
 
     const data = await response.json();
     const parts: GeminiPart[] = data.candidates?.[0]?.content?.parts || [];
+
+    // Form prefill needs no second model call: the browser fills the contact form with these values.
+    const prefillCall = parts.find((p) => p.functionCall?.name === "prefill_contact_form");
+    if (prefillCall?.functionCall) {
+      const prefill = cleanPrefill(prefillCall.functionCall.args || {});
+      const text = parts.map((p) => p.text ?? "").join("").trim();
+      return NextResponse.json({
+        reply: text || "I've filled in the contact form for you. Check the details and press Send Inquiry.",
+        model: MODEL,
+        prefill,
+      });
+    }
 
     const functionCall = parts.find((p) => p.functionCall);
     if (functionCall?.functionCall?.name === "submit_project_inquiry") {
@@ -341,7 +405,7 @@ export async function POST(request: Request) {
           },
         ],
         tools: TOOLS,
-        generationConfig: { temperature: 0.1, maxOutputTokens: 500 },
+        generationConfig: { temperature: 0.1, maxOutputTokens: 350 },
       });
 
       const followUpResponse = await callGemini(followUpBody);

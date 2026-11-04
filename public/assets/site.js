@@ -235,6 +235,24 @@
     const showErr = (el, text) => { const e = $('#e-' + el.id.slice(2)); e.textContent = text; el.setAttribute('aria-invalid', text ? 'true' : 'false'); };
     const clearErr = el => { if (rules[el.id]) showErr(el, ''); };
 
+    // Ask AI (ask-ai.js) can fill this form: directly on this page, or via sessionStorage after sending the visitor here.
+    const fillForm = p => {
+      if (!p) return;
+      const set = (id, v) => { const el = document.getElementById(id); if (el && v) { el.value = v; clearErr(el); } };
+      set('f-name', p.name); set('f-email', p.email); set('f-company', p.company); set('f-msg', p.message);
+      if (p.service && sel.querySelector(`option[value="${CSS.escape(p.service)}"]`)) { sel.value = p.service; clearErr(sel); }
+      counter.textContent = `${msg.value.length} / 1500`;
+      form.classList.add('is-prefilled');
+      setTimeout(() => form.classList.remove('is-prefilled'), 2400);
+      form.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      ($('#f-name').value ? ($('#f-email').value ? $('#submitBtn') : $('#f-email')) : $('#f-name')).focus({ preventScroll: true });
+    };
+    window.ktFillContactForm = fillForm;
+    try {
+      const saved = sessionStorage.getItem('kt-prefill');
+      if (saved) { sessionStorage.removeItem('kt-prefill'); setTimeout(() => fillForm(JSON.parse(saved)), 500); }
+    } catch {}
+
     // preselect a service from links such as /contact?service=web or in-page CTAs
     const want = new URLSearchParams(location.search).get('service');
     if (want && sel.querySelector(`option[value="${CSS.escape(want)}"]`)) sel.value = want;
@@ -247,8 +265,8 @@
       el.addEventListener('input', () => { if (el.getAttribute('aria-invalid') === 'true') showErr(el, rules[id](el.value)); });
       el.addEventListener('change', () => { if (el.getAttribute('aria-invalid') === 'true') showErr(el, rules[id](el.value)); });
     });
-    const ICON_INFO = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M10 9v5M10 6h.01"/></svg>';
-    const ICON_BAD = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M7 7l6 6M13 7l-6 6"/></svg>';
+    const ICON_INFO = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10ZM12 8v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.995 16h.009" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+    const ICON_BAD = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10ZM9.17 14.83l5.66-5.66M14.83 14.83 9.17 9.17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
     form.addEventListener('submit', e => {
       e.preventDefault();
       if ($('#f-web').value) return; // honeypot
@@ -285,6 +303,7 @@
             status.className = 'status info';
             status.innerHTML = `${ICON_INFO}<span><b>Thank you, your inquiry has been sent.</b> We'll reply by email with questions, a suggested approach and next steps.</span>`;
             form.reset(); counter.textContent = '0 / 1500';
+            if (window.gtag) gtag('event', 'generate_lead', { method: 'contact_form', service: sel.value || 'unknown' });
             Object.keys(rules).forEach(id => clearErr(document.getElementById(id)));
           } else {
             status.className = 'status bad';

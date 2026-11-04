@@ -246,7 +246,10 @@ svg{display:block}
 .card:hover::before,.card:hover::after{opacity:1}
 .card h3{font-size:clamp(1.3rem,1.1rem + .6vw,1.65rem);letter-spacing:-.03em;margin-bottom:10px}
 .card p{color:var(--muted);font-size:.95rem;line-height:1.6;max-width:46ch}
-.card .ill{position:relative;height:170px;margin:-6px -6px 22px;border-radius:16px;overflow:hidden;background:radial-gradient(80% 90% at 50% 100%,rgba(var(--acc),.14),transparent 70%)}
+.card .ill{position:relative;height:170px;margin:-6px -6px 22px;border-radius:16px;overflow:hidden;background:radial-gradient(80% 90% at 50% 100%,rgba(var(--acc),.14),transparent 70%);border:1px solid rgba(148,163,184,.12)}
+.card .card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:inherit;transition:transform .75s var(--ease),filter .6s var(--ease);display:block;z-index:1}
+.card:hover .card-img{transform:scale(1.05)}
+.card .ill::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,transparent 60%,rgba(10,14,24,.5));pointer-events:none;z-index:2}
 .card .go{margin-top:auto;padding-top:22px;display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem;color:rgb(var(--acc));align-self:flex-start;border-radius:8px}
 .card .go::after{content:"";width:18px;height:1px;background:currentColor;transition:width .45s var(--ease)}
 .card .go:hover::after{width:34px}
@@ -638,7 +641,7 @@ select.inp option{background:#0D111B;color:var(--ink)}
 [data-theme="light"] .tpanel{background:#fff}
 [data-theme="light"] .tp-text{color:#475569}
 [data-theme="light"] .proc-count b{background:linear-gradient(180deg,#0B1220,#94A3B8);-webkit-background-clip:text;background-clip:text}
-[data-theme="light"] .step h3{color:#94A3B8}
+[data-theme="light"] .step h3{color:#5B6779}
 [data-theme="light"] .step.on h3{color:var(--ink)}
 [data-theme="light"] .step.on .dot{color:var(--ink)}
 [data-theme="light"] .why-mark path:last-child{stroke:var(--ink)}
@@ -739,7 +742,7 @@ select.inp option{background:#0D111B;color:var(--ink)}
 }
 
 /* ---------- INNER PAGES ---------- */
-:root{--surface:#0E1422;--chk:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm-1.2 12.6L5 9.8l1.4-1.4 2.4 2.4 4.8-4.8L15 7.4z'/%3E%3C/svg%3E")}
+:root{--surface:#0E1422;--chk:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M12%202C6.49%202%202%206.49%202%2012s4.49%2010%2010%2010%2010-4.49%2010-10S17.51%202%2012%202Zm4.78%207.7-5.67%205.67a.75.75%200%200%201-1.06%200l-2.83-2.83a.754.754%200%200%201%200-1.06c.29-.29.77-.29%201.06%200l2.3%202.3%205.14-5.14c.29-.29.77-.29%201.06%200%20.29.29.29.76%200%201.06Z%22%20fill%3D%22%23000%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E")}
 [data-theme="light"]{--surface:#FFFFFF}
 [id]{scroll-margin-top:96px}
 .mmenu li a[aria-current]{color:var(--cyan)}
@@ -1120,3 +1123,46 @@ html.ask-ai-lock body{overflow:hidden}
 .ask-ai-inline{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
 .ask-ai-inline p{color:var(--muted);font-size:.92rem}
 .ask-ai-cta svg{width:18px;height:18px}
+
+/* Iconsax arrow used diagonally ("go to") */
+svg.diag{transform:rotate(-45deg)}
+.ring-cta:hover .ring svg.diag{transform:rotate(0)}
+.proj .go2:hover svg.diag{transform:rotate(-45deg) translateX(3px)}
+
+/* ---------- PERFORMANCE ---------- */
+/* Sections below the first screen skip layout and paint until scrolled near (big win on phones). */
+main > section:not(:first-child){content-visibility:auto;contain-intrinsic-size:auto 900px}
+/* Review stars: one element painted with a repeating star mask instead of five SVGs per card. */
+:root{--stars:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 18'%3E%3Cpath d='M9 .8l2.3 4.7 5.2.7-3.8 3.6.9 5.1L9 12.5l-4.6 2.4.9-5.1L1.5 6.2l5.2-.7z'/%3E%3C/svg%3E")}
+.rv-stars{display:inline-block;width:110px;height:18px;background:#FBBF24;-webkit-mask:var(--stars) left center/22px 18px repeat-x;mask:var(--stars) left center/22px 18px repeat-x}
+
+/* ---------- ACCESSIBILITY ---------- */
+/* Faint text meets WCAG AA contrast on the dark background; light theme keeps its own value. */
+:root{--faint:#7C8AA0}
+[data-theme="light"]{--faint:#5B6779}
+.foot .foot-h{font-family:var(--f-body);font-size:.8rem;font-weight:700;letter-spacing:.08em;color:var(--faint);margin:0 0 18px;text-transform:uppercase}
+
+/* ---------- SERVICE DETAIL PAGES (public/services/*.html) ---------- */
+.sd-visual{min-height:0}
+.sd-shot{position:relative;margin:0;width:100%;border-radius:24px;padding:10px;background:linear-gradient(150deg,rgba(var(--acc),.45),rgba(139,92,246,.2) 50%,rgba(var(--acc),.1));box-shadow:0 40px 90px -40px rgba(var(--acc),.7)}
+.sd-shot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:16px;background:var(--bg-2)}
+.sd-num{font-family:var(--f-mono);font-size:.8rem;color:var(--cyan)}
+.sd-rel{display:flex;flex-direction:column;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--surface);overflow:hidden;transition:border-color .3s,transform .5s var(--ease)}
+.sd-rel:hover{border-color:rgba(var(--acc),.6);transform:translateY(-4px)}
+.sd-rel-img{display:block;aspect-ratio:16/9;overflow:hidden;background:var(--bg-2)}
+.sd-rel-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.sd-rel:hover .sd-rel-img img{transform:scale(1.04)}
+.sd-rel-body{display:flex;flex-direction:column;gap:8px;padding:22px}
+.sd-rel-body b{font-family:var(--f-display);font-size:1.2rem;letter-spacing:-.02em}
+.sd-rel-body>span:not(.link-arrow){color:var(--muted);font-size:.92rem;line-height:1.55}
+.sd-rel .link-arrow{margin-top:6px;--acc:inherit}
+.sd-cta{display:grid;grid-template-columns:minmax(0,1.3fr) auto;gap:28px 48px;align-items:center;border-radius:28px;border:1px solid var(--line-2);padding:clamp(28px,4vw,52px);background:radial-gradient(60% 120% at 0% 0%,rgba(var(--acc),.16),transparent 60%),radial-gradient(50% 100% at 100% 100%,rgba(139,92,246,.14),transparent 60%),var(--surface)}
+.sd-cta .h2{margin-top:16px;font-size:clamp(1.7rem,1.1rem + 2vw,2.6rem)}
+.sd-cta .body{margin-top:14px}
+.sd-cta-actions{display:flex;flex-wrap:wrap;gap:12px}
+.svc .details-link{margin-left:18px}
+@media (max-width:960px){.sd-cta{grid-template-columns:1fr}}
+
+/* Ask AI filled the contact form: brief highlight so the visitor sees what changed. */
+.form{transition:box-shadow .5s var(--ease)}
+.form.is-prefilled{box-shadow:0 0 0 3px rgba(34,211,238,.55),0 30px 80px -30px rgba(34,211,238,.6)}

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { EMAIL, PHONE_DISPLAY, WHATSAPP_HREF } from "@/lib/contact";
 import { isMailConfigured, sendMail } from "@/lib/email/send";
+import { saveLead } from "@/lib/leads";
 import { checkRateLimit } from "@/lib/security/rateLimit";
 
 /** Contact form on Home and /contact (public/assets/site.js). Emails each inquiry to the team. */
@@ -66,11 +67,24 @@ export async function POST(request: Request) {
     }
   }
 
-  if (!isMailConfigured()) {
-    console.error("[contact] Inquiry not delivered: email is not configured (RESEND_API_KEY).");
-    return NextResponse.json({ error: `Sending is not available right now. ${FALLBACK}` }, { status: 503 });
-  }
+  let sourcePage = "";
+  try {
+    const referer = request.headers.get("referer");
+    if (referer) sourcePage = new URL(referer).pathname;
+  } catch {}
 
+  // The inquiry counts as delivered once it is saved for the admin dashboard OR emailed.
+  const [saved, emailed] = await Promise.all([
+    saveLead({ name, email, company, service, message, source: "form", sourcePage }),
+    emailInquiry({ name, email, company, service, message }),
+  ]);
+  if (saved || emailed) return NextResponse.json({ ok: true });
+  console.error("[contact] Inquiry not delivered: lead storage and email both unavailable.");
+  return NextResponse.json({ error: `We couldn't send your message. ${FALLBACK}` }, { status: 503 });
+}
+
+async function emailInquiry({ name, email, company, service, message }: Record<"name" | "email" | "company" | "service" | "message", string>) {
+  if (!isMailConfigured()) return false;
   const rows = [
     ["Name", name],
     ["Email", email],
@@ -92,9 +106,9 @@ export async function POST(request: Request) {
       html: `<div style="font-family:sans-serif;max-width:560px;"><h2 style="margin-bottom:4px;">New Project Inquiry</h2><p style="color:#666;margin-top:0;">Sent from the contact form on Kamboh Technologies</p><table style="border-collapse:collapse;width:100%;">${rows}</table></div>`,
       replyTo: email,
     });
-    return NextResponse.json({ ok: true });
+    return true;
   } catch (error) {
     console.error("[contact] Email send failed:", error);
-    return NextResponse.json({ error: `We couldn't send your message. ${FALLBACK}` }, { status: 502 });
+    return false;
   }
 }

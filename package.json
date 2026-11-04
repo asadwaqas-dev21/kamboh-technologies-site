@@ -6,9 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "assets": "node scripts/build-assets.mjs",
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "prebuild": "node scripts/build-assets.mjs",
+    "service-pages": "node scripts/build-service-pages.mjs"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
+    "firebase": "^13.2.0",
+    "firebase-admin": "^14.5.0",
+    "iconsax-react": "^0.0.8",
     "next": "16.4.4",
     "react": "19.3.0",
     "react-dom": "19.3.0"

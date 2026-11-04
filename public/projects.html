@@ -9,7 +9,8 @@
 <meta property="og:title" content="App &amp; Software Development Projects | Kamboh Technologies">
 <meta property="og:description" content="Example app and software projects by Kamboh Technologies: business dashboards, mobile commerce, CRM and booking platforms built in Lahore.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://kambohtechnologies.com/og-image.png">
+<meta property="og:image" content="https://kambohtechnologies.com/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Kamboh Technologies, software house in Lahore, Pakistan">
@@ -19,8 +20,17 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="App &amp; Software Development Projects | Kamboh Technologies">
 <meta name="twitter:description" content="Example app and software projects by Kamboh Technologies: business dashboards, mobile commerce, CRM and booking platforms built in Lahore.">
-<meta name="twitter:image" content="https://kambohtechnologies.com/og-image.png">
+<meta name="twitter:image" content="https://kambohtechnologies.com/og-image.jpg">
 <link rel="canonical" href="https://kambohtechnologies.com/projects">
+<link rel="alternate" hreflang="en" href="https://kambohtechnologies.com/projects">
+<link rel="alternate" hreflang="x-default" href="https://kambohtechnologies.com/projects">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="Kamboh Technologies (Private) Limited">
+<meta name="geo.region" content="PK-PB">
+<meta name="geo.placename" content="Lahore">
+<meta name="geo.position" content="31.4476958;74.2820224">
+<meta name="ICBM" content="31.4476958, 74.2820224">
+<link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#07090E">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
@@ -36,9 +46,17 @@
   if (t === 'light') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#F6F8FC');
 })();
 </script>
+<script>
+/* Google Analytics 4: only on the live domain, loaded after the page is interactive so it never slows first paint. */
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+if(/(^|.)kambohtechnologies.com$/.test(location.hostname)){gtag('js',new Date());gtag('config','G-8XN6PDE3ZV');
+addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-8XN6PDE3ZV';document.head.appendChild(s)},2000)})}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"></noscript>
 
 <script type="application/ld+json">
 {
@@ -62,7 +80,7 @@
       ]
     },
     {
-      "@type": "WebPage",
+      "@type": "CollectionPage",
       "@id": "https://kambohtechnologies.com/projects#webpage",
       "url": "https://kambohtechnologies.com/projects",
       "name": "App & Software Development Projects | Kamboh Technologies",
@@ -72,12 +90,17 @@
       },
       "about": {
         "@id": "https://kambohtechnologies.com/#organization"
+      },
+      "inLanguage": "en",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://kambohtechnologies.com/og-image.jpg"
       }
     }
   ]
 }
 </script>
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.min.css?v=1fcab2c7b1">
 </head>
 <body data-page="projects">
 
@@ -86,8 +109,8 @@
 <!-- NAV -->
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a href="/" class="logo" aria-label="Kamboh Technologies, back to top">
-      <img src="/logo.png" alt="" width="43" height="48">
+    <a href="/" class="logo">
+      <img src="/logo.webp" alt="" width="43" height="48">
       <span class="logo-word"><b>KAMBOH</b><span>TECHNOLOGIES</span></span>
     </a>
     <nav aria-label="Main">
@@ -103,8 +126,8 @@
     </nav>
     <div class="nav-cta">
       <button class="theme-btn" id="themeBtn" aria-label="Switch to light mode">
-        <svg class="sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2M10 16.2v2M1.8 10h2M16.2 10h2M4.2 4.2l1.4 1.4M14.4 14.4l1.4 1.4M4.2 15.8l1.4-1.4M14.4 5.6l1.4-1.4"/></svg>
-        <svg class="moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 12.4A7 7 0 0 1 7.6 3.5a7 7 0 1 0 8.9 8.9z"/></svg>
+        <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="m19.14 19.14-.13-.13m0-14.02.13-.13-.13.13ZM4.86 19.14l.13-.13-.13.13ZM12 2.08V2v.08ZM12 22v-.08.08ZM2.08 12H2h.08ZM22 12h-.08.08ZM4.99 4.99l-.13-.13.13.13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.03 12.42c.36 5.15 4.73 9.34 9.96 9.57 3.69.16 6.99-1.56 8.97-4.27.82-1.11.38-1.85-.99-1.6-.67.12-1.36.17-2.08.14C13 16.06 9 11.97 8.98 7.14c-.01-1.3.26-2.53.75-3.65.54-1.24-.11-1.83-1.36-1.3C4.41 3.86 1.7 7.85 2.03 12.42Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </button>
       <a href="/contact" class="btn btn-outline btn-sm magnetic">Let's Talk</a>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><span></span><span></span><span></span></button>
@@ -120,7 +143,7 @@
       <li><a href="/contact" data-nav="contact">Contact</a></li>
     </ol>
     <a href="/contact" class="btn btn-primary">Let's Talk
-      <svg class="arr" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg></a>
+      <svg class="arr" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M14.43 5.93L20.5 12l-6.07 6.07M3.5 12h16.83"></path></svg></a>
   </div>
 </header>
 
@@ -135,7 +158,7 @@
       <span class="kicker">Featured work</span>
       <h1 class="page-title" id="pageTitle">App and software projects <span class="grad">we build for businesses.</span></h1>
       <p class="lead">Each concept pairs a business problem with the product that solves it, and the stack we would use to build it.</p>
-      <p class="note"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M10 9v5M10 6h.01"/></svg>These four are example concepts that show the kind of products we build. Replace them with real case studies as they are published.</p>
+      <p class="note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10ZM12 8v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.995 16h.009" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>These four are example concepts that show the kind of products we build. Replace them with real case studies as they are published.</p>
     </div>
     <div class="ph-visual">
       <svg class="ph-rings" viewBox="0 0 400 400" aria-hidden="true"><g class="r1"><circle cx="200" cy="200" r="190" fill="none" stroke="rgba(148,163,184,.22)" stroke-dasharray="2 8"/><circle cx="200" cy="10" r="4" fill="#22D3EE"/></g><g class="r2"><circle cx="200" cy="200" r="140" fill="none" stroke="rgba(139,92,246,.32)"/><circle cx="340" cy="200" r="3.5" fill="#D946EF"/></g></svg>
@@ -165,7 +188,7 @@
     <article class="proj case" style="--acc:59,130,246" id="business-platform">
       <div class="shot" data-reveal="mask">
           <span class="badge">Example concept</span>
-          <img class="shot-img" src="/projects/business-platform.jpg" alt="Business Management Platform UI Preview" loading="lazy" width="600" height="412">
+          <img class="shot-img" src="/projects/business-platform.webp" alt="Business Management Platform UI Preview" loading="lazy" width="600" height="412">
         </div>
       <div data-reveal>
         <span class="proj-cat">Web platform</span>
@@ -176,14 +199,14 @@
           <div><dt>Key features</dt><dd><ul class="checks"><li>Live sales, stock and staff figures per branch</li><li>Low-stock alerts and transfer requests</li><li>Role-based access for owners, managers and staff</li><li>Exportable daily and monthly reports</li></ul></dd></div>
           <div><dt>Stack</dt><dd><ul class="tags"><li>Next.js</li><li>PostgreSQL</li><li>REST APIs</li></ul></dd></div>
         </dl>
-        <a href="/contact?service=web" class="go2">Plan a project like this <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
+        <a href="/contact?service=web" class="go2">Plan a project like this <svg class="diag" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M14.43 5.93L20.5 12l-6.07 6.07M3.5 12h16.83"></path></svg></a>
       </div>
     </article>
 
     <article class="proj case" style="--acc:217,70,239" id="mobile-commerce">
       <div class="shot" data-reveal="mask">
           <span class="badge">Example concept</span>
-          <img class="shot-img" src="/projects/mobile-commerce.jpg" alt="Mobile Commerce Application Preview" loading="lazy" width="600" height="412">
+          <img class="shot-img" src="/projects/mobile-commerce.webp" alt="Mobile Commerce Application Preview" loading="lazy" width="600" height="412">
         </div>
       <div data-reveal>
         <span class="proj-cat">Mobile app</span>
@@ -194,14 +217,14 @@
           <div><dt>Key features</dt><dd><ul class="checks"><li>Fast catalogue search with filters</li><li>Cart, wallet and card payments</li><li>Live order status with push notifications</li><li>One-tap reorder from order history</li></ul></dd></div>
           <div><dt>Stack</dt><dd><ul class="tags"><li>Flutter</li><li>Dart</li><li>Firebase</li></ul></dd></div>
         </dl>
-        <a href="/contact?service=mobile" class="go2">Plan a project like this <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
+        <a href="/contact?service=mobile" class="go2">Plan a project like this <svg class="diag" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M14.43 5.93L20.5 12l-6.07 6.07M3.5 12h16.83"></path></svg></a>
       </div>
     </article>
 
     <article class="proj case" style="--acc:34,211,238" id="custom-crm">
       <div class="shot" data-reveal="mask">
           <span class="badge">Example concept</span>
-          <img class="shot-img" src="/projects/custom-crm.jpg" alt="Custom CRM Solution Preview" loading="lazy" width="600" height="412">
+          <img class="shot-img" src="/projects/custom-crm.webp" alt="Custom CRM Solution Preview" loading="lazy" width="600" height="412">
         </div>
       <div data-reveal>
         <span class="proj-cat">Custom software</span>
@@ -212,14 +235,14 @@
           <div><dt>Key features</dt><dd><ul class="checks"><li>Drag-and-drop pipeline stages</li><li>Automatic follow-up reminders</li><li>Full contact and conversation history</li><li>Team performance reports</li></ul></dd></div>
           <div><dt>Stack</dt><dd><ul class="tags"><li>React</li><li>Node.js</li><li>Supabase</li></ul></dd></div>
         </dl>
-        <a href="/contact?service=custom" class="go2">Plan a project like this <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
+        <a href="/contact?service=custom" class="go2">Plan a project like this <svg class="diag" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M14.43 5.93L20.5 12l-6.07 6.07M3.5 12h16.83"></path></svg></a>
       </div>
     </article>
 
     <article class="proj case" style="--acc:139,92,246" id="service-platform">
       <div class="shot" data-reveal="mask">
           <span class="badge">Example concept</span>
-          <img class="shot-img" src="/projects/service-platform.jpg" alt="Digital Service Platform Preview" loading="lazy" width="600" height="412">
+          <img class="shot-img" src="/projects/service-platform.webp" alt="Digital Service Platform Preview" loading="lazy" width="600" height="412">
         </div>
       <div data-reveal>
         <span class="proj-cat">Web and mobile</span>
@@ -230,7 +253,7 @@
           <div><dt>Key features</dt><dd><ul class="checks"><li>Online booking with live availability</li><li>Deposits and payments at checkout</li><li>Automatic reminders before each appointment</li><li>Staff app with daily schedules</li></ul></dd></div>
           <div><dt>Stack</dt><dd><ul class="tags"><li>Next.js</li><li>Flutter</li><li>Supabase</li></ul></dd></div>
         </dl>
-        <a href="/contact?service=web" class="go2">Plan a project like this <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
+        <a href="/contact?service=web" class="go2">Plan a project like this <svg class="diag" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M14.43 5.93L20.5 12l-6.07 6.07M3.5 12h16.83"></path></svg></a>
       </div>
     </article>
   </div>
@@ -243,32 +266,32 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="/" class="logo" aria-label="Kamboh Technologies, back to top">
-          <img src="/logo.png" alt="" width="43" height="48" loading="lazy">
+        <a href="/" class="logo">
+          <img src="/logo.webp" alt="" width="43" height="48" loading="lazy">
           <span class="logo-word"><b>KAMBOH</b><span>TECHNOLOGIES</span></span>
         </a>
         <p>Kamboh Technologies (Private) Limited is a software house in Johar Town, Lahore, building mobile apps, web platforms and custom software for businesses at home and abroad.</p>
         <div class="socials" aria-label="Social profiles">
-          <a href="https://www.instagram.com/kambohtechnologies/" target="_blank" rel="noopener" class="ig" aria-label="Kamboh Technologies on Instagram"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.75" y="1.75" width="12.5" height="12.5" rx="3.5"/><circle cx="8" cy="8" r="3"/><circle cx="11.9" cy="4.1" r=".8" fill="currentColor" stroke="none"/></svg>Instagram</a>
+          <a href="https://www.instagram.com/kambohtechnologies/" target="_blank" rel="noopener" class="ig" aria-label="Kamboh Technologies on Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 22h6c5 0 7-2 7-7V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.636 7h.012" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Instagram</a>
           <span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.5 5.5h2v7h-2zM4.5 2.5a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM7 5.5h1.9v1c.3-.6 1-1.1 2.1-1.1 2 0 2.5 1.3 2.5 3v4.1h-2V8.9c0-.8 0-1.8-1.1-1.8s-1.3.9-1.3 1.8v3.6H7z"/></svg>LinkedIn (add link)</span>
           <a href="https://github.com/Kamboh-Technologies-Private-Limited" target="_blank" rel="noopener" aria-label="Kamboh Technologies on GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 0 0-2.2 13.6c.3.1.5-.2.5-.4v-1.3c-2 .4-2.4-.9-2.4-.9-.3-.8-.8-1-.8-1-.6-.4.1-.4.1-.4.7 0 1.1.7 1.1.7.6 1.1 1.7.8 2.1.6.1-.5.3-.8.4-1-1.6-.2-3.2-.8-3.2-3.5 0-.8.3-1.4.7-1.9 0-.2-.3-.9.1-1.9 0 0 .6-.2 1.9.7a6.6 6.6 0 0 1 3.5 0c1.3-.9 1.9-.7 1.9-.7.4 1 .1 1.7.1 1.9.5.5.7 1.1.7 1.9 0 2.7-1.6 3.3-3.2 3.5.3.2.5.7.5 1.3v2c0 .2.2.5.5.4A7 7 0 0 0 8 1z"/></svg>GitHub</a>
           <span><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M9.3 6.9 14 1.5h-1.1L8.8 6.2 5.5 1.5H1.7l4.9 7-4.9 5.6h1.1L7.1 9.2l3.5 4.9h3.8zM7.7 8.6l-.5-.7-4-5.6h1.7l3.2 4.5.5.7 4.2 5.8h-1.7z"/></svg>X (add link)</span>
         </div>
       </div>
       <div>
-        <h4>Services</h4>
+        <p class="foot-h">Services</p>
         <ul>
-          <li><a href="/services#mobile">Mobile apps</a></li>
-          <li><a href="/services#web">Web applications</a></li>
-          <li><a href="/services#custom">Custom software</a></li>
-          <li><a href="/services#uiux">UI/UX design</a></li>
-          <li><a href="/services#api">Backend &amp; APIs</a></li>
-          <li><a href="/services#ai">AI automation</a></li>
-          <li><a href="/services#seo">SEO &amp; growth</a></li>
+          <li><a href="/services/mobile-app-development">Mobile apps</a></li>
+          <li><a href="/services/web-application-development">Web applications</a></li>
+          <li><a href="/services/custom-software-development">Custom software</a></li>
+          <li><a href="/services/ui-ux-design">UI/UX design</a></li>
+          <li><a href="/services/backend-api-development">Backend &amp; APIs</a></li>
+          <li><a href="/services/ai-automation">AI automation</a></li>
+          <li><a href="/services/seo-digital-growth">SEO &amp; growth</a></li>
         </ul>
       </div>
       <div>
-        <h4>Company</h4>
+        <p class="foot-h">Company</p>
         <ul>
           <li><a href="/about">About</a></li>
           <li><a href="/about#team">Team</a></li>
@@ -281,10 +304,11 @@
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <p class="foot-h">Contact</p>
         <ul>
-          <li><a href="mailto:kambohtechnologies@gmail.com">kambohtechnologies@gmail.com</a></li>
+          <li><a href="mailto:info@kambohtechnologies.com">info@kambohtechnologies.com</a></li>
           <li><a href="tel:+923028207226">+92 302 8207226</a></li>
+          <li><a href="tel:+14168715643">+1 (416) 871-5643</a></li>
           <li><a href="https://www.google.com/maps/place/Kamboh+Technologies+(Private)+Limited/@31.4476958,74.2820224,17z/data=!4m6!3m5!1s0x3919012af9d9c96b:0xe02cf5b1ba3bca29!8m2!3d31.4476958!4d74.2820224!16s%2Fg%2F11_00lnghq" target="_blank" rel="noopener">Johar Town, Lahore, Pakistan</a></li>
         </ul>
       </div>
@@ -298,10 +322,10 @@
   </div>
 </footer>
 
-<button class="to-top" id="toTop" aria-label="Scroll to top"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 16V4M5 9l5-5 5 5"/></svg></button>
+<button class="to-top" id="toTop" aria-label="Scroll to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M18.07 9.57L12 3.5 5.93 9.57M12 20.5V3.67"></path></svg></button>
 
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="/assets/site.js"></script>
-<script src="/assets/ask-ai.js" defer></script>
+<script src="/assets/vendor/lenis-1.1.13.min.js" defer></script>
+<script src="/assets/site.min.js?v=67403d99ad" defer></script>
+<script src="/assets/ask-ai.min.js?v=4431a6d31a" defer></script>
 </body>
 </html>

@@ -22,19 +22,31 @@
     disclaimerPrefix: 'AI answers can be wrong; our team confirms every detail. Or message us on',
     disclaimerLink: 'WhatsApp',
     buttonLabel: 'Ask AI',
-    sent: 'Inquiry sent'
+    sent: 'Inquiry sent',
+    filled: 'Contact form filled'
   };
 
-  const svg = (d, size = 19, extra = '') => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${extra}>${d}</svg>`;
+  /** Puts Ask AI's suggested values into the contact form: here if this page has one, otherwise on /contact. */
+  function applyPrefill(p) {
+    if (document.getElementById('form') && window.ktFillContactForm) {
+      if (matchMedia('(max-width: 1023px)').matches) setTimeout(() => setOpen(false), 900);
+      window.ktFillContactForm(p);
+    } else {
+      try { sessionStorage.setItem('kt-prefill', JSON.stringify(p)); } catch {}
+      setTimeout(() => { location.href = '/contact#form'; }, 1200);
+    }
+  }
+
+  // Iconsax icons (https://iconsax.io), pre-rendered to static SVG.
   const ICON = {
-    chat: svg('<path d="M8 9h8M8 13h6"/><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5l-5 3v-3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z"/>', 18),
-    close: svg('<path d="M18 6 6 18M6 6l12 12"/>', 20),
-    reset: svg('<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>'),
-    send: svg('<path d="M12 19V5M5 12l7-7 7 7"/>'),
-    image: svg('<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/><path d="M16 5h6M19 2v6"/>'),
-    up: svg('<path d="M7 10v12M15 5.9 14 10h5.8a2 2 0 0 1 2 2.3l-1.4 8a2 2 0 0 1-2 1.7H7V10l4-8a3.1 3.1 0 0 1 4 3.9z"/>', 15),
-    down: svg('<path d="M17 14V2M9 18.1 10 14H4.2a2 2 0 0 1-2-2.3l1.4-8a2 2 0 0 1 2-1.7H17v12l-4 8a3.1 3.1 0 0 1-4-3.9z"/>', 15),
-    check: svg('<path d="M20 6 9 17l-5-5"/>', 14)
+    chat: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 2H8C4 2 2 4 2 8v13c0 .55.45 1 1 1h13c4 0 6-2 6-6V8c0-4-2-6-6-6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 9.5h10M7 14.5h7" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    close: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10ZM9.17 14.83l5.66-5.66M14.83 14.83 9.17 9.17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    reset: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.25 22h4.5C15.5 22 17 20.5 17 16.75v-4.5C17 8.5 15.5 7 11.75 7h-4.5C3.5 7 2 8.5 2 12.25v4.5C2 20.5 3.5 22 7.25 22ZM22 9c0-3.87-3.13-7-7-7l1.05 1.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    send: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M18.07 9.57L12 3.5 5.93 9.57M12 20.5V3.67"></path></svg>',
+    image: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M13 2H9C4 2 2 4 2 9v6c0 5 2 7 7 7h6c5 0 7-2 7-7v-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.75 5h5.5M18.5 7.75v-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path><path d="m2.67 18.95 4.93-3.31c.79-.53 1.93-.47 2.64.14l.33.29c.78.67 2.04.67 2.82 0l4.16-3.57c.78-.67 2.04-.67 2.82 0L22 13.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    up: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7.48 18.35 3.1 2.4c.4.4 1.3.6 1.9.6h3.8c1.2 0 2.5-.9 2.8-2.1l2.4-7.3c.5-1.4-.4-2.6-1.9-2.6h-4c-.6 0-1.1-.5-1-1.2l.5-3.2c.2-.9-.4-1.9-1.3-2.2-.8-.3-1.8.1-2.2.7l-4.1 6.1" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></path><path d="M2.38 18.35v-9.8c0-1.4.6-1.9 2-1.9h1c1.4 0 2 .5 2 1.9v9.8c0 1.4-.6 1.9-2 1.9h-1c-1.4 0-2-.5-2-1.9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    down: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m16.52 5.65-3.1-2.4c-.4-.4-1.3-.6-1.9-.6h-3.8c-1.2 0-2.5.9-2.8 2.1l-2.4 7.3c-.5 1.4.4 2.6 1.9 2.6h4c.6 0 1.1.5 1 1.2l-.5 3.2c-.2.9.4 1.9 1.3 2.2.8.3 1.8-.1 2.2-.7l4.1-6.1" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></path><path d="M21.62 5.65v9.8c0 1.4-.6 1.9-2 1.9h-1c-1.4 0-2-.5-2-1.9v-9.8c0-1.4.6-1.9 2-1.9h1c1.4 0 2 .5 2 1.9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    check: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="m7.75 12 2.83 2.83 5.67-5.66" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
   };
 
   let open = false, pending = false, slow = false, slowTimer = 0, nextId = 2;
@@ -140,6 +152,7 @@
   function setOpen(next) {
     open = next;
     if (open && !panel) buildPanel();
+    if (open && window.gtag) gtag('event', 'ask_ai_open');
     root.classList.toggle('is-open', open);
     launcher.hidden = open;
     launcher.setAttribute('aria-expanded', String(open));
@@ -171,6 +184,7 @@
         p.appendChild(linkify(m.content));
         li.appendChild(p);
         if (m.quoteSent) li.appendChild(h('span', 'ask-ai-quote-badge', `${ICON.check}${T.sent}`));
+        if (m.prefilled) li.appendChild(h('span', 'ask-ai-quote-badge', `${ICON.check}${T.filled}`));
         if (m.id !== INTRO_ID && !m.error) {
           const vote = h('div', 'ask-ai-vote');
           ['up', 'down'].forEach(choice => {
@@ -226,8 +240,10 @@
       messages.push({
         id: nextId++, role: 'assistant',
         content: res.ok && data.reply ? data.reply : data.error || T.unavailable,
-        error: !res.ok, quoteSent: !!data.quoteSent
+        error: !res.ok, quoteSent: !!data.quoteSent, prefilled: !!data.prefill
       });
+      if (data.quoteSent && window.gtag) gtag('event', 'generate_lead', { method: 'ask_ai' });
+      if (data.prefill) applyPrefill(data.prefill);
     } catch {
       messages.push({ id: nextId++, role: 'assistant', content: T.unavailable, error: true });
     } finally {

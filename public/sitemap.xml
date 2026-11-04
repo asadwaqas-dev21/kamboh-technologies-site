@@ -1,33 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://kambohtechnologies.com/</loc>
     <lastmod>2026-11-04</lastmod>
     <priority>1.0</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/og-image.jpg</image:loc><image:title>Kamboh Technologies, software house in Lahore</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/services/mobile-app.webp</image:loc><image:title>Mobile App Development</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/services/web-app.webp</image:loc><image:title>Web Application Development</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/services/custom-software.webp</image:loc><image:title>Custom Software Solutions</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/services/uiux-design.webp</image:loc><image:title>UI/UX Design</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/services/backend-api.webp</image:loc><image:title>Backend &amp; API Development</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/services/ai-automation.webp</image:loc><image:title>AI-Powered Automation</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/services/seo-growth.webp</image:loc><image:title>SEO &amp; Digital Growth</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/business-platform.webp</image:loc><image:title>Business Management Platform UI Preview</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/mobile-commerce.webp</image:loc><image:title>Mobile Commerce Application Preview</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/custom-crm.webp</image:loc><image:title>Custom CRM Solution Preview</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/service-platform.webp</image:loc><image:title>Digital Service Platform Preview</image:title></image:image>
   </url>
   <url>
     <loc>https://kambohtechnologies.com/about</loc>
     <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/og-image.jpg</image:loc><image:title>Kamboh Technologies, software house in Lahore</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/about-vision.webp</image:loc><image:title>Software Engineering Innovation at Kamboh Technologies</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/asad-waqas.webp</image:loc><image:title>Asad Waqas</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/ahmad-waqas.webp</image:loc><image:title>Ahmad Waqas</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/abdul-sattar.webp</image:loc><image:title>Abdul Sattar</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/faisal-naveed.webp</image:loc><image:title>Faisal Naveed</image:title></image:image>
   </url>
   <url>
     <loc>https://kambohtechnologies.com/services</loc>
     <lastmod>2026-11-04</lastmod>
     <priority>0.9</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/og-image.jpg</image:loc><image:title>Kamboh Technologies, software house in Lahore</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/mobile-commerce.webp</image:loc><image:title>Mobile App UI preview</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/business-platform.webp</image:loc><image:title>Web Application Dashboard preview</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/custom-crm.webp</image:loc><image:title>Custom CRM &amp; Software preview</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/service-platform.webp</image:loc><image:title>UI/UX design prototype preview</image:title></image:image>
   </url>
   <url>
     <loc>https://kambohtechnologies.com/projects</loc>
     <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/og-image.jpg</image:loc><image:title>Kamboh Technologies, software house in Lahore</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/business-platform.webp</image:loc><image:title>Business Management Platform UI Preview</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/mobile-commerce.webp</image:loc><image:title>Mobile Commerce Application Preview</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/custom-crm.webp</image:loc><image:title>Custom CRM Solution Preview</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/projects/service-platform.webp</image:loc><image:title>Digital Service Platform Preview</image:title></image:image>
   </url>
   <url>
     <loc>https://kambohtechnologies.com/technologies</loc>
     <lastmod>2026-11-04</lastmod>
     <priority>0.7</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/og-image.jpg</image:loc><image:title>Kamboh Technologies, software house in Lahore</image:title></image:image>
   </url>
   <url>
     <loc>https://kambohtechnologies.com/contact</loc>
     <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/og-image.jpg</image:loc><image:title>Kamboh Technologies, software house in Lahore</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/services/mobile-app-development</loc>
+    <lastmod>2026-11-04</lastmod>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/services/mobile-app.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/services/web-application-development</loc>
+    <lastmod>2026-11-04</lastmod>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/services/web-app.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/services/custom-software-development</loc>
+    <lastmod>2026-11-04</lastmod>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/services/custom-software.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/services/ui-ux-design</loc>
+    <lastmod>2026-11-04</lastmod>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/services/uiux-design.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/services/backend-api-development</loc>
+    <lastmod>2026-11-04</lastmod>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/services/backend-api.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/services/ai-automation</loc>
+    <lastmod>2026-11-04</lastmod>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/services/ai-automation.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/services/seo-digital-growth</loc>
+    <lastmod>2026-11-04</lastmod>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/services/seo-growth.webp</image:loc></image:image>
   </url>
 </urlset>

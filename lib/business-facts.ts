@@ -1,11 +1,12 @@
 import { ADDRESS, COMPANY_NAME, EMAIL, NTN, PHONE_DISPLAY, SECP_CUIN, SITE_URL, WHATSAPP_HREF } from "./contact";
 
-type Service = { id: string; title: string; summary: string; included: string[]; stack: string[] };
+type Service = { id: string; slug: string; title: string; summary: string; included: string[]; stack: string[] };
 
 /** The seven services, as described on /services. */
 export const SERVICES: Service[] = [
   {
     id: "mobile",
+    slug: "mobile-app-development",
     title: "Mobile App Development",
     summary: "iOS and Android apps from one Flutter codebase, with offline support, push notifications and app-store release handled for the client.",
     included: ["Product scoping and screen-by-screen user flows", "Flutter app for iOS and Android from one codebase", "Sign-in, payments, push notifications and offline mode", "App Store and Google Play submission", "Crash reporting and post-launch updates"],
@@ -13,6 +14,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "web",
+    slug: "web-application-development",
     title: "Web Application Development",
     summary: "Fast, accessible web apps and portals built with React and Next.js, from customer dashboards to booking systems.",
     included: ["Responsive interfaces that work on every screen size", "Customer portals, dashboards and admin panels", "Roles, permissions and secure sign-in", "Accessibility and performance checks before launch", "Hosting, deployment and staging environments"],
@@ -20,6 +22,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "custom",
+    slug: "custom-software-development",
     title: "Custom Software Solutions",
     summary: "Inventory, HR, billing or operations software shaped around how the client's team works, replacing spreadsheets and manual steps.",
     included: ["Process mapping with the people who do the work", "Inventory, HR, billing and operations modules", "Data migration from spreadsheets or older systems", "Reports and exports managers use", "Training and handover documentation"],
@@ -27,6 +30,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "uiux",
+    slug: "ui-ux-design",
     title: "UI/UX Design",
     summary: "Research-led interface design, clickable prototypes and design systems developers can build from directly.",
     included: ["User research and journey mapping", "Wireframes and high-fidelity screens", "Clickable prototypes for feedback and testing", "A reusable design system", "Developer-ready handoff"],
@@ -34,6 +38,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "api",
+    slug: "backend-api-development",
     title: "Backend & API Development",
     summary: "Secure APIs, databases and integrations with payment gateways, ERPs and third-party services, documented and built to grow.",
     included: ["Database design for integrity and reporting", "Versioned REST APIs with clear documentation", "Payment gateway, ERP and third-party integrations", "Authentication, permissions and audit logs", "Background jobs, backups and monitoring"],
@@ -41,6 +46,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "ai",
+    slug: "ai-automation",
     title: "AI-Powered Automation",
     summary: "Practical AI for real workflows: document processing, support assistants and automations that take repetitive work off a team. Starts with one measurable task.",
     included: ["Finding the repetitive tasks worth automating", "Reading invoices, forms and documents into business systems", "Support and internal knowledge assistants", "Human review steps where accuracy matters", "Usage and quality tracking"],
@@ -48,6 +54,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "seo",
+    slug: "seo-digital-growth",
     title: "SEO & Digital Growth",
     summary: "Technical SEO, site speed and clear content structure so the right customers can find a business, with honest reporting.",
     included: ["Technical SEO audit and fixes", "Page speed and Core Web Vitals improvements", "Site structure, metadata and structured data", "Analytics and search console setup", "Monthly reports in plain language"],
@@ -62,7 +69,7 @@ export const SERVICES: Service[] = [
 export function buildBusinessFacts(): string {
   const services = SERVICES.map(
     (s) =>
-      `### ${s.title} (${SITE_URL}/services#${s.id})\n${s.summary}\nIncluded:\n${s.included.map((i) => `- ${i}`).join("\n")}` +
+      `### ${s.title} (${SITE_URL}/services/${s.slug})\n${s.summary}\nIncluded:\n${s.included.map((i) => `- ${i}`).join("\n")}` +
       (s.stack.length ? `\nTypical stack: ${s.stack.join(", ")}` : ""),
   ).join("\n\n");
 
@@ -80,7 +87,7 @@ export function buildBusinessFacts(): string {
 - Registered with SECP (Corporate Unique Identification No. ${SECP_CUIN}), incorporated 5 June 2025 under the Companies Act, 2017
 - FBR NTN: ${NTN}, income tax status active
 - Works with clients at home and abroad, with video calls, a shared project board and updates scheduled around the client's time zone
-- Office hours: not published on the website
+- Office hours: Monday to Friday, 6:00 AM to 10:00 PM Pakistan time (PKT); closed Saturday and Sunday
 - Prices: not published. Every project gets a written scope and estimate after a short discovery call.
 
 ## Leadership

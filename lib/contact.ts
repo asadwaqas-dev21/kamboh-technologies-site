@@ -1,7 +1,7 @@
 /** Company contact details, shared by the AI assistant and its emails. Keep in sync with the site footer. */
 export const COMPANY_NAME = "Kamboh Technologies (Private) Limited";
 export const SITE_URL = "https://kambohtechnologies.com";
-export const EMAIL = "kambohtechnologies@gmail.com";
+export const EMAIL = "info@kambohtechnologies.com";
 export const PHONE_DISPLAY = "+92 302 8207226";
 export const WHATSAPP_NUMBER = "923028207226";
 export const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}`;
