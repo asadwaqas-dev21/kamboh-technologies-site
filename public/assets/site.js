@@ -266,12 +266,32 @@
       }
       const btn = $('#submitBtn');
       btn.disabled = true; btn.style.opacity = .7;
-      setTimeout(() => {
-        btn.disabled = false; btn.style.opacity = '';
-        status.className = 'status info';
-        status.innerHTML = `${ICON_INFO}<span><b>Your inquiry passed validation but was not sent.</b> This is a demo form with no backend connected. To receive inquiries, connect it to an email service or API endpoint.<br><button type="button" id="resetForm">Clear the form</button></span>`;
-        $('#resetForm').addEventListener('click', () => { form.reset(); counter.textContent = '0 / 1500'; status.hidden = true; Object.keys(rules).forEach(id => clearErr(document.getElementById(id))); $('#f-name').focus(); });
-      }, 500);
+      status.hidden = true;
+      // Sent to app/api/contact/route.ts, which emails the inquiry to the team.
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: $('#f-name').value, email: $('#f-email').value, company: $('#f-company').value,
+          service: sel.value, message: msg.value, website: $('#f-web').value
+        })
+      })
+        .then(res => res.json().catch(() => ({})).then(data => ({ ok: res.ok && data.ok, error: data.error })))
+        .catch(() => ({ ok: false }))
+        .then(({ ok, error }) => {
+          btn.disabled = false; btn.style.opacity = '';
+          status.hidden = false;
+          if (ok) {
+            status.className = 'status info';
+            status.innerHTML = `${ICON_INFO}<span><b>Thank you, your inquiry has been sent.</b> We'll reply by email with questions, a suggested approach and next steps.</span>`;
+            form.reset(); counter.textContent = '0 / 1500';
+            Object.keys(rules).forEach(id => clearErr(document.getElementById(id)));
+          } else {
+            status.className = 'status bad';
+            status.innerHTML = `${ICON_BAD}<span><b>Your message wasn't sent.</b> <span class="status-msg"></span></span>`;
+            $('.status-msg', status).textContent = error || 'Please try again, or WhatsApp us at +92 302 8207226.';
+          }
+        });
     });
   }
 })();
