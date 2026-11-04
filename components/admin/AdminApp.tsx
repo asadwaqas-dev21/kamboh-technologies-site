@@ -34,7 +34,14 @@ export default function AdminApp() {
           setPhase("ready");
         } else {
           const data = await res.json().catch(() => ({}));
-          setDenied(data.error || "This account does not have admin access.");
+          // Only a 403 means "not on the allowlist"; anything else is a server or session problem.
+          const fallback =
+            res.status === 403
+              ? "This account does not have admin access."
+              : res.status >= 500
+                ? `The admin server is not responding correctly (error ${res.status}). Please check the hosting environment variables and server logs.`
+                : `Could not verify your access (error ${res.status}). Please sign in again.`;
+          setDenied(data.error || fallback);
           setPhase("denied");
         }
       } catch {
