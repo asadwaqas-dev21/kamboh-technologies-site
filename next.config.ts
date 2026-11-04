@@ -7,6 +7,16 @@ const nextConfig: NextConfig = {
   },
   cacheComponents: true,
   partialPrefetching: true,
+  // Serve the static site pages in public/ at clean URLs.
+  async rewrites() {
+    const pages = ["about", "services", "projects", "technologies", "contact"];
+    return {
+      beforeFiles: [
+        { source: "/", destination: "/index.html" },
+        ...pages.map((p) => ({ source: `/${p}`, destination: `/${p}.html` })),
+      ],
+    };
+  },
   turbopack: {
     rules: {
       "*.css": {
