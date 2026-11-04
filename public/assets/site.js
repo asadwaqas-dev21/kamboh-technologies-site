@@ -61,7 +61,7 @@
     banner.setAttribute('aria-label', 'Cookie preferences');
     banner.innerHTML = `
       <p class="cookie-title">We value your privacy</p>
-      <p class="cookie-text">We use analytics cookies to understand how visitors use our site and improve it. No advertising cookies. You can change your choice anytime from “Cookie settings” in the footer.</p>
+      <p class="cookie-text">We use analytics cookies to understand how visitors use our site and improve it. No advertising cookies. You can change your choice anytime from “Cookie settings” in the footer. <a href="/cookie-policy">Cookie policy</a></p>
       <div class="cookie-actions">
         <button type="button" class="btn btn-outline btn-sm" data-consent="denied">Reject</button>
         <button type="button" class="btn btn-primary btn-sm" data-consent="granted">Accept</button>
@@ -244,6 +244,26 @@
     $$('.acc-item', group).forEach(it => { it.classList.remove('open'); $('.acc-btn', it).setAttribute('aria-expanded', 'false'); });
     if (open) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
   }));
+
+  /* ---------- blog: filter articles by topic ---------- */
+  const blogChips = $$('[data-blog-filter]');
+  if (blogChips.length) {
+    const announce = document.createElement('p');
+    announce.className = 'sr-only'; announce.setAttribute('role', 'status');
+    document.getElementById('articles')?.prepend(announce);
+    blogChips.forEach(chip => chip.addEventListener('click', () => {
+      const cat = chip.dataset.blogFilter;
+      blogChips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+      let shown = 0;
+      $$('#articles [data-cat]').forEach(el => {
+        const on = cat === 'all' || el.dataset.cat === cat;
+        el.hidden = !on; if (on) { shown++; el.classList.add('in'); }
+      });
+      announce.textContent = `${shown} article${shown === 1 ? '' : 's'} shown`;
+      const target = document.getElementById('articles');
+      if (target && target.getBoundingClientRect().top > innerHeight * 0.85) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }));
+  }
 
   /* ---------- services page: highlight the service in view ---------- */
   const svcLinks = $$('.svc-nav a');

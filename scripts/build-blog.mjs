@@ -13,7 +13,7 @@ const ARROW = '<svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill=
 const template = readFileSync("public/services.html", "utf8");
 const headEnd = template.indexOf("<body");
 const head = template.slice(0, headEnd);
-const navToMain = template.slice(template.indexOf(">", headEnd) + 1, template.indexOf("<main>") + "<main>".length);
+const navToMain = template.slice(template.indexOf(">", headEnd) + 1, template.indexOf(">", template.search(/<main/)) + 1);
 const fromMainEnd = template.slice(template.indexOf("</main>"));
 const posts = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
 
@@ -34,7 +34,12 @@ function pageHead({ title, desc, url, image, ogType = "website", ld }) {
   return h;
 }
 
-const card = (p, i = 0) => `<a class="blog-card" href="/blog/${p.slug}" data-reveal${i ? ` style="--d:.${(i % 3) * 6}s"` : ""}>
+// Accent colour per category (matches the service colours used across the site).
+const CAT_COLOR = { "AI & Automation": "168,85,247", "Mobile Apps": "14,165,233", "Business Setup": "34,211,238", Technology: "59,130,246" };
+const catColor = (c) => CAT_COLOR[c] || "59,130,246";
+const catSlug = (c) => slugify(c);
+
+const card = (p, i = 0) => `<a class="blog-card" href="/blog/${p.slug}" data-cat="${catSlug(p.category)}" data-reveal${i ? ` style="--d:.${(i % 3) * 6}s"` : ""}>
         <span class="blog-card-img"><img src="${p.image}" alt="${esc(p.imageAlt)}" width="1000" height="558" loading="lazy" decoding="async"></span>
         <span class="blog-card-body">
           <span class="blog-meta"><span class="blog-cat">${p.category}</span><span>${fmtDate(p.date)}</span><span>${p.readMins} min read</span></span>
@@ -55,21 +60,57 @@ const card = (p, i = 0) => `<a class="blog-card" href="/blog/${p.slug}" data-rev
         blogPost: posts.map((p) => ({ "@type": "BlogPosting", headline: p.title, url: `${SITE}/blog/${p.slug}`, datePublished: p.date, image: SITE + p.image })) },
     ],
   };
+  const cats = [...new Set(posts.map((p) => p.category))];
+  const avgRead = Math.round(posts.reduce((n, p) => n + p.readMins, 0) / posts.length);
+  const updated = new Date(posts[0].date + "T00:00:00Z").toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
   const main = `
 <section class="page-hero blog-hero" aria-labelledby="pageTitle">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-grid-bg" aria-hidden="true"></div>
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Blog</span></nav>
-    <span class="kicker">Blog</span>
-    <h1 class="page-title" id="pageTitle">Practical guides for <span class="grad">growing businesses.</span></h1>
-    <p class="lead">Clear, honest articles on building apps and software, registering your company and growing online in Pakistan.</p>
+  <div class="wrap ph-grid">
+    <div class="ph-copy">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Blog</span></nav>
+      <span class="kicker">Insights &amp; guides</span>
+      <h1 class="page-title" id="pageTitle">Practical guides for <span class="grad">growing businesses.</span></h1>
+      <p class="lead">Clear, honest articles from our team in Lahore on AI, mobile apps and software, SECP company registration and growing your business online.</p>
+      <div class="bh-topics" role="group" aria-label="Filter articles by topic">
+        <button type="button" class="bh-chip" data-blog-filter="all" aria-pressed="true">All topics <span>${posts.length}</span></button>
+        ${cats.map((c) => `<button type="button" class="bh-chip" data-blog-filter="${catSlug(c)}" aria-pressed="false" style="--c:${catColor(c)}"><i aria-hidden="true"></i>${c} <span>${posts.filter((p) => p.category === c).length}</span></button>`).join("\n        ")}
+      </div>
+      <dl class="bh-stats">
+        <div><dt>In-depth guides</dt><dd>${posts.length}</dd></div>
+        <div><dt>Average read</dt><dd>${avgRead} min</dd></div>
+        <div><dt>Last updated</dt><dd>${updated}</dd></div>
+      </dl>
+    </div>
+    <div class="ph-visual">
+      <svg class="ph-rings" viewBox="0 0 400 400" aria-hidden="true"><g class="r1"><circle cx="200" cy="200" r="190" fill="none" stroke="rgba(148,163,184,.22)" stroke-dasharray="2 8"/><circle cx="200" cy="10" r="4" fill="#22D3EE"/></g><g class="r2"><circle cx="200" cy="200" r="140" fill="none" stroke="rgba(139,92,246,.32)"/><circle cx="340" cy="200" r="3.5" fill="#D946EF"/></g></svg>
+      <div class="ph-card bh-card">
+        <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="ph-head"><span>Reading list</span><span class="live">${posts.length} guides</span></div>
+        <nav class="bh-list" aria-label="All articles">
+          ${posts.map((p, i) => `<a href="/blog/${p.slug}" style="--c:${catColor(p.category)}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="bh-t"><b>${p.title}</b><small><i class="dot" aria-hidden="true"></i>${p.category} · ${p.readMins} min${i === 0 ? ' <em class="bh-new">New</em>' : ""}</small></span><span class="ar" aria-hidden="true">→</span></a>`).join("\n          ")}
+        </nav>
+      </div>
+      <div class="ph-float f1" style="--c:52,211,153" aria-hidden="true"><i></i>Free, no sign-up</div>
+      <div class="ph-float f2" style="--c:217,70,239" aria-hidden="true"><i></i>Written by our Lahore team</div>
+    </div>
+  </div>
+  <div class="horizon" aria-hidden="true">
+    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="phz" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D946EF" stop-opacity=".15"/><stop offset=".18" stop-color="#D946EF"/><stop offset=".45" stop-color="#8B5CF6"/><stop offset=".7" stop-color="#3B82F6"/><stop offset=".92" stop-color="#22D3EE"/><stop offset="1" stop-color="#22D3EE" stop-opacity=".15"/></linearGradient>
+        <filter id="phzBlur" x="-5%" y="-200%" width="110%" height="500%"><feGaussianBlur stdDeviation="6"/></filter>
+      </defs>
+      <path class="hz-line" pathLength="1" d="M0 96 L250 62 L470 104 L620 66 L770 106 L960 48 L1180 92 L1440 56" fill="none" stroke="url(#phz)" stroke-width="8" filter="url(#phzBlur)" opacity=".6" vector-effect="non-scaling-stroke"/>
+      <path class="hz-line" pathLength="1" d="M0 96 L250 62 L470 104 L620 66 L770 106 L960 48 L1180 92 L1440 56" fill="none" stroke="url(#phz)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+    </svg>
   </div>
 </section>
 
-<section class="sec" aria-label="Articles">
+<section class="sec" id="articles" aria-label="Articles" style="padding-top:clamp(24px,3vw,40px)">
   <div class="wrap">
-    <a class="blog-feature" href="/blog/${posts[0].slug}" data-reveal>
+    <a class="blog-feature" href="/blog/${posts[0].slug}" data-cat="${catSlug(posts[0].category)}" data-reveal>
       <span class="blog-card-img"><img src="${posts[0].image}" alt="${esc(posts[0].imageAlt)}" width="1000" height="558" fetchpriority="high" decoding="async"></span>
       <span class="blog-card-body">
         <span class="blog-meta"><span class="blog-cat">${posts[0].category}</span><span>${fmtDate(posts[0].date)}</span><span>${posts[0].readMins} min read</span></span>
@@ -100,7 +141,17 @@ for (const p of posts) {
   if (p.desc.length > 160) throw new Error(`${p.slug} description too long (${p.desc.length})`);
   // Give every h2 an id for the table of contents.
   const toc = [];
-  const body = p.body.replace(/<h2>([\s\S]*?)<\/h2>/g, (_, t) => { const id = slugify(t); toc.push([id, t]); return `<h2 id="${id}">${t}</h2>`; });
+  const faqs = p.faqs || [];
+  const faqHtml = faqs.length ? `
+<h2>Frequently asked questions</h2>
+<div class="acc faq post-faq">
+  ${faqs.map(([q, a], i) => `<div class="acc-item${i ? "" : " open"}">
+    <button class="acc-btn" aria-expanded="${i ? "false" : "true"}" aria-controls="pq${i}" id="pq${i}b"><h3>${q}</h3><span class="pm" aria-hidden="true"></span></button>
+    <div class="acc-panel" id="pq${i}" role="region" aria-labelledby="pq${i}b"><div><p>${a}</p></div></div>
+  </div>`).join("\n  ")}
+</div>
+` : "";
+  const body = (p.body + faqHtml).replace(/<h2>([\s\S]*?)<\/h2>/g, (_, t) => { const id = slugify(t); toc.push([id, t]); return `<h2 id="${id}">${t}</h2>`; });
   const related = posts.filter((x) => x.slug !== p.slug).slice(0, 2);
   const ld = {
     "@context": "https://schema.org",
@@ -109,6 +160,7 @@ for (const p of posts) {
       { "@type": "BlogPosting", "@id": `${url}#article`, headline: p.title, description: p.desc, image: SITE + p.image, datePublished: p.date, dateModified: p.date,
         author: { "@type": "Organization", name: "Kamboh Technologies", url: `${SITE}/` }, publisher: { "@id": ORG }, mainEntityOfPage: url,
         articleSection: p.category, keywords: p.tags.join(", "), inLanguage: "en", wordCount: p.body.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length },
+      ...(faqs.length ? [{ "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: faqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }] : []),
     ],
   };
   const main = `

@@ -41,3 +41,15 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .adm-float, .adm-float-rev, .adm-rise, .adm-shake, .adm-bob, .adm-sheen { animation: none; }
 }
+
+/* Admin login: stop Chrome/Edge autofill from painting a light box over the dark field. */
+.adm-input:-webkit-autofill,
+.adm-input:-webkit-autofill:hover,
+.adm-input:-webkit-autofill:focus,
+.adm-input:-webkit-autofill:active {
+  -webkit-text-fill-color: #fff;
+  caret-color: #fff;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 99999s ease-out 0s, color 99999s ease-out 0s;
+}
+.adm-input:autofill { background: transparent; }

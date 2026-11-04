@@ -307,7 +307,7 @@ function Field({ id, label, type, autoComplete, value, onChange, icon, trailing,
           placeholder=" "
           required
           aria-invalid={invalid || undefined}
-          className="peer h-full w-full bg-transparent pt-4 text-[15px] text-white outline-none"
+          className="adm-input peer h-full w-full bg-transparent pt-4 text-[15px] text-white outline-none"
         />
         <label
           htmlFor={id}

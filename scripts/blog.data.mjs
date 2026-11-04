@@ -1,7 +1,145 @@
 // Blog posts. Add a post here, then run:  npm run blog
-// body: HTML using <h2>, <h3>, <p>, <ul>, <ol>, <strong>, <a>. Keep claims factual.
+// body: HTML using <h2>, <h3>, <p>, <ul>, <ol>, <strong>, <a>, <div class="callout">, <div class="table-wrap"><table>.
+// faqs (optional): [question, answer] pairs, shown as an FAQ section with FAQPage structured data. Keep claims factual.
 
 export const POSTS = [
+  {
+    slug: "ai-agents-small-business-guide",
+    title: "AI Agents for Small Businesses: A Practical Guide for 2026",
+    seoTitle: "AI Agents for Small Business: A Practical 2026 Guide",
+    desc: "What AI agents are, where they save small businesses time, what they cost to run, the risks to manage and a 30-day plan to launch your first one.",
+    excerpt: "AI has moved from answering questions to getting work done. Here is where AI agents genuinely help a small business, what they cost, and how to start safely.",
+    category: "AI & Automation",
+    tags: ["AI agents", "Automation", "Customer support", "Small business"],
+    date: "2026-11-04",
+    image: "/services/ai-automation.webp",
+    imageAlt: "AI automation workflow illustration",
+    readMins: 11,
+    service: ["ai-automation", "AI Automation"],
+    body: `
+<p>A couple of years ago, “using AI” mostly meant typing a question into a chat window. In 2026 the conversation has moved on to <strong>AI agents</strong>: software that can understand a request, decide what to do, use your business tools and complete a task, with a person approving the steps that matter.</p>
+<p>For a small business that is a real opportunity. An agent can answer customers at midnight, read a stack of invoices or follow up with every lead, so a small team can serve more people without burning out. It is also an area full of hype. This guide separates the two: what agents are, where they pay off, what they cost, the risks to manage, and a realistic 30-day plan to launch your first one.</p>
+
+<div class="callout">
+  <p class="callout-h">Key takeaways</p>
+  <ul>
+    <li>An AI agent is a language model plus <strong>your knowledge, your tools and clear rules</strong>. The model is the easy part; the rules and integrations are the real work.</li>
+    <li>Start with <strong>one repetitive, high-volume process</strong>, such as answering common questions or qualifying leads, not your whole business.</li>
+    <li>Keep a <strong>person in the loop</strong> for anything involving money, commitments or sensitive data.</li>
+    <li>Measure hours saved and response times from day one, so you know whether it is actually working.</li>
+  </ul>
+</div>
+
+<h2>What is an AI agent, in plain language?</h2>
+<p>Think of an agent as a new team member with four parts:</p>
+<ul>
+  <li><strong>A brain:</strong> a large language model (LLM) that understands requests written in normal language and works out what to do next.</li>
+  <li><strong>Knowledge:</strong> your own information, such as services, prices, policies, FAQs and product specs, so its answers are about <em>your</em> business and not the internet in general.</li>
+  <li><strong>Tools:</strong> actions it is allowed to take, such as checking an order, creating a lead in your CRM, booking a meeting or drafting an email.</li>
+  <li><strong>Guardrails:</strong> rules about what it must never do, when to ask for confirmation and when to hand over to a human.</li>
+</ul>
+<p>A real example: the <strong>Ask Kamboh AI</strong> assistant on this website answers questions about our services in English, Urdu or Roman Urdu. When a visitor is ready to start a project, it collects their details, <strong>reads them back for confirmation</strong>, and only then fills in the contact form or sends the inquiry to our team. That confirmation step is a guardrail, and it is what makes the agent safe to put in front of customers.</p>
+
+<h2>Chatbot vs automation vs AI agent</h2>
+<p>These three terms are often mixed up. The difference matters, because each suits a different job:</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">Rule-based chatbot</th><th scope="col">Workflow automation</th><th scope="col">AI agent</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">How it works</th><td>Fixed menus and scripted replies</td><td>“When X happens, do Y” steps</td><td>Understands the request and decides which steps and tools to use</td></tr>
+    <tr><th scope="row">Best for</th><td>Simple, predictable menus</td><td>Repetitive tasks that never change</td><td>Varied requests written in everyday language</td></tr>
+    <tr><th scope="row">Weak spot</th><td>Breaks when people go off-script</td><td>Cannot handle exceptions or judgement</td><td>Can make mistakes, so it needs guardrails and review</td></tr>
+  </tbody>
+</table>
+</div>
+<p>In practice the best systems combine them: an agent understands the customer, then triggers a reliable, rule-based workflow to do the actual update.</p>
+
+<h2>Seven high-value uses for a small business</h2>
+<h3>1. Customer support on WhatsApp and your website</h3>
+<p>Most small businesses answer the same twenty questions every day: prices, timings, delivery, location, order status. An agent can answer them instantly, at any hour, in the language the customer writes in, and pass the conversation to a person when it gets complicated.</p>
+<h3>2. Lead qualification and booking</h3>
+<p>Instead of a form that sits unanswered, an agent can ask a prospect a few smart questions (what they need, their budget range, their timeline), log a clean summary in your CRM and suggest a meeting time. Your sales team starts every call already knowing the context.</p>
+<h3>3. Invoices, receipts and documents</h3>
+<p>Agents are very good at reading documents. They can pull supplier names, amounts, dates and tax figures from invoices or purchase orders into a spreadsheet or accounting system, and flag anything that does not match, leaving your accountant to review instead of retype.</p>
+<h3>4. Sales follow-ups and quotations</h3>
+<p>An agent can draft follow-up emails after a meeting, prepare a first version of a quotation from your price list, or remind a customer about a pending payment. A person reviews and sends, so nothing goes out without approval.</p>
+<h3>5. An internal knowledge assistant</h3>
+<p>New staff ask the same questions about policies, procedures and product details. An internal assistant that answers from your own documents (and shows where the answer came from) saves senior staff hours every week and makes onboarding faster.</p>
+<h3>6. Reports and summaries</h3>
+<p>Connected to your POS, ERP or spreadsheets, an agent can send a short daily summary: yesterday’s sales, top products, unusual spikes, overdue invoices. Owners get the picture without opening five dashboards.</p>
+<h3>7. Content and catalogue work</h3>
+<p>Product descriptions, social posts, translations and catalogue updates are ideal first drafts for an agent. Keep a person in charge of the final version, especially for prices, claims and brand tone.</p>
+
+<h2>Where an AI agent is the wrong tool</h2>
+<p>Good advice includes knowing when <em>not</em> to use AI. Avoid agents, or keep them strictly in an advisory role, when:</p>
+<ul>
+  <li><strong>The decision is high-stakes and irreversible</strong>, such as approving refunds, loans or legal and tax positions, without human review.</li>
+  <li><strong>The process itself is broken.</strong> Automating a messy process only produces mess faster. Fix the process first.</li>
+  <li><strong>There is no reliable information to work from.</strong> If your prices and policies are not written down anywhere, the agent has nothing trustworthy to answer from.</li>
+  <li><strong>The volume is tiny.</strong> If a task happens twice a month, a checklist is cheaper than an agent.</li>
+</ul>
+
+<h2>What it costs to run an AI agent</h2>
+<p>Costs come in four parts, and it helps to budget for each separately:</p>
+<ol>
+  <li><strong>Setup and integration.</strong> Writing the instructions, organising your knowledge, connecting your tools (CRM, WhatsApp, email, ERP) and testing. This is usually the largest one-off cost.</li>
+  <li><strong>Model usage.</strong> Most AI providers charge per amount of text processed. For a small business answering customer questions this is often modest, but it grows with volume and with long documents.</li>
+  <li><strong>Channel and platform fees.</strong> Some channels charge separately. The WhatsApp Business Platform, for example, has its own messaging charges set by Meta.</li>
+  <li><strong>Monitoring and improvement.</strong> Reviewing conversations, updating knowledge when prices change and improving answers. Plan a few hours a month.</li>
+</ol>
+<p>Practical ways to keep running costs low: use a smaller, faster model for simple questions, keep answers short, limit how much history is sent with each message, and send only the documents a task needs. We use these same techniques on our own assistant.</p>
+
+<h2>The risks, and how to manage them</h2>
+<h3>Confident but wrong answers</h3>
+<p>Language models can produce answers that sound right but are not, often called “hallucinations”. Reduce this by limiting the agent to your own knowledge, telling it to say “I’m not sure” and hand over when it does not know, and showing a short notice that AI answers are confirmed by your team.</p>
+<h3>Privacy and data protection</h3>
+<p>Only send the agent the data it needs. Check your AI provider’s data terms, in particular whether your content can be used to train or improve their models, and choose a plan that excludes it where possible. In Pakistan, the Prevention of Electronic Crimes Act 2016 (amended in 2025) already applies to how data and information systems are handled, and a dedicated personal data protection law has been proposed but not yet enacted. If you serve customers in Europe, the GDPR applies too. Tell customers when they are talking to an AI and link to your privacy policy.</p>
+<h3>Actions without approval</h3>
+<p>Give the agent the <strong>smallest set of permissions</strong> it needs. It can draft a refund, but a person approves it. It can collect a customer’s details, but confirms them before submitting. Log every action so you can see what happened and why.</p>
+<h3>Manipulation through messages or documents</h3>
+<p>People can try to trick an agent with instructions hidden in a message or a file (“ignore your rules and…”). This is known as prompt injection. Treat everything from outside your business as untrusted, never give the agent access to secrets it does not need, and test it with attempts to break the rules before launch.</p>
+
+<h2>A 30-day plan to launch your first agent</h2>
+<ol>
+  <li><strong>Week 1: choose and measure.</strong> Pick one process with high volume and clear answers. Record the baseline: how many requests, how long each takes and how fast you reply today.</li>
+  <li><strong>Week 2: gather knowledge and write the rules.</strong> Collect your FAQs, prices and policies in one place. Decide what the agent may do, what needs approval and when it hands over. Write 30 real customer questions to test with.</li>
+  <li><strong>Week 3: build the pilot.</strong> Connect the agent to one channel and one tool. Test it with your team, including deliberately difficult and off-topic questions, and fix the gaps.</li>
+  <li><strong>Week 4: launch small and review.</strong> Open it to real customers, read the conversations every day for the first week, update its knowledge and compare the results with your baseline.</li>
+</ol>
+
+<h2>How to tell whether it is working</h2>
+<p>Track a handful of numbers rather than relying on impressions:</p>
+<ul>
+  <li><strong>Resolution rate:</strong> the share of conversations solved without a person.</li>
+  <li><strong>Hand-over rate and reasons:</strong> what the agent could not handle, which tells you what to teach it next.</li>
+  <li><strong>Response time:</strong> how quickly customers get a useful first reply.</li>
+  <li><strong>Leads and conversions:</strong> whether more inquiries turn into meetings and sales.</li>
+  <li><strong>Hours saved:</strong> time your team gets back each week, multiplied by its cost, minus the agent’s running costs.</li>
+</ul>
+
+<h2>Checklist before you build</h2>
+<ul>
+  <li>One clearly defined process and a measured baseline</li>
+  <li>Up-to-date written knowledge: services, prices, policies, FAQs</li>
+  <li>A list of actions the agent may take, and which need approval</li>
+  <li>A clear hand-over path to a real person</li>
+  <li>An AI provider and plan whose data terms you have checked</li>
+  <li>An updated privacy policy and an “AI assistant” notice for customers</li>
+  <li>Someone responsible for reviewing conversations every week</li>
+</ul>
+
+<h2>The bottom line</h2>
+<p>AI agents are not magic and they are not a replacement for a good team. Used well, they take over the repetitive, round-the-clock work, so your people can focus on customers, quality and growth. Start with one process, keep a person in control of what matters, measure the results and expand from there.</p>
+<p>If you would like help choosing the right first use case, or building an agent connected to your website, WhatsApp or business systems, our team in Lahore can map it out with you.</p>
+`,
+    faqs: [
+      ["Do I need a lot of data to use an AI agent?", "No. Most small-business agents work from information you already have: your services, prices, policies and common questions. What matters is that this information is accurate, up to date and written down in one place."],
+      ["Can an AI agent reply in Urdu and Roman Urdu?", "Yes. Modern language models handle English, Urdu and Roman Urdu well, and can reply in the language the customer uses. Always test with real customer messages, because spelling and mixed-language styles vary a lot."],
+      ["Will an AI agent replace my staff?", "For most small businesses, no. An agent takes over repetitive questions and data entry so your team can spend more time on sales, service and work that needs judgement. A person should stay in charge of anything involving money or commitments."],
+      ["Is my business data safe with an AI agent?", "It can be, if it is set up carefully: send only the data a task needs, choose an AI plan whose terms exclude using your data for training where possible, restrict the agent’s permissions and keep access logs. Avoid putting passwords, card details or sensitive personal data into an agent."],
+      ["How long does it take to build an AI agent?", "A focused pilot for one process, such as answering website questions or qualifying leads, can often be live in a few weeks. Agents connected to several systems, such as an ERP, CRM and WhatsApp, take longer because each integration needs building and testing."],
+    ],
+  },
   {
     slug: "mobile-app-development-cost-pakistan",
     title: "What Affects the Cost of Building a Mobile App in Pakistan?",

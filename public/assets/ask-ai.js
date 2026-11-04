@@ -120,7 +120,7 @@
           <textarea id="ask-ai-message" class="ask-ai-textarea" rows="1" maxlength="600" placeholder="${T.placeholder}"></textarea>
           <button type="submit" class="ask-ai-send-btn" aria-label="${T.send}" disabled>${ICON.send}</button>
         </form>
-        <p class="ask-ai-disclaimer">${T.disclaimerPrefix} <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello! I'd like to discuss a software project.")}" target="_blank" rel="noopener noreferrer">${T.disclaimerLink}</a>.</p>
+        <p class="ask-ai-disclaimer">${T.disclaimerPrefix} <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello! I'd like to discuss a software project.")}" target="_blank" rel="noopener noreferrer">${T.disclaimerLink}</a>. <a href="/privacy-policy#ask-ai">Privacy</a></p>
       </div>`;
 
     list = panel.querySelector('ol');
