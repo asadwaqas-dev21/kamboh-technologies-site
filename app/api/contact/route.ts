@@ -3,24 +3,14 @@ import { EMAIL, PHONE_DISPLAY, WHATSAPP_HREF } from "@/lib/contact";
 import { isMailConfigured, sendMail } from "@/lib/email/send";
 import { saveLead } from "@/lib/leads";
 import { checkRateLimit } from "@/lib/security/rateLimit";
+import { escapeHtml, SERVICE_OPTIONS } from "@/lib/service-options";
 
 /** Contact form on Home and /contact (public/assets/site.js). Emails each inquiry to the team. */
 const FORM_LIMITS = [
   { keyPrefix: "contact_minute", maxRequests: 3, windowMs: 60_000 },
   { keyPrefix: "contact_hour", maxRequests: 10, windowMs: 3_600_000 },
 ];
-const SERVICES: Record<string, string> = {
-  mobile: "Mobile app development",
-  web: "Web application development",
-  custom: "Custom software solutions",
-  uiux: "UI/UX design",
-  api: "Backend & API development",
-  ai: "AI-powered automation",
-  seo: "SEO & digital growth",
-  secp: "SECP company registration",
-  tax: "Company tax filing",
-  unsure: "Not sure yet",
-};
+const SERVICES = SERVICE_OPTIONS;
 const FALLBACK = `Please WhatsApp us at ${WHATSAPP_HREF}, call ${PHONE_DISPLAY} or email ${EMAIL}.`;
 
 function isSameOrigin(request: Request) {
@@ -32,10 +22,6 @@ function isSameOrigin(request: Request) {
   } catch {
     return false;
   }
-}
-
-function escapeHtml(value: string) {
-  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
 
 export async function POST(request: Request) {

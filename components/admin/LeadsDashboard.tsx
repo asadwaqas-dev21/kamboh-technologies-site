@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  ArrowRight2, Cup, DocumentDownload, Element3, Global, HambergerMenu, Logout, MessageText, Profile2User,
+  ArrowRight2, Cup, DocumentDownload, Element3, Global, HambergerMenu, Logout, MessageText, Profile, Profile2User,
   Refresh2, SearchNormal1, Sms, Timer1,
 } from "iconsax-react";
 import type { Lead, LeadStatus } from "@/lib/leads";
@@ -187,6 +187,7 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
                   <option value="all">All sources</option>
                   <option value="form">Contact form</option>
                   <option value="ai-chat">Ask AI</option>
+                  <option value="account">Client account</option>
                 </select>
               </div>
             </div>
@@ -298,7 +299,7 @@ export function StatusChip({ status }: { status: LeadStatus }) {
 export function SourceBadge({ source }: { source: Lead["source"] }) {
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full bg-white/[.04] px-2.5 py-1 text-xs font-medium text-slate-300 ring-1 ring-inset ring-white/10">
-      {source === "ai-chat" ? <MessageText size={13} color="#A78BFA" /> : <Sms size={13} color="#22D3EE" />}
+      {source === "ai-chat" ? <MessageText size={13} color="#A78BFA" /> : source === "account" ? <Profile size={13} color="#34D399" /> : <Sms size={13} color="#22D3EE" />}
       {SOURCE_LABEL[source]}
     </span>
   );

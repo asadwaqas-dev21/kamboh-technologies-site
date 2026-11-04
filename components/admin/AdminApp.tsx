@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { onAuthStateChanged, signOut, type User } from "firebase/auth";
+import { onAuthStateChanged, sendEmailVerification, signOut, type User } from "firebase/auth";
 import { Danger, Logout } from "iconsax-react";
 import { getClientAuth, isFirebaseClientConfigured } from "@/lib/firebase/client";
 import LoginScreen from "./LoginScreen";
@@ -15,6 +15,31 @@ export default function AdminApp() {
   const [phase, setPhase] = useState<Phase>("loading");
   const [user, setUser] = useState<User | null>(null);
   const [denied, setDenied] = useState("");
+  const [verifyState, setVerifyState] = useState<"idle" | "sending" | "sent" | "checking">("idle");
+
+  /** Asks the server whether this signed-in user may use the admin. */
+  const check = useCallback(async (u: User) => {
+    try {
+      const res = await fetch("/api/admin/me", { headers: { Authorization: `Bearer ${await u.getIdToken()}` } });
+      if (res.ok) {
+        setPhase("ready");
+        return;
+      }
+      const data = await res.json().catch(() => ({}));
+      // Only a 403 means "not allowed"; anything else is a server or session problem.
+      const fallback =
+        res.status === 403
+          ? "This account does not have admin access."
+          : res.status >= 500
+            ? `The admin server is not responding correctly (error ${res.status}). Please check the hosting environment variables and server logs.`
+            : `Could not verify your access (error ${res.status}). Please sign in again.`;
+      setDenied(data.error || fallback);
+      setPhase("denied");
+    } catch {
+      setDenied("Could not reach the server. Check your connection and try again.");
+      setPhase("denied");
+    }
+  }, []);
 
   useEffect(() => {
     if (!isFirebaseClientConfigured()) {
@@ -28,28 +53,9 @@ export default function AdminApp() {
         setPhase("signed-out");
         return;
       }
-      try {
-        const res = await fetch("/api/admin/me", { headers: { Authorization: `Bearer ${await u.getIdToken()}` } });
-        if (res.ok) {
-          setPhase("ready");
-        } else {
-          const data = await res.json().catch(() => ({}));
-          // Only a 403 means "not on the allowlist"; anything else is a server or session problem.
-          const fallback =
-            res.status === 403
-              ? "This account does not have admin access."
-              : res.status >= 500
-                ? `The admin server is not responding correctly (error ${res.status}). Please check the hosting environment variables and server logs.`
-                : `Could not verify your access (error ${res.status}). Please sign in again.`;
-          setDenied(data.error || fallback);
-          setPhase("denied");
-        }
-      } catch {
-        setDenied("Could not reach the server. Check your connection and try again.");
-        setPhase("denied");
-      }
+      await check(u);
     });
-  }, []);
+  }, [check]);
 
   const api: AdminApi = useCallback(
     async (path, init = {}) => {
@@ -92,6 +98,24 @@ export default function AdminApp() {
       <Notice title="No admin access" icon={<Danger size={28} color="currentColor" />}>
         <p>{denied}</p>
         <p className="mt-2 text-slate-500">Signed in as {user?.email}</p>
+        {user && !user.emailVerified && (
+          <div className="mt-6 flex flex-col gap-2">
+            <button
+              type="button" disabled={verifyState === "sending" || verifyState === "sent"}
+              onClick={async () => { setVerifyState("sending"); try { await sendEmailVerification(user); setVerifyState("sent"); } catch { setVerifyState("idle"); } }}
+              className="rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60"
+            >
+              {verifyState === "sent" ? "Verification email sent. Check your inbox" : verifyState === "sending" ? "Sending…" : "Send verification email"}
+            </button>
+            <button
+              type="button" disabled={verifyState === "checking"}
+              onClick={async () => { setVerifyState("checking"); await user.reload(); await user.getIdToken(true); await check(user); setVerifyState("idle"); }}
+              className="rounded-xl border border-white/10 px-4 py-2.5 text-sm font-semibold hover:bg-white/[.05]"
+            >
+              {verifyState === "checking" ? "Checking…" : "I’ve verified, check again"}
+            </button>
+          </div>
+        )}
         <button onClick={logout} className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/10 px-4 py-2.5 text-sm font-semibold hover:border-cyan-400/60 hover:bg-cyan-400/5">
           <Logout size={18} color="currentColor" /> Sign out
         </button>

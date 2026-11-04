@@ -245,6 +245,16 @@
     if (open) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
   }));
 
+  /* ---------- client account: show the signed-in state (set by /account) ---------- */
+  try {
+    const acct = JSON.parse(localStorage.getItem("kt-account") || "null");
+    if (acct && acct.name) {
+      const btn = document.getElementById("acctBtn"), mm = document.getElementById("mmAcct");
+      if (btn) { btn.classList.add("is-in"); btn.setAttribute("aria-label", `Your account (${acct.name})`); btn.title = `Signed in as ${acct.name}`; }
+      if (mm) mm.querySelector("span").textContent = `Hi ${acct.name}, open your account`;
+    }
+  } catch {}
+
   /* ---------- blog: filter articles by topic ---------- */
   const blogChips = $$('[data-blog-filter]');
   if (blogChips.length) {

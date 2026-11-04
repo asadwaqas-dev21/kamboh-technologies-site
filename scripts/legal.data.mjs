@@ -26,6 +26,7 @@ export const LEGAL = [
     <li><strong>We do not sell your personal information</strong>, and we do not use advertising cookies.</li>
     <li>Analytics cookies are set <strong>only if you click “Accept”</strong> in the cookie banner. You can change your choice anytime.</li>
     <li>Ask Kamboh AI conversations are <strong>not stored in our database</strong>. Only an inquiry you ask the assistant to send is saved.</li>
+    <li>If you create a client account, you can edit or delete it yourself at any time from <a href="/account">your account</a>.</li>
     <li>You can ask us to access, correct or delete your information by emailing ${MAIL}.</li>
   </ul>
 </div>
@@ -40,6 +41,7 @@ export const LEGAL = [
   <li><strong>Contact form:</strong> your name, email address, company name (optional), the service you are interested in and your project description.</li>
   <li><strong>Ask Kamboh AI:</strong> the messages you type and any image you choose to attach. If you ask the assistant to send an inquiry to our team, it also collects the details you provide, such as your name, phone or email, company, the service you need, your timeline and a short project summary, and <strong>confirms them with you before sending</strong>.</li>
   <li><strong>Email, phone and WhatsApp:</strong> the information you share when you contact us directly.</li>
+  <li><strong>Client account:</strong> if you create an account, your name, email address and password, and optionally your phone number and company. Your password is handled by Google Firebase Authentication; we never see or store it.</li>
   <li><strong>Clients:</strong> when you hire us, contract and billing details (such as the signatory’s name and role, company details and tax numbers for invoicing) and the project materials you share with us.</li>
 </ul>
 <p>Please do not send us sensitive personal information (for example health information, CNIC images, passwords or payment card details) through the website or the AI assistant. Where a service such as SECP registration or tax filing genuinely requires identity documents, we will tell you how to share them securely.</p>
@@ -64,6 +66,7 @@ export const LEGAL = [
     <tr><td>Reply to your inquiry, ask questions and prepare a proposal or quotation</td><td>Contact details, service, project description</td><td>Steps taken at your request before entering a contract; our legitimate interest in responding to business inquiries</td></tr>
     <tr><td>Deliver our services and manage our relationship with clients</td><td>Contact, contract and project information</td><td>Performance of a contract</td></tr>
     <tr><td>Invoicing, accounting, tax and company-law records</td><td>Billing and transaction details</td><td>Compliance with legal obligations</td></tr>
+    <tr><td>Provide your client account, show your requests and their status</td><td>Account and profile details, your inquiries</td><td>Performance of our agreement with you (the account terms)</td></tr>
     <tr><td>Answer questions through Ask Kamboh AI</td><td>Chat messages and attached images</td><td>Our legitimate interest in providing instant answers that you choose to request</td></tr>
     <tr><td>Keep the website secure and prevent spam, fraud and abuse</td><td>IP address, technical logs, request counts</td><td>Our legitimate interest in protecting our website and users</td></tr>
     <tr><td>Understand how the website is used and improve it</td><td>Analytics data</td><td>Your consent, which you can withdraw at any time</td></tr>
@@ -82,6 +85,15 @@ export const LEGAL = [
   <li>Please do not share passwords, payment details or sensitive personal information in the chat.</li>
 </ul>
 
+<h2 id="accounts">Client accounts</h2>
+<p>You can create a free client account to send project requests and follow their status.</p>
+<ul>
+  <li><strong>What we store:</strong> your name, email address, optional phone number and company, and the dates your account was created and updated. Sign-in is handled by Google Firebase Authentication, which stores your email and a securely hashed password; we never see your password.</li>
+  <li><strong>Email verification:</strong> we send a verification link to confirm the email address belongs to you. Once verified, your account also shows inquiries you sent earlier from the same email address through our contact form or Ask Kamboh AI.</li>
+  <li><strong>What you see:</strong> your requests, the service, your description and a simple status (received, in discussion, proposal sent, project started or closed). Our internal notes are never shown.</li>
+  <li><strong>Your control:</strong> you can update your details or delete your account at any time from the Profile section. Deleting your account permanently removes your sign-in and profile. Requests you already sent are kept as business records under the inquiry retention rule below; email us if you would like them deleted too.</li>
+</ul>
+
 <h2>Cookies and similar technologies</h2>
 <p>We use a small number of essential browser storage items (for your theme and cookie choice) and, only if you accept them, Google Analytics cookies. We do not use advertising or cross-site tracking cookies. Full details, including names and durations, are in our <a href="/cookie-policy">Cookie Policy</a>.</p>
 <p>You can change your choice at any time using “Cookie settings” in the footer of every page.</p>
@@ -93,7 +105,8 @@ export const LEGAL = [
   <thead><tr><th scope="col">Provider</th><th scope="col">What they do for us</th><th scope="col">Main location</th></tr></thead>
   <tbody>
     <tr><td>Vercel Inc.</td><td>Website hosting, content delivery and server logs</td><td>United States (global network)</td></tr>
-    <tr><td>Google (Firebase / Cloud Firestore)</td><td>Secure storage of inquiries for our team</td><td>United States / Google Cloud regions</td></tr>
+    <tr><td>Google (Firebase Authentication)</td><td>Secure sign-in for client accounts and our team</td><td>United States / Google Cloud regions</td></tr>
+    <tr><td>Google (Firebase / Cloud Firestore)</td><td>Secure storage of inquiries and client profiles</td><td>United States / Google Cloud regions</td></tr>
     <tr><td>Google (Gemini API)</td><td>Generating Ask Kamboh AI replies</td><td>United States / global</td></tr>
     <tr><td>Google (Analytics)</td><td>Website statistics, only with your consent</td><td>United States / global</td></tr>
     <tr><td>Google (Fonts and Maps)</td><td>Website fonts on every page, and the office map on the Contact page</td><td>United States / global</td></tr>
@@ -113,6 +126,7 @@ export const LEGAL = [
   <li><strong>Client records:</strong> for the duration of our relationship and afterwards for as long as company and tax laws require us to keep business and accounting records.</li>
   <li><strong>Analytics data:</strong> no longer than 14 months.</li>
   <li><strong>Server logs and abuse counters:</strong> for the short periods set by our hosting provider, and about an hour for request counters.</li>
+  <li><strong>Client accounts:</strong> until you delete your account. We may also delete accounts that have been unused for more than 3 years, after emailing you first.</li>
   <li><strong>Ask Kamboh AI:</strong> chat transcripts are not stored by us. Inquiries sent through the assistant follow the inquiry rule above.</li>
 </ul>
 
@@ -193,6 +207,15 @@ export const LEGAL = [
   <li>Your use of the assistant is also covered by our <a href="/privacy-policy#ask-ai">Privacy Policy</a>.</li>
 </ul>
 
+<h2>Client accounts</h2>
+<p>You can create a free client account to send project requests and follow their status. When you do, you agree to:</p>
+<ul>
+  <li>Give accurate details and keep them up to date</li>
+  <li>Keep your password secret and tell us straight away if you think someone else has used your account</li>
+  <li>Use the account only for genuine requests about our services, and only for yourself or an organisation you are authorised to represent</li>
+</ul>
+<p>Sending a request through your account is an inquiry, not a contract. A project only starts when both sides agree a written proposal or agreement. You can delete your account at any time from your account page. We may suspend or delete accounts that break these terms, are used for spam or abuse, or have been unused for a long time.</p>
+
 <h2>Information on this website</h2>
 <p>We work to keep the website accurate and up to date, but its content, including blog articles and information about SECP registration and tax filing, is <strong>general information only</strong>. It is not legal, tax, accounting or financial advice and should not be relied on as such. Laws, fees and procedures change; always confirm requirements with the relevant authority or a qualified adviser. See our <a href="/disclaimer">Disclaimer</a>.</p>
 <p>Prices, timelines and service descriptions on the website are indicative. They do not form an offer that you can accept, and we may change them at any time.</p>
@@ -269,6 +292,8 @@ export const LEGAL = [
   <tbody>
     <tr><td><code>kt-theme</code></td><td>Local storage</td><td>Remembers whether you chose light or dark mode</td><td>Until you clear your browser data</td></tr>
     <tr><td><code>kt-consent</code></td><td>Local storage</td><td>Remembers whether you accepted or rejected analytics cookies, so we do not ask again on every page</td><td>Until you change it or clear your browser data</td></tr>
+    <tr><td><code>kt-account</code></td><td>Local storage</td><td>Only if you sign in: remembers your first name so the navigation bar shows you are signed in</td><td>Removed when you sign out or delete your account</td></tr>
+    <tr><td><code>firebaseLocalStorageDb</code></td><td>IndexedDB (Firebase Authentication)</td><td>Only if you sign in: keeps you signed in to your client account (or our team to the admin area)</td><td>Until you sign out</td></tr>
     <tr><td><code>kt-prefill</code></td><td>Session storage</td><td>Briefly holds details from Ask Kamboh AI when you ask it to fill in the contact form</td><td>Deleted as soon as the form is filled, or when you close the tab</td></tr>
   </tbody>
 </table>
@@ -294,8 +319,8 @@ export const LEGAL = [
   <li><strong>Links to WhatsApp, Instagram and GitHub:</strong> these services set their own cookies only if you open them.</li>
 </ul>
 
-<h2>Admin area</h2>
-<p>Our private admin area, used only by our team, stores a sign-in session in the browser through Firebase Authentication. Visitors to the public website never receive it.</p>
+<h2>Signed-in areas</h2>
+<p>If you sign in to a client account, or our team signs in to the private admin area, Firebase Authentication stores a secure sign-in session in the browser (listed above). Visitors who do not sign in never receive it.</p>
 
 <h2>How to change your choice</h2>
 <p>You can accept or reject analytics cookies at any time using <strong>“Cookie settings”</strong> in the footer of every page, or the button at the top of this page. If you withdraw consent, analytics stops immediately. To remove cookies that were already set, clear the cookies for kambohtechnologies.com in your browser settings.</p>

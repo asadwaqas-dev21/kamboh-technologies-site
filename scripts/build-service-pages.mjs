@@ -19,7 +19,7 @@ const template = readFileSync("public/services.html", "utf8");
 const headEnd = template.indexOf("<body");
 const head = template.slice(0, headEnd);
 const bodyOpen = template.slice(headEnd, template.indexOf(">", headEnd) + 1);
-const navToMain = template.slice(template.indexOf(">", headEnd) + 1, template.indexOf(">", template.search(/<main/)) + 1);
+const navToMain = template.slice(template.indexOf(">", headEnd) + 1, template.indexOf(">", template.search(/<main\b/)) + 1);
 const fromMainEnd = template.slice(template.indexOf("</main>"));
 
 function pageHead(s) {

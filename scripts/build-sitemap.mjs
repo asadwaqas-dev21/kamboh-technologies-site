@@ -29,7 +29,7 @@ const day = (file) => statSync(join(PUB, file)).mtime.toISOString().slice(0, 10)
 
 const urls = PAGES.map(([file, path, priority, freq]) => {
   const html = readFileSync(join(PUB, file), "utf8");
-  const main = html.slice(html.search(/<main/), html.indexOf("</main>"));
+  const main = html.slice(html.search(/<main\b/), html.indexOf("</main>"));
   // Images that belong to the page content (not the logo or decorative ones).
   const seen = new Set();
   const images = [...main.matchAll(/<img\b[^>]*\bsrc="(\/[^"]+\.(?:webp|jpg|png))"[^>]*>/g)]

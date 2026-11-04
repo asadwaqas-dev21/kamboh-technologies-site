@@ -10,7 +10,7 @@ export const STATUS_META: Record<LeadStatus, { label: string; chip: string; dot:
 
 export const STATUS_ORDER: LeadStatus[] = ["new", "contacted", "proposal", "won", "lost"];
 
-export const SOURCE_LABEL: Record<Lead["source"], string> = { form: "Contact form", "ai-chat": "Ask AI" };
+export const SOURCE_LABEL: Record<Lead["source"], string> = { form: "Contact form", "ai-chat": "Ask AI", account: "Client account" };
 
 export function timeAgo(iso: string) {
   if (!iso) return "";

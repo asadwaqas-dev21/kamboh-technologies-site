@@ -3,7 +3,7 @@ import { getAdminDb, isFirebaseAdminConfigured } from "./firebase/admin";
 
 export const LEAD_STATUSES = ["new", "contacted", "proposal", "won", "lost"] as const;
 export type LeadStatus = (typeof LEAD_STATUSES)[number];
-export type LeadSource = "form" | "ai-chat";
+export type LeadSource = "form" | "ai-chat" | "account";
 
 export type LeadNote = { id: string; text: string; at: string; by: string };
 export type LeadActivity = { id: string; at: string; text: string; by: string };
@@ -19,6 +19,8 @@ export type Lead = {
   timeline: string;
   source: LeadSource;
   sourcePage: string;
+  /** Firebase uid when the inquiry was sent from a signed-in client account. */
+  uid: string;
   status: LeadStatus;
   notes: LeadNote[];
   activity: LeadActivity[];
@@ -30,7 +32,7 @@ export const LEADS_COLLECTION = "leads";
 
 const stamp = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
 
-export type NewLead = Pick<Lead, "name" | "source"> & Partial<Pick<Lead, "email" | "phone" | "company" | "service" | "message" | "timeline" | "sourcePage">>;
+export type NewLead = Pick<Lead, "name" | "source"> & Partial<Pick<Lead, "email" | "phone" | "company" | "service" | "message" | "timeline" | "sourcePage" | "uid">>;
 
 /** Saves an inquiry to Firestore. Returns false (and logs) when Firebase is not configured or the write fails. */
 export async function saveLead(input: NewLead): Promise<boolean> {
@@ -49,9 +51,10 @@ export async function saveLead(input: NewLead): Promise<boolean> {
         timeline: input.timeline || "",
         source: input.source,
         sourcePage: input.sourcePage || "",
+        uid: input.uid || "",
         status: "new",
         notes: [],
-        activity: [{ id: stamp(), at: now, text: input.source === "ai-chat" ? "Lead created from Ask AI chat" : "Lead created from contact form", by: "system" }],
+        activity: [{ id: stamp(), at: now, text: input.source === "ai-chat" ? "Lead created from Ask AI chat" : input.source === "account" ? "Lead created from a client account" : "Lead created from contact form", by: "system" }],
         createdAt: now,
         updatedAt: now,
         createdAtServer: FieldValue.serverTimestamp(),
@@ -74,8 +77,9 @@ export function toLead(id: string, d: FirebaseFirestore.DocumentData): Lead {
     service: d.service || "",
     message: d.message || "",
     timeline: d.timeline || "",
-    source: d.source === "ai-chat" ? "ai-chat" : "form",
+    source: d.source === "ai-chat" || d.source === "account" ? d.source : "form",
     sourcePage: d.sourcePage || "",
+    uid: d.uid || "",
     status: LEAD_STATUSES.includes(d.status) ? d.status : "new",
     notes: Array.isArray(d.notes) ? d.notes : [],
     activity: Array.isArray(d.activity) ? d.activity : [],
