@@ -3,7 +3,7 @@
 // Runs automatically before `next build` (see "prebuild" in package.json).
 // After editing public/assets/site.css, site.js or ask-ai.js locally, run:  npm run assets
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { transform } from "lightningcss";
@@ -15,6 +15,8 @@ const ASSETS = "public/assets";
 const PAGES = [
   ...["index", "about", "services", "projects", "technologies", "contact"].map((p) => join("public", p + ".html")),
   ...readdirSync("public/services").filter((f) => f.endsWith(".html")).map((f) => join("public/services", f)),
+  ...(existsSync("public/blog.html") ? ["public/blog.html"] : []),
+  ...(existsSync("public/blog") ? readdirSync("public/blog").filter((f) => f.endsWith(".html")).map((f) => join("public/blog", f)) : []),
 ];
 const hash = (buf) => createHash("sha256").update(buf).digest("hex").slice(0, 10);
 const kb = (n) => `${(n / 1024).toFixed(1)}KB`;

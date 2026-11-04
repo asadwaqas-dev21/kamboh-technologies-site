@@ -154,7 +154,7 @@ const TOOLS = [
             name: { type: "STRING", description: "Visitor's full name if given, otherwise empty string." },
             email: { type: "STRING", description: "Visitor's email if given, otherwise empty string." },
             company: { type: "STRING", description: "Company name if given, otherwise empty string." },
-            service: { type: "STRING", enum: ["mobile", "web", "custom", "uiux", "api", "ai", "seo", "unsure"], description: "Closest matching service: mobile app, web app, custom software, UI/UX design, backend/API, AI automation, SEO, or unsure." },
+            service: { type: "STRING", enum: ["mobile", "web", "custom", "uiux", "api", "ai", "seo", "secp", "tax", "unsure"], description: "Closest matching service: mobile app, web app, custom software, UI/UX design, backend/API, AI automation, SEO, SECP company registration (secp), company tax filing (tax), or unsure." },
             message: { type: "STRING", description: "2-4 sentence project description written in first person from what the visitor said (what they want built, who it's for, any timeline)." },
           },
           required: ["service", "message"],
@@ -164,7 +164,7 @@ const TOOLS = [
   },
 ];
 
-const FORM_SERVICES = new Set(["mobile", "web", "custom", "uiux", "api", "ai", "seo", "unsure"]);
+const FORM_SERVICES = new Set(["mobile", "web", "custom", "uiux", "api", "ai", "seo", "secp", "tax", "unsure"]);
 
 /** Model-supplied form values: strings only, trimmed and capped to the form's limits. */
 function cleanPrefill(args: Record<string, unknown>) {
@@ -315,7 +315,7 @@ export async function POST(request: Request) {
     }
   }
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 30_000);
+  const timeout = setTimeout(() => controller.abort(), 20_000);
 
   try {
     const contents = messages.map((message, index) => {
@@ -344,7 +344,7 @@ export async function POST(request: Request) {
       });
 
     let response = await callGemini(requestBody);
-    for (const delay of [600, 1_400, 3_000]) {
+    for (const delay of [800, 2_000]) {
       if (response.status !== 429 && response.status !== 503) break;
       await new Promise((resolve) => setTimeout(resolve, delay));
       response = await callGemini(requestBody);

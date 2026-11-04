@@ -1,0 +1,6 @@
+# Keep deployments small and fast: these files are not needed to build or run the site.
+brand-originals/
+*firebase-adminsdk*.json
+serviceAccount*.json
+firestore.rules
+README.md

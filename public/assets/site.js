@@ -24,7 +24,7 @@
     });
   }
 
-  /* ---------- theme: follows the device until the visitor picks one ---------- */
+  /* ---------- theme: dark by default, light only when the visitor picks it ---------- */
   const root = document.documentElement, themeBtn = $('#themeBtn'), themeMeta = $('meta[name="theme-color"]');
   function applyTheme(t) {
     root.setAttribute('data-theme', t);
@@ -37,10 +37,41 @@
     applyTheme(t);
     try { localStorage.setItem('kt-theme', t); } catch (e) {}
   });
-  matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-    let saved = null; try { saved = localStorage.getItem('kt-theme'); } catch (err) {}
-    if (!saved) applyTheme(e.matches ? 'light' : 'dark');
-  });
+
+  /* ---------- cookie consent (Google Consent Mode v2, see the GA snippet in each page <head>) ---------- */
+  const CONSENT_KEY = 'kt-consent';
+  const readConsent = () => { try { return localStorage.getItem(CONSENT_KEY); } catch { return null; } };
+  let banner = null;
+  function closeBanner() {
+    if (!banner) return;
+    banner.classList.remove('show');
+    const b = banner; banner = null;
+    setTimeout(() => b.remove(), 400);
+  }
+  function setConsent(value) {
+    try { localStorage.setItem(CONSENT_KEY, value); } catch {}
+    if (window.gtag) gtag('consent', 'update', { analytics_storage: value === 'granted' ? 'granted' : 'denied' });
+    closeBanner();
+  }
+  function showBanner() {
+    if (banner) return;
+    banner = document.createElement('section');
+    banner.className = 'cookie-banner';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-label', 'Cookie preferences');
+    banner.innerHTML = `
+      <p class="cookie-title">We value your privacy</p>
+      <p class="cookie-text">We use analytics cookies to understand how visitors use our site and improve it. No advertising cookies. You can change your choice anytime from “Cookie settings” in the footer.</p>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-outline btn-sm" data-consent="denied">Reject</button>
+        <button type="button" class="btn btn-primary btn-sm" data-consent="granted">Accept</button>
+      </div>`;
+    banner.addEventListener('click', e => { const b = e.target.closest('[data-consent]'); if (b) setConsent(b.dataset.consent); });
+    document.body.appendChild(banner);
+    requestAnimationFrame(() => requestAnimationFrame(() => banner && banner.classList.add('show')));
+  }
+  if (!readConsent()) setTimeout(showBanner, 1200);
+  document.addEventListener('click', e => { if (e.target.closest('[data-cookie-settings]')) { e.preventDefault(); showBanner(); } });
 
   /* ---------- pause animations in sections that are off screen ---------- */
   if ('IntersectionObserver' in window) {
@@ -70,7 +101,9 @@
     if (!ind) return;
     if (!current || getComputedStyle(current).display === 'none') { ind.style.opacity = 0; return; }
     ind.style.width = (current.offsetWidth - 28) + 'px';
-    ind.style.transform = `translateX(${current.offsetLeft + 14}px)`;
+    // Measured against the list, not offsetLeft: the Services link sits inside a dropdown wrapper.
+    const left = current.getBoundingClientRect().left - current.closest('.nav-links').getBoundingClientRect().left;
+    ind.style.transform = `translateX(${left + 14}px)`;
     ind.style.opacity = 1;
   }
   moveInd();

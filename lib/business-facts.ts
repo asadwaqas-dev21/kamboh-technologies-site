@@ -60,6 +60,22 @@ export const SERVICES: Service[] = [
     included: ["Technical SEO audit and fixes", "Page speed and Core Web Vitals improvements", "Site structure, metadata and structured data", "Analytics and search console setup", "Monthly reports in plain language"],
     stack: [],
   },
+  {
+    id: "secp",
+    slug: "secp-company-registration",
+    title: "SECP Company Registration",
+    summary: "Registration of private limited and single member companies with the Securities and Exchange Commission of Pakistan (SECP), from name reservation to the certificate of incorporation, plus NTN registration with the FBR.",
+    included: ["Company name availability check and reservation", "Incorporation documents (Memorandum and Articles of Association)", "Online incorporation filing with the SECP", "NTN registration with the FBR after incorporation", "Guidance on annual returns and post-incorporation compliance"],
+    stack: [],
+  },
+  {
+    id: "tax",
+    slug: "tax-filing",
+    title: "Company Tax Filing",
+    summary: "Company tax compliance with the Federal Board of Revenue (FBR): NTN registration, annual income tax returns, withholding statements and help staying on the Active Taxpayers List.",
+    included: ["NTN registration and FBR profile setup", "Annual income tax return preparation and filing", "Withholding tax statements", "Guidance on keeping tax records and invoices", "Deadline reminders and filing confirmations"],
+    stack: [],
+  },
 ];
 
 /**
@@ -75,7 +91,7 @@ export function buildBusinessFacts(): string {
 
   return `# ${COMPANY_NAME}
 
-> Software house in Johar Town, Lahore, Pakistan. Designs and builds mobile apps, web platforms and custom business software for companies in Pakistan and abroad.
+> Software house in Johar Town, Lahore, Pakistan. Designs and builds mobile apps, web platforms and custom business software for companies in Pakistan and abroad, and also offers SECP company registration and company tax filing.
 
 ## Key facts
 - Address: ${ADDRESS}
@@ -96,7 +112,7 @@ export function buildBusinessFacts(): string {
 - Abdul Sattar: Finance Manager
 - Faisal Naveed: Business Development Manager
 
-## Services (7)
+## Services (${SERVICES.length})
 ${services}
 
 ## Ways to work together

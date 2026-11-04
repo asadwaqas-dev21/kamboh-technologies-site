@@ -3,6 +3,7 @@
 // Run after editing the data or the site's navbar/footer:  npm run service-pages
 import { readFileSync, writeFileSync } from "node:fs";
 import { SERVICES } from "./service-pages.data.mjs";
+import { EXTRA } from "./service-pages.extra.mjs";
 
 const SITE = "https://kambohtechnologies.com";
 const ORG = `${SITE}/#organization`;
@@ -58,8 +59,15 @@ function pageHead(s) {
 }
 
 function pageMain(s) {
+  const e = EXTRA[s.id];
   const contact = `/contact?service=${s.id}`;
   const related = s.related.map((id) => byId[id]);
+  const lname = plain(s.name).toLowerCase();
+  const ENGAGE = [
+    ["Fixed-scope project", "A clear scope, timeline and estimate agreed up front. Best when you know what you need.", ["Written scope and estimate", "Milestone-based delivery", "Launch and handover"]],
+    ["Dedicated team", "Our people working as an extension of your team, with priorities you set each sprint.", ["Flexible priorities", "Sprint demos", "Scale up or down"]],
+    ["Support and care", "Ongoing help once you are live: updates, fixes and small improvements every month.", ["Monitoring and fixes", "Updates and patches", "Monthly improvements"]],
+  ];
   return `
 <!-- SERVICE HERO -->
 <section class="page-hero sd-hero" aria-labelledby="pageTitle" style="--acc:${s.acc}">
@@ -71,10 +79,14 @@ function pageMain(s) {
       <span class="kicker">${s.name}</span>
       <h1 class="page-title" id="pageTitle">${s.h1}</h1>
       <p class="lead">${s.lead}</p>
+      <ul class="sd-chips">${e.chips.map((c) => `<li>${c}</li>`).join("")}</ul>
       <div class="page-actions">
         <a href="${contact}" class="btn btn-primary magnetic">Start This Project ${ARROW}</a>
         <button type="button" class="btn btn-outline magnetic" data-ask-ai>${CHAT} Ask Kamboh AI</button>
       </div>
+      <ul class="sd-trust" aria-label="About Kamboh Technologies">
+        <li>SECP registered company</li><li>Office in Johar Town, Lahore</li><li>Clients in Pakistan and abroad</li>
+      </ul>
     </div>
     <div class="ph-visual sd-visual">
       <figure class="sd-shot">
@@ -83,6 +95,10 @@ function pageMain(s) {
     </div>
   </div>
 </section>
+
+<nav class="sd-tabs" aria-label="On this page">
+  <div class="wrap"><a href="#overview">Overview</a><a href="#problems">Problems we solve</a><a href="#features">Features</a><a href="#process">Process</a><a href="#deliverables">Deliverables</a><a href="#faq">FAQ</a></div>
+</nav>
 
 <!-- OVERVIEW -->
 <section class="sec" id="overview" aria-labelledby="ovTitle">
@@ -93,62 +109,114 @@ function pageMain(s) {
     </div>
     <div class="stack-text">
       ${s.overview.map((p, i) => `<p class="${i ? "body" : "lead"}" data-reveal${i ? ' style="--d:.06s"' : ""}>${p}</p>`).join("\n      ")}
-      <div class="svc-box" data-reveal style="--d:.1s">
-        <div><h3>Who it's for</h3><ul class="checks">${s.forWho.map((w) => `<li>${w}</li>`).join("")}</ul></div>
+      <div class="sd-who" data-reveal style="--d:.1s">
+        <p class="sd-label">Who it's for</p>
+        <ul class="checks">${s.forWho.map((w) => `<li>${w}</li>`).join("")}</ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INCLUDED + STACK -->
-<section class="sec alt" id="included" aria-labelledby="incTitle">
-  <div class="wrap two">
-    <div data-reveal>
-      <span class="kicker">What's included</span>
-      <h2 class="h2" id="incTitle">Everything you need, end to end.</h2>
-      <p class="body" style="margin-top:22px">Every ${s.name.toLowerCase()} project includes these, scoped to your goals in a written estimate before work starts.</p>
+<!-- PROBLEMS -->
+<section class="sec alt" id="problems" aria-labelledby="probTitle">
+  <div class="wrap">
+    <div class="sec-intro" data-reveal>
+      <span class="kicker">Problems we solve</span>
+      <h2 class="h2" id="probTitle">Sound familiar?</h2>
+      <p class="body">These are the issues businesses most often bring to us, and how this service fixes them.</p>
     </div>
-    <div class="svc-box" data-reveal style="--d:.08s">
-      <div><h3>Included</h3><ul class="checks">${s.included.map((i) => `<li>${i}</li>`).join("")}</ul></div>
-      <div><h3>Technology</h3><ul class="tags">${s.stack.map((t) => `<li>${t}</li>`).join("")}</ul></div>
+    <div class="sd-probs">
+      ${e.problems.map(([p, fix], i) => `<article class="sd-prob" data-reveal${i ? ` style="--d:.${i * 6}s"` : ""}>
+        <p class="sd-prob-q"><span class="sd-label">The problem</span>${p}</p>
+        <p class="sd-prob-a"><span class="sd-label">How we solve it</span>${fix}</p>
+      </article>`).join("\n      ")}
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec" id="features" aria-labelledby="featTitle" style="--acc:${s.acc}">
+  <div class="wrap">
+    <div class="sec-intro" data-reveal>
+      <span class="kicker">Features</span>
+      <h2 class="h2" id="featTitle">What's included.</h2>
+      <p class="body">Every ${lname} project is scoped to your goals in a written estimate, and can include:</p>
+    </div>
+    <div class="sd-feats">
+      ${e.features.map(([t, d], i) => `<article class="sd-feat" data-reveal style="--d:.${(i % 3) * 5}s"><span class="sd-feat-n">${String(i + 1).padStart(2, "0")}</span><h3>${t}</h3><p>${d}</p></article>`).join("\n      ")}
     </div>
   </div>
 </section>
 
 <!-- PROCESS -->
-<section class="sec" id="how" aria-labelledby="howTitle">
-  <div class="wrap two">
-    <div data-reveal>
+<section class="sec alt" id="process" aria-labelledby="procTitle2" style="--acc:${s.acc}">
+  <div class="wrap">
+    <div class="sec-intro" data-reveal>
       <span class="kicker">How we deliver it</span>
-      <h2 class="h2" id="howTitle">A clear path from idea to launch.</h2>
-      <p class="body" style="margin-top:22px">Each phase ends with something you can see and approve, so you stay in control of scope and budget.</p>
+      <h2 class="h2" id="procTitle2">A clear path, step by step.</h2>
+      <p class="body">Each step ends with something you can see and approve, so you stay in control of scope and budget.</p>
     </div>
-    <ol class="next-steps" data-reveal style="--d:.08s">
-      ${s.process.map(([t, d]) => `<li><div><b>${t}</b><span>${d}</span></div></li>`).join("\n      ")}
+    <ol class="sd-steps" data-reveal>
+      ${s.process.map(([t, d], i) => `<li><span class="sd-step-n">${i + 1}</span><b>${t}</b><span>${d}</span></li>`).join("\n      ")}
     </ol>
   </div>
 </section>
 
-<!-- OUTCOMES -->
-<section class="sec alt" id="outcomes" aria-labelledby="outTitle">
+<!-- DELIVERABLES + PREPARE -->
+<section class="sec" id="deliverables" aria-labelledby="delTitle">
   <div class="wrap">
     <div class="sec-intro" data-reveal>
-      <span class="kicker">What you get</span>
-      <h2 class="h2" id="outTitle">Results that matter to your business.</h2>
+      <span class="kicker">Deliverables</span>
+      <h2 class="h2" id="delTitle">What you get, and how to prepare.</h2>
+    </div>
+    <div class="sd-two">
+      <div class="sd-panel" data-reveal>
+        <p class="sd-panel-h">You receive</p>
+        <ul class="checks">${e.deliverables.map((d) => `<li>${d}</li>`).join("")}</ul>
+      </div>
+      <div class="sd-panel sd-panel--prep" data-reveal style="--d:.08s">
+        <p class="sd-panel-h">Before you contact us, have ready</p>
+        <ol class="sd-prep">${e.prepare.map((p) => `<li>${p}</li>`).join("")}</ol>
+        <p class="sd-note">Don't have everything? That's fine. We'll work it out together on the first call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="sec alt" id="stack" aria-labelledby="stackTitle">
+  <div class="wrap two">
+    <div data-reveal>
+      <span class="kicker">Tools and technology</span>
+      <h2 class="h2" id="stackTitle">Chosen for the long run.</h2>
+    </div>
+    <div class="stack-text" data-reveal style="--d:.08s">
+      <p class="lead">${e.whyStack}</p>
+      <ul class="tags sd-tags">${s.stack.map((t) => `<li>${t}</li>`).join("")}</ul>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT -->
+<section class="sec" id="engagement" aria-labelledby="engTitle2">
+  <div class="wrap">
+    <div class="sec-intro" data-reveal>
+      <span class="kicker">Ways to work with us</span>
+      <h2 class="h2" id="engTitle2">Pick the model that fits.</h2>
     </div>
     <div class="tiles3">
-      ${s.outcomes.map(([t, d], i) => `<article class="tile" data-reveal${i ? ` style="--d:.${i * 6}s"` : ""}><span class="sd-num">0${i + 1}</span><h3>${t}</h3><p>${d}</p></article>`).join("\n      ")}
+      ${ENGAGE.map(([t, d, list], i) => `<article class="tile" data-reveal${i ? ` style="--d:.${i * 6}s"` : ""}><h3>${t}</h3><p>${d}</p><ul class="checks">${list.map((l) => `<li>${l}</li>`).join("")}</ul></article>`).join("\n      ")}
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="sec" id="faq" aria-labelledby="faqTitle">
+<section class="sec alt" id="faq" aria-labelledby="faqTitle">
   <div class="wrap two">
     <div data-reveal>
       <span class="kicker">FAQ</span>
       <h2 class="h2" id="faqTitle">Common questions.</h2>
-      <p class="body" style="margin-top:22px">Something else on your mind? <a href="${contact}" style="color:var(--cyan);font-weight:700">Ask us directly</a>.</p>
+      <p class="body" style="margin-top:22px">Something else on your mind? <a href="${contact}" style="color:var(--cyan);font-weight:700">Ask us directly</a> or ask Kamboh AI.</p>
     </div>
     <div class="acc faq" data-reveal style="--d:.08s">
       ${s.faqs.map(([q, a], i) => `<div class="acc-item${i ? "" : " open"}">
@@ -160,7 +228,7 @@ function pageMain(s) {
 </section>
 
 <!-- RELATED -->
-<section class="sec alt" id="related" aria-labelledby="relTitle">
+<section class="sec" id="related" aria-labelledby="relTitle">
   <div class="wrap">
     <div class="sec-intro" data-reveal>
       <span class="kicker">Related services</span>
@@ -176,12 +244,12 @@ function pageMain(s) {
 </section>
 
 <!-- CONTACT PANEL -->
-<section class="sec" id="start" aria-labelledby="startTitle">
+<section class="sec" id="start" aria-labelledby="startTitle" style="padding-top:0">
   <div class="wrap">
     <div class="sd-cta" data-reveal style="--acc:${s.acc}">
       <div>
         <span class="kicker">Start a project</span>
-        <h2 class="h2" id="startTitle">Ready to talk about your ${s.name.toLowerCase().replace("&amp;", "&")} project?</h2>
+        <h2 class="h2" id="startTitle">Ready to talk about ${lname}?</h2>
         <p class="body">Tell us what you need. We reply with questions, a suggested approach and next steps.</p>
       </div>
       <div class="sd-cta-actions">
@@ -194,7 +262,11 @@ function pageMain(s) {
 `;
 }
 
+// Merge the extra FAQs so the page and its FAQ schema show the same questions.
+for (const s of SERVICES) s.faqs = [...s.faqs, ...(EXTRA[s.id]?.moreFaqs || [])];
+
 for (const s of SERVICES) {
+  if (!EXTRA[s.id]) throw new Error(`no extra content for ${s.id}`);
   for (const k of ["title", "desc"]) if (plain(s[k]).length > (k === "title" ? 62 : 160)) throw new Error(`${s.slug} ${k} too long (${plain(s[k]).length})`);
   const html = pageHead(s) + bodyOpen + navToMain + pageMain(s) + fromMainEnd;
   writeFileSync(`public/services/${s.slug}.html`, html);

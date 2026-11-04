@@ -17,6 +17,8 @@ const SERVICES: Record<string, string> = {
   api: "Backend & API development",
   ai: "AI-powered automation",
   seo: "SEO & digital growth",
+  secp: "SECP company registration",
+  tax: "Company tax filing",
   unsure: "Not sure yet",
 };
 const FALLBACK = `Please WhatsApp us at ${WHATSAPP_HREF}, call ${PHONE_DISPLAY} or email ${EMAIL}.`;

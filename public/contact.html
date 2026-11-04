@@ -37,18 +37,21 @@
 <link rel="icon" type="image/png" href="/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script>
-/* pick the theme before first paint: saved choice, else the device setting */
+/* pick the theme before first paint: the visitor's saved choice, else dark */
 (function () {
   var t = null;
   try { t = localStorage.getItem('kt-theme'); } catch (e) {}
-  if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  if (t !== 'light' && t !== 'dark') t = 'dark'; // dark by default; light only when the visitor picks it
   document.documentElement.setAttribute('data-theme', t);
   if (t === 'light') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#F6F8FC');
 })();
 </script>
 <script>
-/* Google Analytics 4: only on the live domain, loaded after the page is interactive so it never slows first paint. */
+/* Google Analytics 4 with Consent Mode v2: no analytics cookies until the visitor accepts (cookie banner in site.js).
+   Only runs on the live domain, and loads after the page is interactive so it never slows first paint. */
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('kt-consent')==='granted')gtag('consent','update',{analytics_storage:'granted'})}catch(e){}
 if(/(^|.)kambohtechnologies.com$/.test(location.hostname)){gtag('js',new Date());gtag('config','G-8XN6PDE3ZV');
 addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-8XN6PDE3ZV';document.head.appendChild(s)},2000)})}
 </script>
@@ -100,7 +103,7 @@ addEventListener('load',function(){setTimeout(function(){var s=document.createEl
   ]
 }
 </script>
-<link rel="stylesheet" href="/assets/site.min.css?v=1fcab2c7b1">
+<link rel="stylesheet" href="/assets/site.min.css?v=73b56d72d0">
 </head>
 <body data-page="contact">
 
@@ -117,8 +120,24 @@ addEventListener('load',function(){setTimeout(function(){var s=document.createEl
       <ul class="nav-links" id="navLinks">
         <li><a href="/" data-nav="home">Home</a></li>
         <li><a href="/about" data-nav="about">About</a></li>
-        <li><a href="/services" data-nav="services">Services</a></li>
+        <li class="has-dd"><a href="/services" data-nav="services" aria-haspopup="true">Services<svg class="dd-chev" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M19.92 8.95l-6.52 6.52c-.77.77-2.03.77-2.8 0L4.08 8.95"></path></svg></a>
+          <div class="dd">
+            <div class="dd-grid">
+              <a class="dd-item" href="/services/mobile-app-development" style="--c:14,165,233"><span class="dd-ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path opacity=".4" d="M16.24 2H7.76C5 2 4 3 4 5.81v12.38C4 21 5 22 7.76 22h8.47C19 22 20 21 20 18.19V5.81C20 3 19 2 16.24 2Z" fill="rgb(14,165,233)"></path><path d="M14 6.25h-4c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h4c.41 0 .75.34.75.75s-.34.75-.75.75ZM12 19.3a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5Z" fill="rgb(14,165,233)"></path></svg></span><span class="dd-txt"><b>Mobile App Development</b><small>iOS and Android with Flutter</small></span></a>
+              <a class="dd-item" href="/services/web-application-development" style="--c:59,130,246"><span class="dd-ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path opacity=".4" d="M21.97 6.41v6.5H2v-6.5C2 3.98 3.98 2 6.41 2h11.15c2.43 0 4.41 1.98 4.41 4.41Z" fill="rgb(59,130,246)"></path><path d="M2 12.922v.2a4.41 4.41 0 0 0 4.41 4.41h3.84c.55 0 1 .45 1 1v.97c0 .55-.45 1-1 1H7.83a.749.749 0 1 0 0 1.5h8.35c.41 0 .75-.34.75-.75s-.34-.75-.75-.75h-2.42c-.55 0-1-.45-1-1v-.97c0-.55.45-1 1-1h3.81a4.41 4.41 0 0 0 4.41-4.41v-.2H2Z" fill="rgb(59,130,246)"></path></svg></span><span class="dd-txt"><b>Web Applications</b><small>Portals and dashboards</small></span></a>
+              <a class="dd-item" href="/services/custom-software-development" style="--c:139,92,246"><span class="dd-ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path opacity=".4" d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81v8.37C2 19.83 4.17 22 7.81 22h8.37c3.64 0 5.81-2.17 5.81-5.81V7.81C22 4.17 19.83 2 16.19 2Z" fill="rgb(139,92,246)"></path><path d="M6.89 15.749c-.28 0-.54-.15-.67-.41a.745.745 0 0 1 .34-1.01c.87-.43 1.61-1.09 2.14-1.89.18-.27.18-.61 0-.88-.54-.8-1.28-1.46-2.14-1.89a.74.74 0 0 1-.34-1.01c.18-.37.63-.52 1-.33 1.1.55 2.04 1.38 2.72 2.4a2.3 2.3 0 0 1 0 2.54 7.077 7.077 0 0 1-2.72 2.4c-.1.05-.22.08-.33.08ZM17 15.75h-4c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h4c.41 0 .75.34.75.75s-.34.75-.75.75Z" fill="rgb(139,92,246)"></path></svg></span><span class="dd-txt"><b>Custom Software</b><small>Inventory, HR and billing systems</small></span></a>
+              <a class="dd-item" href="/services/ui-ux-design" style="--c:217,70,239"><span class="dd-ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21.81 3.938c-1.31 3.27-4.3 7.54-7.15 10.33a5.962 5.962 0 0 0-5.07-4.96c2.8-2.86 7.1-5.89 10.38-7.21.58-.22 1.16-.05 1.52.31.38.38.56.95.32 1.53Z" fill="rgb(217,70,239)"></path><path opacity=".4" d="M14.66 14.269c-.5.49-1 .94-1.48 1.32l-1.97 1.58c-.25.18-.5.33-.78.45 0-.19-.02-.38-.04-.58-.11-.83-.49-1.62-1.16-2.29-.69-.68-1.51-1.07-2.36-1.18-.2-.02-.41-.03-.6-.02.11-.31.28-.6.49-.84l1.56-1.97c.37-.47.8-.95 1.27-1.43 2.6.36 4.66 2.38 5.07 4.96Z" fill="rgb(217,70,239)"></path><path d="M10.43 17.62c0 1.1-.42 2.15-1.22 2.94-.61.62-1.43 1.04-2.43 1.16l-2.45.27c-1.34.15-2.49-1-2.34-2.35l.27-2.46c.24-2.19 2.07-3.59 4.01-3.63.19-.01.4 0 .6.02.85.11 1.67.5 2.36 1.18.67.67 1.05 1.46 1.16 2.29.02.2.04.39.04.58Z" fill="rgb(217,70,239)"></path></svg></span><span class="dd-txt"><b>UI/UX Design</b><small>Research, prototypes, design systems</small></span></a>
+              <a class="dd-item" href="/services/backend-api-development" style="--c:99,102,241"><span class="dd-ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5.25 8.5a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5ZM5 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM19 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="rgb(99,102,241)"></path><path opacity=".4" d="M19.17 15.978a6.929 6.929 0 0 0-6.54-4.65h-.03l-3.53.01c-1.52.02-2.88-1.01-3.29-2.49v-1.85c0-.42-.34-.76-.77-.76s-.76.34-.76.76v11.22c0 .42.34.76.76.76s.77-.34.77-.76v-6.62c.88.78 2.03 1.26 3.28 1.26h.02l3.53-.01h.02c2.29 0 4.34 1.45 5.09 3.62.11.32.41.51.72.51.08 0 .17-.01.25-.04.41-.12.62-.56.48-.96Z" fill="rgb(99,102,241)"></path></svg></span><span class="dd-txt"><b>Backend &amp; APIs</b><small>APIs, databases, integrations</small></span></a>
+              <a class="dd-item" href="/services/ai-automation" style="--c:168,85,247"><span class="dd-ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path opacity=".4" d="M15 4H9C6.24 4 4 6.24 4 9v6c0 2.76 2.24 5 5 5h6c2.76 0 5-2.24 5-5V9c0-2.76-2.24-5-5-5Zm2.26 10.26c0 1.66-1.34 3-3 3H9.74c-1.66 0-3-1.34-3-3V9.74c0-1.66 1.34-3 3-3h4.51c1.66 0 3 1.34 3 3v4.52h.01Z" fill="rgb(168,85,247)"></path><path d="M9.06 2.75V4H9c-.5 0-.98.07-1.44.21V2.75a.749.749 0 1 1 1.5 0ZM12.75 2.75V4h-1.5V2.75c0-.41.34-.75.75-.75s.75.34.75.75ZM16.45 2.75v1.46C15.99 4.07 15.5 4 15 4h-.05V2.75c0-.41.34-.75.75-.75s.75.34.75.75ZM22 8.3c0 .42-.33.75-.75.75H20V9c0-.5-.07-.99-.21-1.45h1.46c.42 0 .75.34.75.75ZM22 12c0 .41-.33.75-.75.75H20v-1.5h1.25c.42 0 .75.33.75.75ZM22 15.7c0 .41-.33.75-.75.75h-1.46c.14-.46.21-.95.21-1.45v-.05h1.25c.42 0 .75.33.75.75ZM16.45 19.79v1.46c0 .41-.34.75-.75.75s-.75-.34-.75-.75V20H15c.5 0 .99-.07 1.45-.21ZM12.76 20v1.25a.749.749 0 1 1-1.5 0V20h1.5ZM9.06 20v1.25a.749.749 0 1 1-1.5 0v-1.46c.46.14.94.21 1.44.21h.06ZM4.21 7.55C4.07 8.01 4 8.5 4 9v.05H2.75a.749.749 0 1 1 0-1.5h1.46ZM4 11.25v1.5H2.75a.749.749 0 1 1 0-1.5H4ZM4.21 16.45H2.75a.749.749 0 1 1 0-1.5H4V15c0 .5.07.99.21 1.45ZM17.26 9.738v4.51c0 1.66-1.34 3-3 3H9.74c-1.66 0-3-1.34-3-3v-4.51c0-1.66 1.34-3 3-3h4.51a3.01 3.01 0 0 1 3.01 3Z" fill="rgb(168,85,247)"></path></svg></span><span class="dd-txt"><b>AI Automation</b><small>Documents, assistants, workflows</small></span></a>
+              <a class="dd-item" href="/services/seo-digital-growth" style="--c:20,184,166"><span class="dd-ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path opacity=".4" d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81v8.37C2 19.83 4.17 22 7.81 22h8.37c3.64 0 5.81-2.17 5.81-5.81V7.81C22 4.17 19.83 2 16.19 2Z" fill="rgb(20,184,166)"></path><path d="M16.83 9.41a.707.707 0 0 0-.38-.38.751.751 0 0 0-.26-.05h-1.86c-.39 0-.7.31-.7.7 0 .39.31.7.7.7h.18l-2.11 2.11-1.02-1.52a.712.712 0 0 0-.51-.31.676.676 0 0 0-.56.2l-2.98 2.98c-.27.27-.27.71 0 .99.14.14.31.2.49.2s.36-.07.49-.2l2.38-2.38 1.02 1.52c.12.17.3.29.51.31.22.02.41-.05.56-.2l2.72-2.72v.18c0 .39.31.7.7.7.39 0 .7-.31.7-.7V9.67c-.02-.09-.03-.18-.07-.26Z" fill="rgb(20,184,166)"></path></svg></span><span class="dd-txt"><b>SEO &amp; Growth</b><small>Technical SEO and site speed</small></span></a>
+              <a class="dd-item" href="/services/secp-company-registration" style="--c:34,211,238"><span class="dd-ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path opacity=".4" d="M12.5 7.41V22H4.08c-1.16 0-2.11-.93-2.11-2.07V5.09c0-2.62 1.96-3.81 4.35-2.64l4.43 2.19c.96.47 1.75 1.72 1.75 2.77Z" fill="rgb(34,211,238)"></path><path d="M8.97 9.75H5.5c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h3.47a.749.749 0 1 1 0 1.5ZM8.97 13.75H5.5c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h3.47a.749.749 0 1 1 0 1.5Z" fill="rgb(34,211,238)"></path><path opacity=".6" d="M22 15.052v4.45a2.5 2.5 0 0 1-2.5 2.5h-7v-11.58l.47.1 4.04.9.48.11 2.04.46c.49.1.94.27 1.33.52 0 .01.01.01.01.01.1.07.2.15.29.24.46.46.76 1.13.83 2.11 0 .06.01.12.01.18Z" fill="rgb(34,211,238)"></path><path d="M12.5 10.422v6c.46.61 1.18 1 2 1 1.39 0 2.51-1.12 2.51-2.5v-3.49l-4.04-.9-.47-.11ZM21.99 14.872c-.07-.98-.37-1.65-.83-2.11-.09-.09-.19-.17-.29-.24 0 0-.01 0-.01-.01-.39-.25-.84-.42-1.33-.52l-2.04-.46-.48-.11v3.5a2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.49-2.36v-.01c0-.06-.01-.12-.01-.18Z" fill="rgb(34,211,238)"></path></svg></span><span class="dd-txt"><b>SECP Company Registration</b><small>Incorporation, NTN, compliance</small></span></a>
+              <a class="dd-item" href="/services/tax-filing" style="--c:52,211,153"><span class="dd-ic"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 6v2.42C22 10 21 11 19.42 11H16V4.01C16 2.9 16.91 2 18.02 2c1.09.01 2.09.45 2.81 1.17C21.55 3.9 22 4.9 22 6Z" fill="rgb(52,211,153)"></path><path opacity=".4" d="M2 7v14c0 .83.94 1.3 1.6.8l1.71-1.28c.4-.3.96-.26 1.32.1l1.66 1.67c.39.39 1.03.39 1.42 0l1.68-1.68c.35-.35.91-.39 1.3-.09l1.71 1.28c.66.49 1.6.02 1.6-.8V4c0-1.1.9-2 2-2H6C3 2 2 3.79 2 6v1Z" fill="rgb(52,211,153)"></path><path d="M12 9.75H6c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h6c.41 0 .75.34.75.75s-.34.75-.75.75ZM11.25 13.75h-4.5c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h4.5c.41 0 .75.34.75.75s-.34.75-.75.75Z" fill="rgb(52,211,153)"></path></svg></span><span class="dd-txt"><b>Company Tax Filing</b><small>FBR returns and withholding</small></span></a>
+            </div>
+            <div class="dd-foot"><a class="dd-all" href="/services">View all services</a><button type="button" class="dd-ask" data-ask-ai>Not sure? Ask Kamboh AI</button></div>
+          </div>
+        </li>
         <li><a href="/projects" data-nav="projects">Projects</a></li>
+        <li><a href="/blog" data-nav="blog">Blog</a></li>
         <li><a href="/technologies" data-nav="technologies">Technologies</a></li>
         <li><a href="/contact" data-nav="contact">Contact</a></li>
         <li aria-hidden="true" class="nav-ind" id="navInd"></li>
@@ -137,8 +156,11 @@ addEventListener('load',function(){setTimeout(function(){var s=document.createEl
     <ol>
       <li><a href="/" data-nav="home">Home</a></li>
       <li><a href="/about" data-nav="about">About</a></li>
-      <li><a href="/services" data-nav="services">Services</a></li>
+      <li class="mm-has-sub"><a href="/services" data-nav="services">Services</a>
+        <div class="mm-sub"><a href="/services/mobile-app-development">Mobile App Development</a><a href="/services/web-application-development">Web Applications</a><a href="/services/custom-software-development">Custom Software</a><a href="/services/ui-ux-design">UI/UX Design</a><a href="/services/backend-api-development">Backend &amp; APIs</a><a href="/services/ai-automation">AI Automation</a><a href="/services/seo-digital-growth">SEO &amp; Growth</a><a href="/services/secp-company-registration">SECP Company Registration</a><a href="/services/tax-filing">Company Tax Filing</a></div>
+      </li>
       <li><a href="/projects" data-nav="projects">Projects</a></li>
+        <li><a href="/blog" data-nav="blog">Blog</a></li>
       <li><a href="/technologies" data-nav="technologies">Technologies</a></li>
       <li><a href="/contact" data-nav="contact">Contact</a></li>
     </ol>
@@ -216,6 +238,8 @@ addEventListener('load',function(){setTimeout(function(){var s=document.createEl
           <option value="api">Backend &amp; API development</option>
           <option value="ai">AI-powered automation</option>
           <option value="seo">SEO &amp; digital growth</option>
+          <option value="secp">SECP company registration</option>
+          <option value="tax">Company tax filing</option>
           <option value="unsure">Not sure yet</option>
         </select><p class="err" id="e-service" aria-live="polite"></p></div>
       <div class="fld full"><label for="f-msg">Project description</label><textarea class="inp" id="f-msg" name="message" maxlength="1500" placeholder="What are you building, who is it for, and when do you need it?" aria-describedby="e-msg c-msg"></textarea>
@@ -295,6 +319,8 @@ addEventListener('load',function(){setTimeout(function(){var s=document.createEl
           <li><a href="/services/backend-api-development">Backend &amp; APIs</a></li>
           <li><a href="/services/ai-automation">AI automation</a></li>
           <li><a href="/services/seo-digital-growth">SEO &amp; growth</a></li>
+          <li><a href="/services/secp-company-registration">SECP registration</a></li>
+          <li><a href="/services/tax-filing">Tax filing</a></li>
         </ul>
       </div>
       <div>
@@ -304,6 +330,7 @@ addEventListener('load',function(){setTimeout(function(){var s=document.createEl
           <li><a href="/about#team">Team</a></li>
           <li><a href="/about#registration">Company registration</a></li>
           <li><a href="/projects">Projects</a></li>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="/technologies">Technologies</a></li>
           <li><a href="/about#process">Process</a></li>
           <li><a href="/about#values">Why Kamboh</a></li>
@@ -324,6 +351,7 @@ addEventListener('load',function(){setTimeout(function(){var s=document.createEl
     <div class="foot-bot">
       <span>© 2026 Kamboh Technologies (Private) Limited. All rights reserved.</span>
       <span class="foot-reg">SECP CUIN 0297023 · NTN G813109</span>
+      <button type="button" class="foot-link-btn" data-cookie-settings>Cookie settings</button>
       <a href="#top">Back to top</a>
     </div>
   </div>
@@ -332,7 +360,7 @@ addEventListener('load',function(){setTimeout(function(){var s=document.createEl
 <button class="to-top" id="toTop" aria-label="Scroll to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M18.07 9.57L12 3.5 5.93 9.57M12 20.5V3.67"></path></svg></button>
 
 <script src="/assets/vendor/lenis-1.1.13.min.js" defer></script>
-<script src="/assets/site.min.js?v=67403d99ad" defer></script>
+<script src="/assets/site.min.js?v=4165231bd7" defer></script>
 <script src="/assets/ask-ai.min.js?v=4431a6d31a" defer></script>
 </body>
 </html>
