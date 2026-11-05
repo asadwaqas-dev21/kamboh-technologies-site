@@ -28,7 +28,7 @@
   const root = document.documentElement, themeBtn = $('#themeBtn'), themeMeta = $('meta[name="theme-color"]');
   function applyTheme(t) {
     root.setAttribute('data-theme', t);
-    if (themeMeta) themeMeta.setAttribute('content', t === 'light' ? '#F6F8FC' : '#07090E');
+    if (themeMeta) themeMeta.setAttribute('content', t === 'light' ? '#F8FAFC' : '#0B1220');
     if (themeBtn) themeBtn.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
   }
   applyTheme(root.getAttribute('data-theme') || 'dark');

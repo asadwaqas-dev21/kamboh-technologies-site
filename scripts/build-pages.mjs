@@ -38,7 +38,7 @@ const hero = ({ crumb, kicker, title, lead, actions }) => `
     <div class="hx-glow g1"></div>
     <div class="hx-glow g2"></div>
     <div class="hx-blob"></div>
-    <svg class="hx-star s1" viewBox="0 0 100 100"><defs><linearGradient id="phStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".55" stop-color="#3B82F6"/><stop offset="1" stop-color="#A855F7"/></linearGradient></defs><path d="${STAR}" fill="url(#phStar)"/></svg>
+    <svg class="hx-star s1" viewBox="0 0 100 100"><defs><linearGradient id="phStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".55" stop-color="#2563EB"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs><path d="${STAR}" fill="url(#phStar)"/></svg>
     <svg class="hx-star s2" viewBox="0 0 100 100"><path d="${STAR}" fill="url(#phStar)"/></svg>
   </div>
   <div class="wrap ph-grid">
@@ -85,7 +85,7 @@ const ctaBand = (title, text) => `
       cta: ["Get a project quote", "/contact"],
     },
     {
-      name: "Dedicated team", tag: "Flexible", c: "139,92,246",
+      name: "Dedicated team", tag: "Flexible", c: "37,99,235",
       best: "Growing products, long roadmaps and changing priorities.",
       how: "A monthly fee for the developers and designers on your team.",
       items: ["Developers and designers as an extension of your team", "Priorities you can change every sprint", "Shared project board and sprint demos", "Scale the team up or down", "Regular progress reports"],

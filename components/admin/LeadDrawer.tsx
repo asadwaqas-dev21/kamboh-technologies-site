@@ -53,10 +53,10 @@ export default function LeadDrawer({ lead, api, onClose, onUpdate, onDelete, onT
   return (
     <div className="fixed inset-0 z-50">
       <button aria-label="Close" onClick={onClose} className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
-      <aside role="dialog" aria-modal="true" aria-label={`Lead: ${lead.name}`} className="absolute inset-y-0 right-0 flex w-full max-w-xl flex-col border-l border-white/10 bg-[#0B0F1A] shadow-2xl shadow-black">
+      <aside role="dialog" aria-modal="true" aria-label={`Lead: ${lead.name}`} className="absolute inset-y-0 right-0 flex w-full max-w-xl flex-col border-l border-white/10 bg-[#0B1220] shadow-2xl shadow-black">
         {/* Header */}
         <div className="flex items-start gap-4 border-b border-white/[.06] p-5 sm:p-6">
-          <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-gradient-to-br from-blue-500 to-violet-500 text-sm font-bold">{initials(lead.name)}</span>
+          <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-sm font-bold">{initials(lead.name)}</span>
           <div className="min-w-0 flex-1">
             <h2 className="truncate text-lg font-bold tracking-tight">{lead.name}</h2>
             <p className="text-sm text-slate-500">{SOURCE_LABEL[lead.source]} · {timeAgo(lead.createdAt)}</p>
@@ -90,7 +90,7 @@ export default function LeadDrawer({ lead, api, onClose, onUpdate, onDelete, onT
           {/* Quick actions */}
           <section className="flex flex-wrap gap-2">
             {lead.email && (
-              <a href={`mailto:${lead.email}?subject=${encodeURIComponent("Your inquiry to Kamboh Technologies")}`} className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 px-3.5 py-2 text-sm font-bold hover:brightness-110">
+              <a href={`mailto:${lead.email}?subject=${encodeURIComponent("Your inquiry to Kamboh Technologies")}`} className="inline-flex items-center gap-2 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] px-3.5 py-2 text-sm font-bold hover:brightness-110">
                 <Sms size={17} color="currentColor" /> Email
               </a>
             )}
@@ -142,7 +142,7 @@ export default function LeadDrawer({ lead, api, onClose, onUpdate, onDelete, onT
             <ol className="relative space-y-4 border-l border-white/10 pl-5">
               {timeline.map((t) => (
                 <li key={t.id} className="relative">
-                  <span className={`absolute -left-[27px] top-1 grid h-3.5 w-3.5 place-items-center rounded-full ring-4 ring-[#0B0F1A] ${t.kind === "note" ? "bg-cyan-400" : "bg-slate-600"}`} />
+                  <span className={`absolute -left-[27px] top-1 grid h-3.5 w-3.5 place-items-center rounded-full ring-4 ring-[#0B1220] ${t.kind === "note" ? "bg-cyan-400" : "bg-slate-600"}`} />
                   {t.kind === "note" ? (
                     <div className="rounded-xl border border-cyan-400/15 bg-cyan-400/[.04] p-3">
                       <p className="flex items-center gap-1.5 text-xs font-semibold text-cyan-300"><Note1 size={13} color="currentColor" /> Note</p>
@@ -180,7 +180,7 @@ export default function LeadDrawer({ lead, api, onClose, onUpdate, onDelete, onT
 
 function Detail({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href?: string }) {
   return (
-    <div className="bg-[#0B0F1A] p-3.5">
+    <div className="bg-[#0B1220] p-3.5">
       <p className="flex items-center gap-1.5 text-xs text-slate-500">{icon}{label}</p>
       {value ? (
         href ? <a href={href} className="mt-1 block truncate text-sm font-medium text-slate-100 hover:text-cyan-300">{value}</a> : <p className="mt-1 truncate text-sm font-medium text-slate-100">{value}</p>

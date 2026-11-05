@@ -84,11 +84,11 @@ export default function LoginScreen() {
   const onKey = (e: React.KeyboardEvent<HTMLInputElement>) => setCapsLock(e.getModifierState?.("CapsLock") ?? false);
 
   return (
-    <div className="relative grid min-h-screen overflow-hidden bg-[#05070C] lg:grid-cols-[1.05fr_1fr]">
+    <div className="relative grid min-h-screen overflow-hidden bg-[#0B1220] lg:grid-cols-[1.05fr_1fr]">
       {/* ---------- Brand panel ---------- */}
       <section className="relative hidden overflow-hidden border-r border-white/[.06] lg:flex lg:flex-col">
-        <div className="adm-float pointer-events-none absolute -left-[15%] -top-[20%] h-[70%] w-[80%] rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,.45),transparent)] blur-2xl" />
-        <div className="adm-float-rev pointer-events-none absolute -bottom-[25%] -right-[10%] h-[75%] w-[75%] rounded-full bg-[radial-gradient(closest-side,rgba(217,70,239,.32),transparent)] blur-2xl" />
+        <div className="adm-float pointer-events-none absolute -left-[15%] -top-[20%] h-[70%] w-[80%] rounded-full bg-[radial-gradient(closest-side,rgba(37,99,235,.45),transparent)] blur-2xl" />
+        <div className="adm-float-rev pointer-events-none absolute -bottom-[25%] -right-[10%] h-[75%] w-[75%] rounded-full bg-[radial-gradient(closest-side,rgba(34,211,238,.32),transparent)] blur-2xl" />
         <div className="adm-float pointer-events-none absolute left-[35%] top-[40%] h-[40%] w-[40%] rounded-full bg-[radial-gradient(closest-side,rgba(34,211,238,.22),transparent)] blur-2xl" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(148,163,184,.07)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,.07)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(75%_70%_at_50%_45%,#000,transparent)]" />
 
@@ -109,7 +109,7 @@ export default function LoginScreen() {
             </span>
             <h1 className="mt-6 text-5xl font-bold leading-[1.05] tracking-[-.04em] xl:text-6xl">
               Every lead, <br />
-              <span className="adm-sheen bg-gradient-to-r from-cyan-300 via-blue-400 via-60% to-fuchsia-400 bg-clip-text text-transparent">one clear pipeline.</span>
+              <span className="text-[#22D3EE]">one clear pipeline.</span>
             </h1>
             <p className="mt-5 max-w-md text-[17px] leading-relaxed text-slate-400">
               Inquiries from the website and Ask AI land here, ready to follow up, track and close.
@@ -118,7 +118,7 @@ export default function LoginScreen() {
             <ul className="mt-9 space-y-4">
               {[
                 { icon: <Profile2User size={20} color="#60A5FA" variant="Bulk" />, t: "All inquiries in one place", d: "Contact form and Ask AI, saved automatically" },
-                { icon: <TrendUp size={20} color="#A78BFA" variant="Bulk" />, t: "Track every deal", d: "New, contacted, proposal, won or lost" },
+                { icon: <TrendUp size={20} color="#60A5FA" variant="Bulk" />, t: "Track every deal", d: "New, contacted, proposal, won or lost" },
                 { icon: <ShieldTick size={20} color="#34D399" variant="Bulk" />, t: "Private by design", d: "Approved staff only, verified on every request" },
               ].map((f) => (
                 <li key={f.t} className="flex items-start gap-4">
@@ -136,13 +136,13 @@ export default function LoginScreen() {
         </div>
 
         {/* Floating preview card */}
-        <div className="adm-bob pointer-events-none absolute bottom-[14%] right-[-6%] z-10 w-72 rounded-2xl border border-white/10 bg-[#0E1422]/80 p-4 shadow-2xl shadow-black/60 backdrop-blur-xl xl:right-[2%]">
+        <div className="adm-bob pointer-events-none absolute bottom-[14%] right-[-6%] z-10 w-72 rounded-2xl border border-white/10 bg-[#13243C]/80 p-4 shadow-2xl shadow-black/60 backdrop-blur-xl xl:right-[2%]">
           <div className="flex items-center justify-between text-xs">
             <span className="font-semibold text-slate-300">This week</span>
             <span className="flex items-center gap-1 text-emerald-300"><Flash size={13} color="currentColor" variant="Bold" /> Live</span>
           </div>
           <div className="mt-3 grid grid-cols-3 gap-2">
-            {[["New", "bg-sky-400"], ["Proposal", "bg-violet-400"], ["Won", "bg-emerald-400"]].map(([l, c]) => (
+            {[["New", "bg-sky-400"], ["Proposal", "bg-blue-400"], ["Won", "bg-emerald-400"]].map(([l, c]) => (
               <div key={l} className="rounded-xl bg-white/[.04] p-2.5">
                 <span className={`block h-1.5 w-1.5 rounded-full ${c}`} />
                 <span className="mt-2 block h-2 w-8 rounded bg-white/20" />
@@ -151,7 +151,7 @@ export default function LoginScreen() {
             ))}
           </div>
           <svg viewBox="0 0 240 56" className="mt-3 h-12 w-full" aria-hidden="true">
-            <defs><linearGradient id="admSpark" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#3B82F6" stopOpacity=".45" /><stop offset="1" stopColor="#3B82F6" stopOpacity="0" /></linearGradient></defs>
+            <defs><linearGradient id="admSpark" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#2563EB" stopOpacity=".45" /><stop offset="1" stopColor="#2563EB" stopOpacity="0" /></linearGradient></defs>
             <path d="M0 46 C30 40 45 30 70 34 S110 18 140 22 S190 6 240 8 L240 56 L0 56Z" fill="url(#admSpark)" />
             <path d="M0 46 C30 40 45 30 70 34 S110 18 140 22 S190 6 240 8" fill="none" stroke="#60A5FA" strokeWidth="2" />
           </svg>
@@ -160,7 +160,7 @@ export default function LoginScreen() {
 
       {/* ---------- Form panel ---------- */}
       <section className="relative flex min-h-screen items-center justify-center px-5 py-12 sm:px-10">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(59,130,246,.12),transparent_70%)] lg:hidden" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(37,99,235,.12),transparent_70%)] lg:hidden" />
         <div className="relative w-full max-w-[400px]">
           {/* Mobile brand */}
           <div className="mb-10 flex items-center gap-3 lg:hidden">
@@ -240,7 +240,7 @@ export default function LoginScreen() {
                 <button
                   type="submit"
                   disabled={busy || !email.trim() || (view === "signin" && !password)}
-                  className="group relative flex h-[52px] w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 text-[15px] font-bold shadow-[0_12px_32px_-10px_rgba(99,102,241,.8)] transition hover:shadow-[0_16px_40px_-10px_rgba(99,102,241,1)] disabled:cursor-not-allowed disabled:opacity-50"
+                  className="group relative flex h-[52px] w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-[15px] font-bold shadow-[0_12px_32px_-10px_rgba(37,99,235,.8)] transition hover:shadow-[0_16px_40px_-10px_rgba(37,99,235,1)] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                   {busy ? (

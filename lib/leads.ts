@@ -1,4 +1,3 @@
-import { FieldValue } from "firebase-admin/firestore";
 import { getAdminDb, isFirebaseAdminConfigured } from "./firebase/admin";
 
 export const LEAD_STATUSES = ["new", "contacted", "proposal", "won", "lost"] as const;
@@ -57,7 +56,7 @@ export async function saveLead(input: NewLead): Promise<boolean> {
         activity: [{ id: stamp(), at: now, text: input.source === "ai-chat" ? "Lead created from Ask AI chat" : input.source === "account" ? "Lead created from a client account" : "Lead created from contact form", by: "system" }],
         createdAt: now,
         updatedAt: now,
-        createdAtServer: FieldValue.serverTimestamp(),
+        createdAtServer: require("firebase-admin/firestore").FieldValue.serverTimestamp(),
       });
     return true;
   } catch (error) {

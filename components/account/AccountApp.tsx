@@ -99,7 +99,7 @@ export default function AccountApp() {
   if (phase === "error" || !data || !user) {
     return (
       <div className="grid min-h-screen place-items-center px-5">
-        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#0E1422] p-8 text-center">
+        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#13243C] p-8 text-center">
           <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-amber-400/10"><Danger size={28} color="#FBBF24" /></span>
           <h1 className="mt-5 text-xl font-bold">We couldn’t load your account</h1>
           <p className="mt-2 text-sm leading-relaxed text-slate-400">{error || "Please try again."}</p>

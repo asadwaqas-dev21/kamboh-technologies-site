@@ -103,7 +103,7 @@ export default function AdminApp() {
             <button
               type="button" disabled={verifyState === "sending" || verifyState === "sent"}
               onClick={async () => { setVerifyState("sending"); try { await sendEmailVerification(user); setVerifyState("sent"); } catch { setVerifyState("idle"); } }}
-              className="rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60"
+              className="rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60"
             >
               {verifyState === "sent" ? "Verification email sent. Check your inbox" : verifyState === "sending" ? "Sending…" : "Send verification email"}
             </button>
@@ -129,7 +129,7 @@ export default function AdminApp() {
 function Notice({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode }) {
   return (
     <div className="grid min-h-screen place-items-center px-4">
-      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#0E1422] p-8 text-center shadow-2xl shadow-black/40">
+      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#13243C] p-8 text-center shadow-2xl shadow-black/40">
         <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-amber-400/10 text-amber-300">{icon}</div>
         <h1 className="text-xl font-bold tracking-tight">{title}</h1>
         <div className="mt-3 text-sm leading-relaxed text-slate-400">{children}</div>

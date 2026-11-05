@@ -137,11 +137,11 @@ export default function AuthScreen() {
   }[view];
 
   return (
-    <div className="relative grid min-h-screen overflow-hidden bg-[#05070C] lg:grid-cols-[1.05fr_1fr]">
+    <div className="relative grid min-h-screen overflow-hidden bg-[#0B1220] lg:grid-cols-[1.05fr_1fr]">
       {/* ---------- Brand panel ---------- */}
       <section className="relative hidden overflow-hidden border-r border-white/[.06] lg:flex lg:flex-col">
         <div className="adm-float pointer-events-none absolute -left-[15%] -top-[20%] h-[70%] w-[80%] rounded-full bg-[radial-gradient(closest-side,rgba(34,211,238,.32),transparent)] blur-2xl" />
-        <div className="adm-float-rev pointer-events-none absolute -bottom-[25%] -right-[10%] h-[75%] w-[75%] rounded-full bg-[radial-gradient(closest-side,rgba(139,92,246,.34),transparent)] blur-2xl" />
+        <div className="adm-float-rev pointer-events-none absolute -bottom-[25%] -right-[10%] h-[75%] w-[75%] rounded-full bg-[radial-gradient(closest-side,rgba(37,99,235,.34),transparent)] blur-2xl" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(148,163,184,.07)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,.07)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(75%_70%_at_50%_45%,#000,transparent)]" />
 
         <div className="relative z-10 flex flex-1 flex-col p-12 xl:p-16">
@@ -161,7 +161,7 @@ export default function AuthScreen() {
             </span>
             <p className="mt-6 text-5xl font-bold leading-[1.05] tracking-[-.04em] xl:text-6xl">
               Your projects, <br />
-              <span className="adm-sheen bg-gradient-to-r from-cyan-300 via-blue-400 via-60% to-fuchsia-400 bg-clip-text text-transparent">one simple place.</span>
+              <span className="text-[#22D3EE]">one simple place.</span>
             </p>
             <p className="mt-5 max-w-md text-[17px] leading-relaxed text-slate-400">
               Send a request in seconds, see where it stands and keep your details ready for every new project.
@@ -169,7 +169,7 @@ export default function AuthScreen() {
             <ul className="mt-9 space-y-4">
               {[
                 { icon: <DocumentText size={20} color="#22D3EE" variant="Bulk" />, t: "Requests in seconds", d: "Your details are saved, so you only describe the project" },
-                { icon: <Timer1 size={20} color="#A78BFA" variant="Bulk" />, t: "Follow every status", d: "Received, in discussion, proposal sent, project started" },
+                { icon: <Timer1 size={20} color="#60A5FA" variant="Bulk" />, t: "Follow every status", d: "Received, in discussion, proposal sent, project started" },
                 { icon: <ShieldTick size={20} color="#34D399" variant="Bulk" />, t: "Private and secure", d: "Encrypted sign-in; delete your account anytime" },
               ].map((f) => (
                 <li key={f.t} className="flex items-start gap-4">
@@ -297,7 +297,7 @@ export default function AuthScreen() {
                 <button
                   type="submit"
                   disabled={busy || !email.trim() || (view === "signin" && !password) || (view === "signup" && !signupReady)}
-                  className="group relative flex h-[52px] w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 text-[15px] font-bold shadow-[0_12px_32px_-10px_rgba(59,130,246,.8)] transition hover:shadow-[0_16px_40px_-10px_rgba(59,130,246,1)] disabled:cursor-not-allowed disabled:opacity-50"
+                  className="group relative flex h-[52px] w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-[15px] font-bold shadow-[0_12px_32px_-10px_rgba(37,99,235,.8)] transition hover:shadow-[0_16px_40px_-10px_rgba(37,99,235,1)] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                   {busy ? (

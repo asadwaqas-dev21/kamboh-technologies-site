@@ -72,7 +72,7 @@ await sharp(icon).resize(32, 32).png().toFile("public/favicon-32.png");
 await sharp(icon).resize(180, 180).png().toFile("public/apple-touch-icon.png");
 await sharp(icon).resize(192, 192).png().toFile("public/icon-192.png");
 await sharp(icon).resize(512, 512).png().toFile("public/icon-512.png");
-const ico = await sharp(icon).resize(48, 48).png().toBuffer();
+const ico = await sharp(icon).resize(48, 48).ensureAlpha().png().toBuffer(); // RGBA PNG inside the ICO (Next.js requires it)
 // app/favicon.ico (used by the Next.js pages) as a single-image PNG-based ICO
 const header = Buffer.alloc(22);
 header.writeUInt16LE(0, 0); header.writeUInt16LE(1, 2); header.writeUInt16LE(1, 4);

@@ -37,8 +37,8 @@ function pageHead({ title, desc, url, image, ogType = "website", ld }) {
 }
 
 // Accent colour per category (matches the service colours used across the site).
-const CAT_COLOR = { "AI & Automation": "168,85,247", "Mobile Apps": "14,165,233", "Business Setup": "34,211,238", Technology: "59,130,246" };
-const catColor = (c) => CAT_COLOR[c] || "59,130,246";
+const CAT_COLOR = { "AI & Automation": "37,99,235", "Mobile Apps": "14,165,233", "Business Setup": "34,211,238", Technology: "37,99,235" };
+const catColor = (c) => CAT_COLOR[c] || "37,99,235";
 const catSlug = (c) => slugify(c);
 
 const card = (p, i = 0) => `<a class="blog-card" href="/blog/${p.slug}" data-cat="${catSlug(p.category)}" data-reveal${i ? ` style="--d:.${(i % 3) * 6}s"` : ""}>
@@ -73,7 +73,7 @@ const card = (p, i = 0) => `<a class="blog-card" href="/blog/${p.slug}" data-cat
     <div class="hx-glow g1"></div>
     <div class="hx-glow g2"></div>
     <div class="hx-blob"></div>
-    <svg class="hx-star s1" viewBox="0 0 100 100"><defs><linearGradient id="phStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".55" stop-color="#3B82F6"/><stop offset="1" stop-color="#A855F7"/></linearGradient></defs><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
+    <svg class="hx-star s1" viewBox="0 0 100 100"><defs><linearGradient id="phStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".55" stop-color="#2563EB"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
     <svg class="hx-star s2" viewBox="0 0 100 100"><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
   </div>
   <div class="wrap ph-grid">
@@ -93,7 +93,7 @@ const card = (p, i = 0) => `<a class="blog-card" href="/blog/${p.slug}" data-cat
       </dl>
     </div>
     <div class="ph-visual">
-      <svg class="ph-rings" viewBox="0 0 400 400" aria-hidden="true"><g class="r1"><circle cx="200" cy="200" r="190" fill="none" stroke="rgba(148,163,184,.22)" stroke-dasharray="2 8"/><circle cx="200" cy="10" r="4" fill="#22D3EE"/></g><g class="r2"><circle cx="200" cy="200" r="140" fill="none" stroke="rgba(139,92,246,.32)"/><circle cx="340" cy="200" r="3.5" fill="#D946EF"/></g></svg>
+      <svg class="ph-rings" viewBox="0 0 400 400" aria-hidden="true"><g class="r1"><circle cx="200" cy="200" r="190" fill="none" stroke="rgba(148,163,184,.22)" stroke-dasharray="2 8"/><circle cx="200" cy="10" r="4" fill="#22D3EE"/></g><g class="r2"><circle cx="200" cy="200" r="140" fill="none" stroke="rgba(37,99,235,.32)"/><circle cx="340" cy="200" r="3.5" fill="#22D3EE"/></g></svg>
       <div class="ph-card bh-card">
         <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
         <div class="ph-head"><span>Reading list</span><span class="live">${posts.length} guides</span></div>
@@ -101,14 +101,14 @@ const card = (p, i = 0) => `<a class="blog-card" href="/blog/${p.slug}" data-cat
           ${posts.map((p, i) => `<a href="/blog/${p.slug}" style="--c:${catColor(p.category)}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="bh-t"><b>${p.title}</b><small><i class="dot" aria-hidden="true"></i>${p.category} · ${p.readMins} min${i === 0 ? ' <em class="bh-new">New</em>' : ""}</small></span><span class="ar" aria-hidden="true">→</span></a>`).join("\n          ")}
         </nav>
       </div>
-      <div class="ph-float f1" style="--c:52,211,153" aria-hidden="true"><i></i>Free, no sign-up</div>
-      <div class="ph-float f2" style="--c:217,70,239" aria-hidden="true"><i></i>Written by our Lahore team</div>
+      <div class="ph-float f1" style="--c:34,211,238" aria-hidden="true"><i></i>Free, no sign-up</div>
+      <div class="ph-float f2" style="--c:34,211,238" aria-hidden="true"><i></i>Written by our Lahore team</div>
     </div>
   </div>
   <div class="horizon" aria-hidden="true">
     <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
       <defs>
-        <linearGradient id="phz" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D946EF" stop-opacity=".15"/><stop offset=".18" stop-color="#D946EF"/><stop offset=".45" stop-color="#8B5CF6"/><stop offset=".7" stop-color="#3B82F6"/><stop offset=".92" stop-color="#22D3EE"/><stop offset="1" stop-color="#22D3EE" stop-opacity=".15"/></linearGradient>
+        <linearGradient id="phz" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22D3EE" stop-opacity=".15"/><stop offset=".18" stop-color="#22D3EE"/><stop offset=".45" stop-color="#2563EB"/><stop offset=".7" stop-color="#2563EB"/><stop offset=".92" stop-color="#22D3EE"/><stop offset="1" stop-color="#22D3EE" stop-opacity=".15"/></linearGradient>
         <filter id="phzBlur" x="-5%" y="-200%" width="110%" height="500%"><feGaussianBlur stdDeviation="6"/></filter>
       </defs>
       <path class="hz-line" pathLength="1" d="M0 96 L250 62 L470 104 L620 66 L770 106 L960 48 L1180 92 L1440 56" fill="none" stroke="url(#phz)" stroke-width="8" filter="url(#phzBlur)" opacity=".6" vector-effect="non-scaling-stroke"/>
@@ -187,7 +187,7 @@ for (const p of posts) {
     <div class="hx-glow g1"></div>
     <div class="hx-glow g2"></div>
     <div class="hx-blob"></div>
-    <svg class="hx-star s1" viewBox="0 0 100 100"><defs><linearGradient id="phStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".55" stop-color="#3B82F6"/><stop offset="1" stop-color="#A855F7"/></linearGradient></defs><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
+    <svg class="hx-star s1" viewBox="0 0 100 100"><defs><linearGradient id="phStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".55" stop-color="#2563EB"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
     <svg class="hx-star s2" viewBox="0 0 100 100"><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
   </div>
   <div class="wrap post-wrap">

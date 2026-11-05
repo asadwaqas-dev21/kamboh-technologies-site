@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
   experimental: {
     agentFeedback: true,
   },
+  serverExternalPackages: ["firebase-admin", "firebase-admin/app", "firebase-admin/auth", "firebase-admin/firestore"],
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,

@@ -46,7 +46,7 @@ export default function Field({ id, label, type, autoComplete, value, onChange, 
         />
         <label
           htmlFor={id}
-          className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] text-slate-500 transition-all duration-200 peer-focus:top-[15px] peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-cyan-300 peer-[:not(:placeholder-shown)]:top-[15px] peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:font-semibold"
+          className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] text-slate-400 transition-all duration-200 peer-focus:top-[15px] peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-cyan-300 peer-[:not(:placeholder-shown)]:top-[15px] peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:font-semibold"
         >
           {label}
         </label>

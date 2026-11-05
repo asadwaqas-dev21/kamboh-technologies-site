@@ -18,7 +18,7 @@ type Tab = "overview" | "requests" | "new" | "profile";
 const STATUS: Record<string, { label: string; chip: string; dot: string; step: number }> = {
   new: { label: "Received", chip: "bg-sky-400/10 text-sky-300 ring-sky-400/30", dot: "bg-sky-400", step: 0 },
   contacted: { label: "In discussion", chip: "bg-amber-400/10 text-amber-300 ring-amber-400/30", dot: "bg-amber-400", step: 1 },
-  proposal: { label: "Proposal sent", chip: "bg-violet-400/10 text-violet-300 ring-violet-400/30", dot: "bg-violet-400", step: 2 },
+  proposal: { label: "Proposal sent", chip: "bg-blue-400/10 text-blue-300 ring-blue-400/30", dot: "bg-blue-400", step: 2 },
   won: { label: "Project started", chip: "bg-emerald-400/10 text-emerald-300 ring-emerald-400/30", dot: "bg-emerald-400", step: 3 },
   lost: { label: "Closed", chip: "bg-slate-400/10 text-slate-300 ring-slate-400/30", dot: "bg-slate-400", step: -1 },
 };
@@ -58,11 +58,11 @@ export default function Dashboard({ user, data, setData, api, reload, refreshVer
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#07090E]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_100%_at_30%_0%,rgba(59,130,246,.14),transparent_70%)]" />
+    <div className="relative min-h-screen bg-[#0B1220]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_100%_at_30%_0%,rgba(37,99,235,.14),transparent_70%)]" />
 
       {/* ---------- Top bar ---------- */}
-      <header className="sticky top-0 z-30 border-b border-white/[.06] bg-[#07090E]/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 border-b border-white/[.06] bg-[#0B1220]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 sm:px-6">
           <a href="/" className="flex items-center gap-2.5" aria-label="Kamboh Technologies home">
             <span className="grid h-9 w-9 place-items-center rounded-xl"><img src="/brand/logo-dark.png" alt="" width={24} height={27} /></span>
@@ -78,7 +78,7 @@ export default function Dashboard({ user, data, setData, api, reload, refreshVer
           </nav>
           <div className="ml-auto flex items-center gap-2">
             <span className="hidden items-center gap-2.5 rounded-xl border border-white/10 bg-white/[.03] py-1.5 pl-1.5 pr-3 sm:flex">
-              <span className="grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-cyan-400 to-violet-500 text-xs font-bold">{first[0]?.toUpperCase()}</span>
+              <span className="grid h-7 w-7 place-items-center rounded-lg bg-[#2563EB] text-xs font-bold">{first[0]?.toUpperCase()}</span>
               <span className="max-w-[180px] truncate text-sm text-slate-300">{data.profile.email}</span>
             </span>
             <button type="button" onClick={() => signOut(getClientAuth())} className="flex h-10 items-center gap-2 rounded-xl border border-white/10 px-3 text-sm font-semibold text-slate-300 transition hover:bg-white/[.05] hover:text-white">
@@ -109,7 +109,7 @@ export default function Dashboard({ user, data, setData, api, reload, refreshVer
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Need help?</p>
             <a href="https://wa.me/923028207226" target="_blank" rel="noopener" className="mt-3 flex items-center gap-2 text-sm text-slate-300 hover:text-white"><MessageText size={16} color="#34D399" /> WhatsApp us</a>
             <a href="tel:+923028207226" className="mt-2 flex items-center gap-2 text-sm text-slate-300 hover:text-white"><Call size={16} color="#22D3EE" /> +92 302 8207226</a>
-            <a href="mailto:info@kambohtechnologies.com" className="mt-2 flex items-center gap-2 text-sm text-slate-300 hover:text-white"><Sms size={16} color="#A78BFA" /> Email the team</a>
+            <a href="mailto:info@kambohtechnologies.com" className="mt-2 flex items-center gap-2 text-sm text-slate-300 hover:text-white"><Sms size={16} color="#60A5FA" /> Email the team</a>
           </div>
         </nav>
 
@@ -137,8 +137,8 @@ export default function Dashboard({ user, data, setData, api, reload, refreshVer
                 {data.inquiries.length === 0 && <Empty onNew={() => setTab("new")} />}
               </div>
 
-              <button type="button" onClick={() => setTab("new")} className="group mt-8 flex w-full items-center gap-4 rounded-2xl border border-cyan-400/20 bg-gradient-to-r from-cyan-400/[.08] via-blue-500/[.06] to-violet-500/[.08] p-5 text-left transition hover:border-cyan-400/40">
-                <span className="grid h-12 w-12 flex-none place-items-center rounded-xl bg-gradient-to-br from-cyan-400 to-violet-500"><Add size={24} color="#fff" /></span>
+              <button type="button" onClick={() => setTab("new")} className="group mt-8 flex w-full items-center gap-4 rounded-2xl border border-cyan-400/20 bg-gradient-to-r from-cyan-400/[.08] via-blue-500/[.06] to-blue-600/[.08] p-5 text-left transition hover:border-cyan-400/40">
+                <span className="grid h-12 w-12 flex-none place-items-center rounded-xl bg-[#2563EB]"><Add size={24} color="#fff" /></span>
                 <span className="min-w-0">
                   <span className="block font-bold">Start a new project</span>
                   <span className="block text-sm text-slate-400">Tell us what you need. Your contact details are added automatically.</span>
@@ -216,7 +216,7 @@ function RequestCard({ q, detailed = false }: { q: ClientInquiry; detailed?: boo
         <ol className="mt-5 grid grid-cols-4 gap-2" aria-label="Progress">
           {STEPS.map((label, i) => (
             <li key={label} className="min-w-0">
-              <span className={`block h-1.5 rounded-full ${i <= st.step ? "bg-gradient-to-r from-cyan-400 to-violet-500" : "bg-white/10"}`} />
+              <span className={`block h-1.5 rounded-full ${i <= st.step ? "bg-[#22D3EE]" : "bg-white/10"}`} />
               <span className={`mt-2 block truncate text-[11px] ${i <= st.step ? "text-slate-300" : "text-slate-600"}`}>{label}</span>
             </li>
           ))}
@@ -307,14 +307,14 @@ function NewRequest({ data, api, reload, onDone, goProfile }: { data: AccountDat
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="nr-service" className="mb-2 block text-sm font-semibold text-slate-300">Service</label>
-            <select id="nr-service" value={service} onChange={(e) => setService(e.target.value)} className={`${inputCls} h-12 bg-[#0C111D]`} required>
+            <select id="nr-service" value={service} onChange={(e) => setService(e.target.value)} className={`${inputCls} h-12 bg-[#13243C]`} required>
               <option value="">Choose a service</option>
               {Object.entries(data.services).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>
           </div>
           <div>
             <label htmlFor="nr-timeline" className="mb-2 block text-sm font-semibold text-slate-300">Timeline <span className="font-normal text-slate-500">(optional)</span></label>
-            <select id="nr-timeline" value={timeline} onChange={(e) => setTimeline(e.target.value)} className={`${inputCls} h-12 bg-[#0C111D]`}>
+            <select id="nr-timeline" value={timeline} onChange={(e) => setTimeline(e.target.value)} className={`${inputCls} h-12 bg-[#13243C]`}>
               <option value="">Select a timeline</option>
               {TIMELINES.map((t) => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -331,7 +331,7 @@ function NewRequest({ data, api, reload, onDone, goProfile }: { data: AccountDat
             <Danger size={18} color="#FB7185" className="mt-px flex-none" /> {error}
           </p>
         )}
-        <button type="submit" disabled={busy || !data.emailVerified} className="flex h-12 items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 px-6 text-[15px] font-bold shadow-[0_12px_32px_-10px_rgba(59,130,246,.8)] transition hover:shadow-[0_16px_40px_-10px_rgba(59,130,246,1)] disabled:cursor-not-allowed disabled:opacity-50">
+        <button type="submit" disabled={busy || !data.emailVerified} className="flex h-12 items-center gap-2 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] px-6 text-[15px] font-bold shadow-[0_12px_32px_-10px_rgba(37,99,235,.8)] transition hover:shadow-[0_16px_40px_-10px_rgba(37,99,235,1)] disabled:cursor-not-allowed disabled:opacity-50">
           {busy ? <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" /> : <Send2 size={18} color="currentColor" />}
           {busy ? "Sending…" : "Send request"}
         </button>

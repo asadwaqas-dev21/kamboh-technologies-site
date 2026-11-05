@@ -3,7 +3,7 @@ import type { Lead, LeadStatus } from "@/lib/leads";
 export const STATUS_META: Record<LeadStatus, { label: string; chip: string; dot: string }> = {
   new: { label: "New", chip: "bg-sky-400/10 text-sky-300 ring-sky-400/30", dot: "bg-sky-400" },
   contacted: { label: "Contacted", chip: "bg-amber-400/10 text-amber-300 ring-amber-400/30", dot: "bg-amber-400" },
-  proposal: { label: "Proposal", chip: "bg-violet-400/10 text-violet-300 ring-violet-400/30", dot: "bg-violet-400" },
+  proposal: { label: "Proposal", chip: "bg-blue-400/10 text-blue-300 ring-blue-400/30", dot: "bg-blue-400" },
   won: { label: "Won", chip: "bg-emerald-400/10 text-emerald-300 ring-emerald-400/30", dot: "bg-emerald-400" },
   lost: { label: "Lost", chip: "bg-rose-400/10 text-rose-300 ring-rose-400/30", dot: "bg-rose-400" },
 };

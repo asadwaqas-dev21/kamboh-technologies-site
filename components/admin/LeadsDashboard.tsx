@@ -101,7 +101,7 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
         </div>
         <nav className="mt-2 flex-1 space-y-1 px-3">
           <p className="px-3 pb-2 pt-3 text-[11px] font-semibold uppercase tracking-[.14em] text-slate-600">Workspace</p>
-          <button className="flex w-full items-center gap-3 rounded-xl bg-gradient-to-r from-blue-500/15 to-violet-500/10 px-3 py-2.5 text-sm font-semibold text-white ring-1 ring-inset ring-blue-400/20">
+          <button className="flex w-full items-center gap-3 rounded-xl bg-gradient-to-r from-blue-500/15 to-blue-600/10 px-3 py-2.5 text-sm font-semibold text-white ring-1 ring-inset ring-blue-400/20">
             <Profile2User size={19} color="#60A5FA" variant="Bulk" />
             Leads
             <span className="ml-auto rounded-full bg-sky-400/15 px-2 py-0.5 text-xs text-sky-300">{counts.new}</span>
@@ -113,7 +113,7 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
         </nav>
         <div className="border-t border-white/[.06] p-4">
           <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 flex-none place-items-center rounded-full bg-gradient-to-br from-cyan-400 to-violet-500 text-xs font-bold">{initials(email.split("@")[0])}</span>
+            <span className="grid h-9 w-9 flex-none place-items-center rounded-full bg-[#2563EB] text-xs font-bold">{initials(email.split("@")[0])}</span>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold">{email.split("@")[0]}</p>
               <p className="truncate text-xs text-slate-500">{email}</p>
@@ -128,7 +128,7 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
 
       {/* Main */}
       <main className="min-w-0 flex-1 lg:pl-64">
-        <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/[.06] bg-[#07090E]/85 px-4 py-4 backdrop-blur sm:px-8">
+        <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/[.06] bg-[#0B1220]/85 px-4 py-4 backdrop-blur sm:px-8">
           <button onClick={() => setMenuOpen(true)} aria-label="Open menu" className="rounded-lg p-2 text-slate-400 hover:bg-white/5 lg:hidden">
             <HambergerMenu size={22} color="currentColor" />
           </button>
@@ -141,7 +141,7 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
               <Refresh2 size={17} color="currentColor" className={loading ? "animate-spin" : ""} />
               <span className="hidden sm:inline">Refresh</span>
             </button>
-            <button onClick={exportCsv} disabled={!filtered.length} className="inline-flex h-10 items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 px-3.5 text-sm font-bold shadow-lg shadow-indigo-500/25 hover:brightness-110 disabled:opacity-40">
+            <button onClick={exportCsv} disabled={!filtered.length} className="inline-flex h-10 items-center gap-2 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] px-3.5 text-sm font-bold shadow-lg shadow-blue-600/25 hover:brightness-110 disabled:opacity-40">
               <DocumentDownload size={17} color="currentColor" />
               <span className="hidden sm:inline">Export CSV</span>
             </button>
@@ -158,7 +158,7 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
           </section>
 
           {/* Table card */}
-          <section className="overflow-hidden rounded-2xl border border-white/[.07] bg-[#0C111D]">
+          <section className="overflow-hidden rounded-2xl border border-white/[.07] bg-[#13243C]">
             <div className="flex gap-1 overflow-x-auto border-b border-white/[.06] px-3 pt-3 [scrollbar-width:none]">
               {(["all", ...STATUS_ORDER] as Tab[]).map((t) => (
                 <button
@@ -179,11 +179,11 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
                 <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search name, email, phone, company or message…" className="h-full w-full bg-transparent text-sm outline-none placeholder:text-slate-600" />
               </div>
               <div className="flex gap-3">
-                <select value={service} onChange={(e) => setService(e.target.value)} className="h-10 flex-1 rounded-xl border border-white/10 bg-[#0C111D] px-3 text-sm text-slate-300 outline-none focus:border-cyan-400/70 md:w-52">
+                <select value={service} onChange={(e) => setService(e.target.value)} className="h-10 flex-1 rounded-xl border border-white/10 bg-[#13243C] px-3 text-sm text-slate-300 outline-none focus:border-cyan-400/70 md:w-52">
                   <option value="all">All services</option>
                   {services.map((s) => <option key={s} value={s}>{s}</option>)}
                 </select>
-                <select value={source} onChange={(e) => setSource(e.target.value)} className="h-10 flex-1 rounded-xl border border-white/10 bg-[#0C111D] px-3 text-sm text-slate-300 outline-none focus:border-cyan-400/70 md:w-40">
+                <select value={source} onChange={(e) => setSource(e.target.value)} className="h-10 flex-1 rounded-xl border border-white/10 bg-[#13243C] px-3 text-sm text-slate-300 outline-none focus:border-cyan-400/70 md:w-40">
                   <option value="all">All sources</option>
                   <option value="form">Contact form</option>
                   <option value="ai-chat">Ask AI</option>
@@ -226,7 +226,7 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
                       <tr key={l.id} onClick={() => setSelectedId(l.id)} className="cursor-pointer border-b border-white/[.04] transition last:border-0 hover:bg-white/[.025]">
                         <td className="px-5 py-3.5">
                           <div className="flex items-center gap-3">
-                            <span className="grid h-9 w-9 flex-none place-items-center rounded-full bg-gradient-to-br from-blue-500/30 to-violet-500/30 text-xs font-bold ring-1 ring-white/10">{initials(l.name)}</span>
+                            <span className="grid h-9 w-9 flex-none place-items-center rounded-full bg-gradient-to-br from-blue-500/30 to-blue-600/30 text-xs font-bold ring-1 ring-white/10">{initials(l.name)}</span>
                             <div className="min-w-0">
                               <p className="truncate font-semibold text-slate-100">{l.name}{l.company && <span className="font-normal text-slate-500"> · {l.company}</span>}</p>
                               <p className="truncate text-xs text-slate-500">{l.email || l.phone}</p>
@@ -248,7 +248,7 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
                   {filtered.map((l) => (
                     <li key={l.id}>
                       <button onClick={() => setSelectedId(l.id)} className="flex w-full items-start gap-3 px-4 py-4 text-left hover:bg-white/[.025]">
-                        <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-gradient-to-br from-blue-500/30 to-violet-500/30 text-xs font-bold ring-1 ring-white/10">{initials(l.name)}</span>
+                        <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-gradient-to-br from-blue-500/30 to-blue-600/30 text-xs font-bold ring-1 ring-white/10">{initials(l.name)}</span>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
                             <p className="truncate font-semibold">{l.name}</p>
@@ -280,7 +280,7 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
 function Stat({ icon, label, value, hint, accent = "blue" }: { icon: React.ReactNode; label: string; value: number; hint: string; accent?: "blue" | "sky" | "amber" | "emerald" }) {
   const glow = { blue: "from-blue-500/10", sky: "from-sky-400/10", amber: "from-amber-400/10", emerald: "from-emerald-400/10" }[accent];
   return (
-    <div className={`relative overflow-hidden rounded-2xl border border-white/[.07] bg-gradient-to-br ${glow} to-transparent bg-[#0C111D] p-4 sm:p-5`}>
+    <div className={`relative overflow-hidden rounded-2xl border border-white/[.07] bg-gradient-to-br ${glow} to-transparent bg-[#13243C] p-4 sm:p-5`}>
       <div className="flex items-center justify-between">
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 sm:text-[13px] sm:normal-case sm:tracking-normal">{label}</p>
         <span className="grid h-9 w-9 place-items-center rounded-xl bg-white/[.04]">{icon}</span>
@@ -299,7 +299,7 @@ export function StatusChip({ status }: { status: LeadStatus }) {
 export function SourceBadge({ source }: { source: Lead["source"] }) {
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full bg-white/[.04] px-2.5 py-1 text-xs font-medium text-slate-300 ring-1 ring-inset ring-white/10">
-      {source === "ai-chat" ? <MessageText size={13} color="#A78BFA" /> : source === "account" ? <Profile size={13} color="#34D399" /> : <Sms size={13} color="#22D3EE" />}
+      {source === "ai-chat" ? <MessageText size={13} color="#60A5FA" /> : source === "account" ? <Profile size={13} color="#34D399" /> : <Sms size={13} color="#22D3EE" />}
       {SOURCE_LABEL[source]}
     </span>
   );
