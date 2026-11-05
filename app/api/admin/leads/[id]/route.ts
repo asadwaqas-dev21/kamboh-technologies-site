@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
-import { FieldValue } from "firebase-admin/firestore";
 import { requireAdmin } from "@/lib/admin-auth";
 import { getAdminDb } from "@/lib/firebase/admin";
 import { LEAD_STATUSES, LEADS_COLLECTION, newNoteId, toLead, type LeadStatus } from "@/lib/leads";
+
+// Lazy-load to avoid Turbopack mangling the firebase-admin package name.
+const getFieldValue = () => require("firebase-admin/firestore").FieldValue;
 
 type Ctx = { params: Promise<{ id: string }> };
 
@@ -36,12 +38,12 @@ export async function PATCH(request: Request, { params }: Ctx) {
     const before = toLead(id, snap.data()!).status;
     if (status !== before) {
       update.status = status;
-      update.activity = FieldValue.arrayUnion({ id: newNoteId(), at: now, by: auth.email, text: `Status changed from ${STATUS_LABEL[before]} to ${STATUS_LABEL[status]}` });
+      update.activity = getFieldValue().arrayUnion({ id: newNoteId(), at: now, by: auth.email, text: `Status changed from ${STATUS_LABEL[before]} to ${STATUS_LABEL[status]}` });
     }
   } else if (typeof body.note === "string") {
     const text = body.note.trim().slice(0, 2000);
     if (!text) return NextResponse.json({ error: "The note is empty." }, { status: 400 });
-    update.notes = FieldValue.arrayUnion({ id: newNoteId(), at: now, by: auth.email, text });
+    update.notes = getFieldValue().arrayUnion({ id: newNoteId(), at: now, by: auth.email, text });
   } else {
     return NextResponse.json({ error: "Nothing to update." }, { status: 400 });
   }

@@ -1,3 +1,4 @@
+import type { DocumentData } from "firebase-admin/firestore";
 import { getAdminDb, isFirebaseAdminConfigured } from "./firebase/admin";
 
 export const LEAD_STATUSES = ["new", "contacted", "proposal", "won", "lost"] as const;
@@ -66,7 +67,7 @@ export async function saveLead(input: NewLead): Promise<boolean> {
 }
 
 /** Converts a Firestore document into the shape the admin dashboard uses. */
-export function toLead(id: string, d: FirebaseFirestore.DocumentData): Lead {
+export function toLead(id: string, d: DocumentData): Lead {
   return {
     id,
     name: d.name || "",

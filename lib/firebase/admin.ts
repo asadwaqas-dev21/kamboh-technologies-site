@@ -1,4 +1,5 @@
 import type { App, ServiceAccount } from "firebase-admin/app";
+import type { Firestore } from "firebase-admin/firestore";
 import { readFileSync } from "fs";
 import { resolve } from "path";
 
@@ -33,7 +34,7 @@ export function getAdminApp(): App {
   // Use require() to avoid Turbopack mangling the package name during bundling.
   const { cert, getApps, initializeApp } = require("firebase-admin/app");
   app = getApps()[0] ?? initializeApp({ credential: cert(loadServiceAccount()) });
-  return app;
+  return app!;
 }
 
 export function getAdminAuth() {
@@ -41,7 +42,7 @@ export function getAdminAuth() {
   return getAuth(getAdminApp());
 }
 
-export function getAdminDb() {
+export function getAdminDb(): Firestore {
   const { getFirestore } = require("firebase-admin/firestore");
   return getFirestore(getAdminApp());
 }
