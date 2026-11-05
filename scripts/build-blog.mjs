@@ -4,6 +4,8 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { POSTS } from "./blog.data.mjs";
 
 const SITE = "https://kambohtechnologies.com";
+// Scrollable tables need keyboard focus and a name (WCAG 2.1.1).
+const tableWrap = (n) => `<div class="table-wrap" tabindex="0" role="region" aria-label="Table ${n}, scrolls sideways on small screens">`;
 const ORG = `${SITE}/#organization`;
 const esc = (t) => String(t).replace(/&(?!amp;|lt;|gt;|quot;|#\d+;)/g, "&amp;").replace(/"/g, "&quot;");
 const fmtDate = (d) => new Date(d + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
@@ -67,6 +69,13 @@ const card = (p, i = 0) => `<a class="blog-card" href="/blog/${p.slug}" data-cat
 <section class="page-hero blog-hero" aria-labelledby="pageTitle">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hx-deco ph-deco" aria-hidden="true">
+    <div class="hx-glow g1"></div>
+    <div class="hx-glow g2"></div>
+    <div class="hx-blob"></div>
+    <svg class="hx-star s1" viewBox="0 0 100 100"><defs><linearGradient id="phStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".55" stop-color="#3B82F6"/><stop offset="1" stop-color="#A855F7"/></linearGradient></defs><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
+    <svg class="hx-star s2" viewBox="0 0 100 100"><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
+  </div>
   <div class="wrap ph-grid">
     <div class="ph-copy">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Blog</span></nav>
@@ -125,7 +134,7 @@ const card = (p, i = 0) => `<a class="blog-card" href="/blog/${p.slug}" data-cat
   </div>
 </section>
 `;
-  const html = pageHead({ title: "Blog | Kamboh Technologies", desc: "Practical guides on mobile apps, software, SECP company registration, tax filing and digital growth from Kamboh Technologies in Lahore.", url, image: posts[0].image, ld })
+  const html = pageHead({ title: "Blog: Software, AI & Business Guides | Kamboh Technologies", desc: "Practical guides on mobile apps, software, SECP company registration, tax filing and digital growth from Kamboh Technologies in Lahore.", url, image: posts[0].image, ld })
     + `<body data-page="blog">` + navToMain + main + fromMainEnd;
   writeFileSync("public/blog.html", html);
   console.log("public/blog.html");
@@ -151,7 +160,14 @@ for (const p of posts) {
   </div>`).join("\n  ")}
 </div>
 ` : "";
-  const body = (p.body + faqHtml).replace(/<h2>([\s\S]*?)<\/h2>/g, (_, t) => { const id = slugify(t); toc.push([id, t]); return `<h2 id="${id}">${t}</h2>`; });
+  // "In short": a direct answer at the top, which answer engines and AI assistants quote.
+  const summaryHtml = p.summary ? `
+<div class="callout answer-box">
+  <p class="callout-h">In short</p>
+  <ul>${p.summary.map((x) => `<li>${x}</li>`).join("")}</ul>
+</div>
+` : "";
+  const body = (summaryHtml + p.body + faqHtml).replace(/<h2>([\s\S]*?)<\/h2>/g, (_, t) => { const id = slugify(t); toc.push([id, t]); return `<h2 id="${id}">${t}</h2>`; });
   const related = posts.filter((x) => x.slug !== p.slug).slice(0, 2);
   const ld = {
     "@context": "https://schema.org",
@@ -159,7 +175,7 @@ for (const p of posts) {
       { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` }, { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE}/blog` }, { "@type": "ListItem", position: 3, name: p.title, item: url }] },
       { "@type": "BlogPosting", "@id": `${url}#article`, headline: p.title, description: p.desc, image: SITE + p.image, datePublished: p.date, dateModified: p.date,
         author: { "@type": "Organization", name: "Kamboh Technologies", url: `${SITE}/` }, publisher: { "@id": ORG }, mainEntityOfPage: url,
-        articleSection: p.category, keywords: p.tags.join(", "), inLanguage: "en", wordCount: p.body.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length },
+        ...(p.summary ? { abstract: p.summary.map((x) => x.replace(/<[^>]+>/g, "")).join(" ") } : {}), articleSection: p.category, keywords: p.tags.join(", "), inLanguage: "en", wordCount: p.body.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length },
       ...(faqs.length ? [{ "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: faqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }] : []),
     ],
   };
@@ -167,6 +183,13 @@ for (const p of posts) {
 <section class="page-hero post-hero" aria-labelledby="pageTitle">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hx-deco ph-deco" aria-hidden="true">
+    <div class="hx-glow g1"></div>
+    <div class="hx-glow g2"></div>
+    <div class="hx-blob"></div>
+    <svg class="hx-star s1" viewBox="0 0 100 100"><defs><linearGradient id="phStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".55" stop-color="#3B82F6"/><stop offset="1" stop-color="#A855F7"/></linearGradient></defs><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
+    <svg class="hx-star s2" viewBox="0 0 100 100"><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
+  </div>
   <div class="wrap post-wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog">Blog</a><span aria-hidden="true">/</span><span aria-current="page">${p.category}</span></nav>
     <span class="kicker">${p.category}</span>
@@ -180,10 +203,10 @@ for (const p of posts) {
     <figure class="post-cover"><img src="${p.image}" alt="${esc(p.imageAlt)}" width="1000" height="558" fetchpriority="high" decoding="async"></figure>
     <div class="post-layout">
       <article class="prose">
-${body}
+${(() => { let n = 0; return body.replace(/<div class="table-wrap">/g, () => tableWrap(++n)); })()}
         <ul class="tags post-tags">${p.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
       </article>
-      <aside class="post-side">
+      <div class="post-side">
         <nav class="post-toc" aria-label="In this article">
           <p class="sd-label">In this article</p>
           <ol>${toc.map(([id, t]) => `<li><a href="#${id}">${t}</a></li>`).join("")}</ol>
@@ -195,7 +218,7 @@ ${body}
           <a href="/services/${p.service[0]}" class="btn btn-primary btn-sm">View service ${ARROW}</a>
           <button type="button" class="btn btn-outline btn-sm" data-ask-ai>Ask Kamboh AI</button>
         </div>
-      </aside>
+      </div>
     </div>
   </div>
 </section>

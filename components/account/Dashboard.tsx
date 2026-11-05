@@ -65,7 +65,7 @@ export default function Dashboard({ user, data, setData, api, reload, refreshVer
       <header className="sticky top-0 z-30 border-b border-white/[.06] bg-[#07090E]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 sm:px-6">
           <a href="/" className="flex items-center gap-2.5" aria-label="Kamboh Technologies home">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-white"><img src="/logo.png" alt="" width={24} height={27} /></span>
+            <span className="grid h-9 w-9 place-items-center rounded-xl"><img src="/brand/logo-dark.png" alt="" width={24} height={27} /></span>
             <span className="hidden leading-tight sm:block">
               <span className="block text-[13px] font-extrabold tracking-[.08em]">KAMBOH</span>
               <span className="block text-[8px] font-semibold tracking-[.4em] text-slate-400">TECHNOLOGIES</span>

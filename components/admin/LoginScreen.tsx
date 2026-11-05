@@ -94,8 +94,8 @@ export default function LoginScreen() {
 
         <div className="relative z-10 flex flex-1 flex-col p-12 xl:p-16">
           <div className="flex items-center gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white shadow-lg shadow-cyan-500/30">
-              <img src="/logo.png" alt="" width={30} height={34} />
+            <span className="grid h-11 w-11 place-items-center rounded-2xl">
+              <img src="/brand/logo-dark.png" alt="" width={30} height={34} />
             </span>
             <div className="leading-tight">
               <p className="text-[15px] font-extrabold tracking-[.08em]">KAMBOH</p>
@@ -164,8 +164,8 @@ export default function LoginScreen() {
         <div className="relative w-full max-w-[400px]">
           {/* Mobile brand */}
           <div className="mb-10 flex items-center gap-3 lg:hidden">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white shadow-lg shadow-cyan-500/25">
-              <img src="/logo.png" alt="" width={30} height={34} />
+            <span className="grid h-11 w-11 place-items-center rounded-2xl">
+              <img src="/brand/logo-dark.png" alt="" width={30} height={34} />
             </span>
             <div className="leading-tight">
               <p className="text-[15px] font-extrabold tracking-[.08em]">KAMBOH</p>

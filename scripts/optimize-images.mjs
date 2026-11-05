@@ -17,7 +17,7 @@ const JOBS = [
   ["team", 640],
   [".", 1100], // about-vision.jpg and similar top-level photos
 ];
-const SKIP = new Set(["og-image.png", "og-image.jpg", "logo.png", "icon-192.png", "apple-touch-icon.png", "favicon-32.png"]);
+const SKIP = new Set(["og-image.png", "og-image.jpg", "icon-192.png", "icon-512.png", "apple-touch-icon.png", "favicon-32.png"]);
 
 const kb = (n) => `${(n / 1024).toFixed(0)}KB`;
 let before = 0, after = 0;
@@ -42,10 +42,9 @@ for (const [folder, maxW] of JOBS) {
   }
 }
 
-// Brand images: small WebP logo for <img> tags (PNG stays for structured data and the chat widget).
+// Brand logos live in public/brand/ and are built by scripts/build-brand.mjs (npm run brand).
+// Here we only shrink the app icons it produces.
 {
-  const info = await sharp(join(PUB, "logo.png")).resize({ height: 120 }).webp({ quality: 90, effort: 6 }).toFile(join(PUB, "logo.webp"));
-  console.log(`logo.webp ${kb(info.size)}`);
   for (const icon of ["icon-192.png", "apple-touch-icon.png"]) {
     const buf = await sharp(join(PUB, icon)).png({ palette: true, quality: 90, effort: 10 }).toBuffer();
     const old = statSync(join(PUB, icon)).size;
@@ -64,7 +63,6 @@ for (const [folder, maxW] of JOBS) {
 for (const page of PAGES) {
   let html = readFileSync(page, "utf8");
   for (const [from, to] of renames) html = html.split(`"${from}"`).join(`"${to}"`);
-  html = html.replace(/<img([^>]*?)src="\/logo\.png"/g, '<img$1src="/logo.webp"');
   html = html.split("/og-image.png").join("/og-image.jpg");
   writeFileSync(page, html);
 }

@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
   compress: true,
   // One URL per page: the .html files are only reachable through the clean URLs below.
   async redirects() {
-    const pages = ["about", "services", "projects", "technologies", "contact", ...LEGAL_PAGES];
+    const pages = ["about", "services", "projects", "technologies", "contact", "pricing", "reviews", ...LEGAL_PAGES];
     return [
       { source: "/index.html", destination: "/", permanent: true },
       ...pages.map((p) => ({ source: `/${p}.html`, destination: `/${p}`, permanent: true })),
@@ -55,7 +55,7 @@ const nextConfig: NextConfig = {
   },
   // Serve the static site pages in public/ at clean URLs.
   async rewrites() {
-    const pages = ["about", "services", "projects", "technologies", "contact", ...LEGAL_PAGES];
+    const pages = ["about", "services", "projects", "technologies", "contact", "pricing", "reviews", ...LEGAL_PAGES];
     return {
       beforeFiles: [
         { source: "/", destination: "/index.html" },

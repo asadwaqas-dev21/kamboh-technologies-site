@@ -146,8 +146,8 @@ export default function AuthScreen() {
 
         <div className="relative z-10 flex flex-1 flex-col p-12 xl:p-16">
           <a href="/" className="flex w-fit items-center gap-3" aria-label="Kamboh Technologies home">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white shadow-lg shadow-cyan-500/30">
-              <img src="/logo.png" alt="" width={30} height={34} />
+            <span className="grid h-11 w-11 place-items-center rounded-2xl">
+              <img src="/brand/logo-dark.png" alt="" width={30} height={34} />
             </span>
             <span className="leading-tight">
               <span className="block text-[15px] font-extrabold tracking-[.08em]">KAMBOH</span>
@@ -187,12 +187,12 @@ export default function AuthScreen() {
       </section>
 
       {/* ---------- Form panel ---------- */}
-      <section className="relative flex min-h-screen items-center justify-center px-5 py-12 sm:px-10">
+      <main id="main" className="relative flex min-h-screen items-center justify-center px-5 py-12 sm:px-10">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(34,211,238,.1),transparent_70%)] lg:hidden" />
         <div className="relative w-full max-w-[420px]">
           <a href="/" className="mb-10 flex w-fit items-center gap-3 lg:hidden" aria-label="Kamboh Technologies home">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white shadow-lg shadow-cyan-500/25">
-              <img src="/logo.png" alt="" width={30} height={34} />
+            <span className="grid h-11 w-11 place-items-center rounded-2xl">
+              <img src="/brand/logo-dark.png" alt="" width={30} height={34} />
             </span>
             <span className="leading-tight">
               <span className="block text-[15px] font-extrabold tracking-[.08em]">KAMBOH</span>
@@ -323,7 +323,7 @@ export default function AuthScreen() {
             <ArrowLeft size={15} color="currentColor" /> Back to website
           </a>
         </div>
-      </section>
+      </main>
     </div>
   );
 }

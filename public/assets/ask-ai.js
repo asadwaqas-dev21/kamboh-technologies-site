@@ -104,7 +104,7 @@
     panel.innerHTML = `
       <span aria-hidden="true" class="ask-ai-grabber"></span>
       <header class="ask-ai-header">
-        <div class="ask-ai-brand"><span class="ask-ai-avatar"><img src="/logo.png" alt="" width="28" height="31"></span>
+        <div class="ask-ai-brand"><span class="ask-ai-avatar"><img src="/brand/logo-light.webp" alt="" width="28" height="28"></span>
           <div class="ask-ai-header-copy"><h2 id="ask-ai-title">${T.title}</h2><p>${T.subtitle}</p></div></div>
         <div class="ask-ai-header-actions">
           <button type="button" class="ask-ai-icon-btn" data-act="reset" aria-label="${T.startOver}">${ICON.reset}</button>

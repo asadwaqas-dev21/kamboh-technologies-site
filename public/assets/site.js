@@ -167,6 +167,57 @@
     hero.addEventListener('pointerleave', () => { hv.style.setProperty('--px', 0); hv.style.setProperty('--py', 0); });
   }
 
+  /* ---------- hero v2: typewriter (types a word, pauses, deletes it, types the next) ---------- */
+  const rot = $('#hxRot');
+  if (rot && !reduce) {
+    const words = ['mobile apps', 'web platforms', 'custom software', 'AI automation'];
+    const caretBox = rot.parentElement;
+    // Reserve room for the longest word so the line never shifts while typing (not on small phones, where it has its own line).
+    const reserve = () => {
+      if (matchMedia('(max-width: 480px)').matches) { caretBox.style.minWidth = ''; return; }
+      const current = rot.textContent;
+      let max = 0;
+      for (const w of words) { rot.textContent = w; max = Math.max(max, rot.getBoundingClientRect().width); }
+      rot.textContent = current;
+      caretBox.style.minWidth = Math.ceil(max + 10) + 'px';
+    };
+    reserve();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(reserve);
+    addEventListener('resize', reserve, { passive: true });
+    let wi = 0, ci = words[0].length, deleting = true;
+    const tick = () => {
+      let delay;
+      if (deleting) {
+        ci--;
+        delay = 38;
+        if (ci <= 0) { ci = 0; deleting = false; wi = (wi + 1) % words.length; delay = 380; }
+      } else {
+        ci++;
+        delay = 85 + Math.random() * 50; // slight variation feels like real typing
+        if (ci >= words[wi].length) { deleting = true; delay = 1900; }
+      }
+      rot.textContent = (deleting && ci === 0) ? '' : words[wi].slice(0, ci);
+      caretBox.classList.toggle('is-typing', delay < 300);
+      setTimeout(tick, document.hidden ? 1000 : delay);
+    };
+    setTimeout(tick, 2200); // let the first word sit for a moment before deleting it
+  }
+
+  /* ---------- hero v2: process tabs (auto-advance when the progress line fills) ---------- */
+  const hxTabs = $$('.hx-tab'), hxCap = $('#hxCap');
+  if (hxTabs.length && hxCap) {
+    const select = (tab) => {
+      hxTabs.forEach(t => t.setAttribute('aria-pressed', String(t === tab)));
+      hxCap.classList.add('fade');
+      setTimeout(() => { hxCap.textContent = tab.dataset.cap; hxCap.classList.remove('fade'); }, 180);
+    };
+    hxTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(tab));
+      // The fill animation ends after 6s: move to the next step.
+      tab.querySelector('i').addEventListener('animationend', () => select(hxTabs[(i + 1) % hxTabs.length]));
+    });
+  }
+
   /* hero: pipeline card */
   const pItems = $$('#pipeSteps li'), pBar = $('#pipeBar');
   if (pItems.length && pBar) {
@@ -252,6 +303,8 @@
       const btn = document.getElementById("acctBtn"), mm = document.getElementById("mmAcct");
       if (btn) { btn.classList.add("is-in"); btn.setAttribute("aria-label", `Your account (${acct.name})`); btn.title = `Signed in as ${acct.name}`; }
       if (mm) mm.querySelector("span").textContent = `Hi ${acct.name}, open your account`;
+      const tab = document.getElementById("tabAcct");
+      if (tab) { tab.classList.add("is-in"); tab.setAttribute("aria-label", `Your account (${acct.name})`); }
     }
   } catch {}
 
@@ -376,4 +429,172 @@
         });
     });
   }
+
+  /* ---------- site search (Ctrl/Cmd+K, "/" or the Search button). Index: /search-index.json (scripts/build-search-index.mjs) ---------- */
+  (() => {
+    const ICON = {"search":"<svg aria-hidden=\"true\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M11.5 21a9.5 9.5 0 1 0 0-19 9.5 9.5 0 0 0 0 19ZM22 22l-2-2\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>","doc":"<svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M21 7v10c0 3-1.5 5-5 5H8c-3.5 0-5-2-5-5V7c0-3 1.5-5 5-5h8c3.5 0 5 2 5 5Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M14.5 4.5v2c0 1.1.9 2 2 2h2M8 13h4M8 17h8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>","box":"<svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M22 8.52V3.98C22 2.57 21.36 2 19.77 2h-4.04c-1.59 0-2.23.57-2.23 1.98v4.53c0 1.42.64 1.98 2.23 1.98h4.04c1.59.01 2.23-.56 2.23-1.97ZM22 19.77v-4.04c0-1.59-.64-2.23-2.23-2.23h-4.04c-1.59 0-2.23.64-2.23 2.23v4.04c0 1.59.64 2.23 2.23 2.23h4.04c1.59 0 2.23-.64 2.23-2.23ZM10.5 8.52V3.98C10.5 2.57 9.86 2 8.27 2H4.23C2.64 2 2 2.57 2 3.98v4.53c0 1.42.64 1.98 2.23 1.98h4.04c1.59.01 2.23-.56 2.23-1.97ZM10.5 19.77v-4.04c0-1.59-.64-2.23-2.23-2.23H4.23c-1.59 0-2.23.64-2.23 2.23v4.04C2 21.36 2.64 22 4.23 22h4.04c1.59 0 2.23-.64 2.23-2.23Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>","book":"<svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M22 16.74V4.67c0-1.2-.98-2.09-2.17-1.99h-.06c-2.1.18-5.29 1.25-7.07 2.37l-.17.11c-.29.18-.77.18-1.06 0l-.25-.15C9.44 3.9 6.26 2.84 4.16 2.67 2.97 2.57 2 3.47 2 4.66v12.08c0 .96.78 1.86 1.74 1.98l.29.04c2.17.29 5.52 1.39 7.44 2.44l.04.02c.27.15.7.15.96 0 1.92-1.06 5.28-2.17 7.46-2.46l.33-.04c.96-.12 1.74-1.02 1.74-1.98ZM12 5.49v15M7.75 8.49H5.5M8.5 11.49h-3\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>","shield":"<svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M10.49 2.23 5.5 4.11c-1.15.43-2.09 1.79-2.09 3.01v7.43c0 1.18.78 2.73 1.73 3.44l4.3 3.21c1.41 1.06 3.73 1.06 5.14 0l4.3-3.21c.95-.71 1.73-2.26 1.73-3.44V7.12c0-1.23-.94-2.59-2.09-3.02l-4.99-1.87c-.85-.31-2.21-.31-3.04 0Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"m9.05 11.87 1.61 1.61 4.3-4.3\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>","arrow":"<svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\"><path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"10\" stroke-width=\"1.5\" d=\"M8.91 19.92l6.52-6.52c.77-.77.77-2.03 0-2.8L8.91 4.08\"></path></svg>","msg":"<svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M16 2H8C4 2 2 4 2 8v13c0 .55.45 1 1 1h13c4 0 6-2 6-6V8c0-4-2-6-6-6Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M7 9.5h10M7 14.5h7\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>","flash":"<svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M6.09 13.28h3.09v7.2c0 1.68.91 2.02 2.02.76l7.57-8.6c.93-1.05.54-1.92-.87-1.92h-3.09v-7.2c0-1.68-.91-2.02-2.02-.76l-7.57 8.6c-.92 1.06-.53 1.92.87 1.92Z\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"};
+    const TYPE_ICON = { Page: ICON.doc, Service: ICON.box, Blog: ICON.book, Legal: ICON.shield };
+    const QUICK = [
+      ['Start a project', '/contact', ICON.flash, 'Tell us what you want to build'],
+      ['All services', '/services', ICON.box, 'Apps, web, software, AI, SEO, SECP and tax'],
+      ['Latest articles', '/blog', ICON.book, 'Guides on AI, apps and business setup'],
+      ['Ask Kamboh AI', '#ask-ai', ICON.msg, 'Get an instant answer from our assistant'],
+    ];
+    let index = null, loading = null, root, input, list, results = [], active = -1, lastFocus = null;
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const norm = (s) => String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '');
+    const mark = (s, toks) => {
+      let out = esc(s);
+      toks.forEach((t) => { if (t.length > 1) out = out.replace(new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); });
+      return out;
+    };
+    const load = () => loading || (loading = fetch('/search-index.json').then((r) => r.json()).then((d) => (index = d)).catch(() => (index = [])));
+
+    function build() {
+      root = document.createElement('div');
+      root.className = 'srch';
+      root.hidden = true;
+      root.innerHTML = `<div class="srch-backdrop" data-close></div>
+        <div class="srch-panel" role="dialog" aria-modal="true" aria-label="Search the website" data-lenis-prevent>
+          <div class="srch-bar">${ICON.search}
+            <input type="search" class="srch-input" placeholder="Search services, articles and pages…" autocomplete="off" spellcheck="false"
+              role="combobox" aria-expanded="true" aria-controls="srchList" aria-autocomplete="list" aria-label="Search">
+            <button type="button" class="srch-esc" data-close aria-label="Close search">Esc</button>
+          </div>
+          <div class="srch-body"><ul class="srch-list" id="srchList" role="listbox" aria-label="Search results"></ul></div>
+          <div class="srch-foot"><span><kbd>↑</kbd><kbd>↓</kbd> to move</span><span><kbd>Enter</kbd> to open</span><span><kbd>Esc</kbd> to close</span></div>
+        </div>`;
+      document.body.appendChild(root);
+      input = root.querySelector('.srch-input');
+      list = root.querySelector('.srch-list');
+      root.addEventListener('click', (e) => { if (e.target.closest('[data-close]')) close(); });
+      input.addEventListener('input', render);
+      input.addEventListener('keydown', onKey);
+      list.addEventListener('mousemove', (e) => { const li = e.target.closest('[role="option"]'); if (li) setActive(+li.dataset.i, false); });
+      list.addEventListener('click', (e) => { const a = e.target.closest('a'); if (a && a.dataset.action === 'ask') { e.preventDefault(); close(); window.dispatchEvent(new Event('askai:open')); } else if (a) close(); });
+      root.addEventListener('keydown', (e) => { // keep Tab inside the dialog
+        if (e.key !== 'Tab') return;
+        const f = [...root.querySelectorAll('input,button,a[href]')].filter((x) => x.offsetParent);
+        if (!f.length) return;
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      });
+    }
+
+    function search(q) {
+      const toks = norm(q).split(/\s+/).filter(Boolean);
+      if (!toks.length || !index) return { toks, items: [] };
+      const items = [];
+      for (const d of index) {
+        const T = norm(d.t), H = norm(d.h), D = norm(d.d), B = norm(d.b), S = d.s.map((s) => norm(s.t)).join(' | ');
+        let score = 0, ok = true;
+        for (const t of toks) {
+          let s = 0;
+          if (T.includes(t)) s += new RegExp('(^|\\W)' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).test(T) ? 14 : 9;
+          if (H.includes(t)) s += 6;
+          if (S.includes(t)) s += 4;
+          if (D.includes(t)) s += 3;
+          if (B.includes(t)) s += 1;
+          if (!s) { ok = false; break; }
+          score += s;
+        }
+        if (!ok) continue;
+        if (d.y === 'Page' || d.y === 'Service') score += 1;
+        // Best matching section, so the result can jump straight to it.
+        let sec = null;
+        if (!toks.every((t) => T.includes(t))) for (const h of d.s) { const n = norm(h.t); if (h.id && toks.every((t) => n.includes(t))) { sec = h; break; } }
+        items.push({ d, score, sec });
+      }
+      items.sort((a, b) => b.score - a.score);
+      // Keep each type together (ordered by its best result), so every group label appears once.
+      const top = items.slice(0, 8), rank = {};
+      top.forEach((it) => { if (!(it.d.y in rank)) rank[it.d.y] = Object.keys(rank).length; });
+      top.sort((a, b) => rank[a.d.y] - rank[b.d.y] || b.score - a.score);
+      return { toks, items: top };
+    }
+
+    function render() {
+      const q = input.value.trim();
+      let html = '';
+      results = [];
+      if (!q) {
+        html = `<li class="srch-label" role="presentation">Quick links</li>` + QUICK.map(([t, u, ic, d], i) => {
+          results.push(u);
+          const ask = u === '#ask-ai';
+          return `<li role="option" id="srch-${i}" data-i="${i}" aria-selected="false"><a href="${ask ? '/contact' : u}"${ask ? ' data-action="ask"' : ''}><span class="srch-ic">${ic}</span><span class="srch-tx"><b>${esc(t)}</b><small>${esc(d)}</small></span>${ICON.arrow}</a></li>`;
+        }).join('');
+      } else if (!index) {
+        html = `<li class="srch-empty" role="presentation">Loading…</li>`;
+        load().then(render);
+      } else {
+        const { toks, items } = search(q);
+        if (!items.length) {
+          html = `<li class="srch-empty" role="presentation"><b>No results for “${esc(q)}”</b><span>Try another word, or ask our assistant.</span></li>`
+            + `<li role="option" id="srch-0" data-i="0" aria-selected="false"><a href="/contact" data-action="ask"><span class="srch-ic">${ICON.msg}</span><span class="srch-tx"><b>Ask Kamboh AI</b><small>Get an instant answer to your question</small></span>${ICON.arrow}</a></li>`;
+          results.push('#ask-ai');
+        } else {
+          let lastType = '';
+          html = items.map(({ d, sec }, i) => {
+            const url = sec ? `${d.u}#${sec.id}` : d.u;
+            results.push(url);
+            const label = d.y !== lastType ? `<li class="srch-label" role="presentation">${{ Page: 'Pages', Service: 'Services', Blog: 'Articles', Legal: 'Legal' }[d.y]}</li>` : '';
+            lastType = d.y;
+            const sub = sec ? `${mark(sec.t, toks)}` : mark(d.d.length > 110 ? d.d.slice(0, 108) + '…' : d.d, toks);
+            return `${label}<li role="option" id="srch-${i}" data-i="${i}" aria-selected="false"><a href="${esc(url)}"><span class="srch-ic">${TYPE_ICON[d.y]}</span><span class="srch-tx"><b>${mark(d.t, toks)}</b><small>${sub}</small></span>${ICON.arrow}</a></li>`;
+          }).join('');
+        }
+      }
+      list.innerHTML = html;
+      setActive(results.length ? 0 : -1, false);
+    }
+
+    function setActive(i, scroll = true) {
+      active = i;
+      list.querySelectorAll('[role="option"]').forEach((li) => li.setAttribute('aria-selected', String(+li.dataset.i === i)));
+      const cur = list.querySelector(`#srch-${i}`);
+      if (cur) { input.setAttribute('aria-activedescendant', cur.id); if (scroll) cur.scrollIntoView({ block: 'nearest' }); }
+      else input.removeAttribute('aria-activedescendant');
+    }
+
+    function onKey(e) {
+      const n = results.length;
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (n) setActive((active + 1) % n); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (n) setActive((active - 1 + n) % n); }
+      else if (e.key === 'Enter') { const a = list.querySelector(`#srch-${active} a`); if (a) { e.preventDefault(); a.click(); if (!a.dataset.action) location.href = a.href; } }
+      else if (e.key === 'Escape') { e.preventDefault(); close(); }
+    }
+
+    function open() {
+      if (!root) build();
+      lastFocus = document.activeElement;
+      load();
+      root.hidden = false;
+      document.documentElement.classList.add('srch-open');
+      if (lenis) lenis.stop();
+      requestAnimationFrame(() => root.classList.add('show'));
+      input.value = '';
+      render();
+      setTimeout(() => input.focus(), 30);
+      if (window.gtag) gtag('event', 'search_open');
+    }
+    function close() {
+      if (!root || root.hidden) return;
+      root.classList.remove('show');
+      document.documentElement.classList.remove('srch-open');
+      if (lenis) lenis.start();
+      const q = input.value.trim();
+      if (q && window.gtag) gtag('event', 'search', { search_term: q.slice(0, 100) });
+      setTimeout(() => { root.hidden = true; }, 180);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.addEventListener('click', (e) => { if (e.target.closest('[data-search]')) { e.preventDefault(); open(); } });
+    addEventListener('keydown', (e) => {
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName) || document.activeElement?.isContentEditable;
+      if ((e.key === 'k' || e.key === 'K') && (e.ctrlKey || e.metaKey)) { e.preventDefault(); root && !root.hidden ? close() : open(); }
+      else if (e.key === '/' && !typing) { e.preventDefault(); open(); }
+    });
+    // Show the right shortcut hint (⌘K on Mac, Ctrl K elsewhere).
+    if (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) $$('.search-btn kbd').forEach((k) => (k.textContent = '⌘K'));
+  })();
 })();

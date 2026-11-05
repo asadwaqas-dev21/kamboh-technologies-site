@@ -13,7 +13,7 @@ const { minify } = require("next/dist/compiled/terser");
 
 const ASSETS = "public/assets";
 const PAGES = [
-  ...["index", "about", "services", "projects", "technologies", "contact"].map((p) => join("public", p + ".html")),
+  ...["index", "about", "services", "projects", "technologies", "contact", "pricing", "reviews"].filter((p) => existsSync(join("public", p + ".html"))).map((p) => join("public", p + ".html")),
   // Legal pages (scripts/build-legal.mjs), when built.
   ...["privacy-policy", "terms-and-conditions", "cookie-policy", "accessibility", "contract-information", "disclaimer"].map((p) => join("public", p + ".html")).filter((f) => existsSync(f)),
   ...readdirSync("public/services").filter((f) => f.endsWith(".html")).map((f) => join("public/services", f)),

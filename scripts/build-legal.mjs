@@ -4,6 +4,8 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { LEGAL, UPDATED } from "./legal.data.mjs";
 
 const SITE = "https://kambohtechnologies.com";
+// Scrollable tables need keyboard focus and a name (WCAG 2.1.1).
+const tableWrap = (n) => `<div class="table-wrap" tabindex="0" role="region" aria-label="Table ${n}, scrolls sideways on small screens">`;
 const ORG = `${SITE}/#organization`;
 const esc = (t) => String(t).replace(/&(?!amp;|lt;|gt;|quot;|#\d+;)/g, "&amp;").replace(/"/g, "&quot;");
 const slugify = (t) => t.toLowerCase().replace(/<[^>]+>/g, "").replace(/&amp;/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -44,6 +46,13 @@ for (const p of LEGAL) {
 <section class="page-hero post-hero legal-hero" aria-labelledby="pageTitle">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hx-deco ph-deco" aria-hidden="true">
+    <div class="hx-glow g1"></div>
+    <div class="hx-glow g2"></div>
+    <div class="hx-blob"></div>
+    <svg class="hx-star s1" viewBox="0 0 100 100"><defs><linearGradient id="phStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".55" stop-color="#3B82F6"/><stop offset="1" stop-color="#A855F7"/></linearGradient></defs><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
+    <svg class="hx-star s2" viewBox="0 0 100 100"><path d="M50 0C53 30 70 47 100 50 70 53 53 70 50 100 47 70 30 53 0 50 30 47 47 30 50 0Z" fill="url(#phStar)"/></svg>
+  </div>
   <div class="wrap post-wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Legal</span><span aria-hidden="true">/</span><span aria-current="page">${p.title}</span></nav>
     <span class="kicker">Legal</span>
@@ -53,13 +62,13 @@ for (const p of LEGAL) {
   </div>
 </section>
 
-<section class="sec post-sec legal-sec" aria-label="${esc(p.title)}">
+<section class="sec post-sec legal-sec" aria-label="${esc(p.title)}: full text">
   <div class="wrap">
     <div class="post-layout">
       <article class="prose legal-prose">
-${body}
+${(() => { let n = 0; return body.replace(/<div class="table-wrap">/g, () => tableWrap(++n)); })()}
       </article>
-      <aside class="post-side">
+      <div class="post-side">
         <nav class="post-toc" aria-label="On this page">
           <p class="sd-label">On this page</p>
           <ol>${toc.map(([id, t]) => `<li><a href="#${id}">${t}</a></li>`).join("")}</ol>
@@ -75,7 +84,7 @@ ${body}
           <p class="sd-label">Legal</p>
           <ol>${others.map((o) => `<li><a href="/${o.slug}">${o.title}</a></li>`).join("")}</ol>
         </nav>
-      </aside>
+      </div>
     </div>
   </div>
 </section>

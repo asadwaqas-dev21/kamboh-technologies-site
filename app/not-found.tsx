@@ -19,7 +19,7 @@ export default function NotFound() {
       <div className="relative max-w-lg text-center">
         <a href="/" className="mx-auto mb-10 inline-flex items-center gap-3">
           <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white">
-            <img src="/logo.webp" alt="" width={30} height={34} />
+            <img src="/brand/logo-dark.png" alt="" width={30} height={34} />
           </span>
           <span className="text-left leading-tight">
             <span className="block text-[15px] font-extrabold tracking-[.08em]">KAMBOH</span>

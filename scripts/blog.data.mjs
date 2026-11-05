@@ -153,6 +153,34 @@ export const POSTS = [
     imageAlt: "Mobile app screens on two phones",
     readMins: 6,
     service: ["mobile-app-development", "Mobile App Development"],
+    summary: [
+      "The cost of a mobile app in Pakistan depends mainly on <strong>scope</strong>: how many features it has and how complex they are.",
+      "Other big factors are one platform or two, the design, the backend and admin panel, integrations such as payments, testing and store approval, and maintenance after launch.",
+      "A cross-platform framework such as Flutter usually lowers cost, because one codebase runs on both iPhone and Android.",
+      "Launching a focused first version (an MVP) is the most reliable way to control cost and get to market sooner."
+    ],
+    faqs: [
+      [
+            "How much does it cost to build a mobile app in Pakistan?",
+            "It depends on what the app needs to do. A simple app with a few screens costs far less than one with user accounts, payments, live tracking or chat. The most accurate way to know is to list your features, then ask for a written scope and estimate based on them."
+      ],
+      [
+            "Is it cheaper to build one app for both iPhone and Android?",
+            "Usually, yes. A cross-platform framework such as Flutter uses one codebase for both platforms, which typically reduces build time and long-term maintenance compared with building two separate native apps."
+      ],
+      [
+            "What is an MVP and why does it save money?",
+            "An MVP (minimum viable product) is a first version with only the must-have features. It gets you to market faster, costs less, and lets real users show you what to build next, instead of paying for features nobody uses."
+      ],
+      [
+            "Do I need to budget for maintenance after launch?",
+            "Yes. New iOS and Android versions, security updates, bug fixes and new features all need ongoing work. Ask any development team what their support after launch looks like and include it in your budget."
+      ],
+      [
+            "What should I prepare before asking for a quote?",
+            "A short description of the app and who it is for, the three to five things users must be able to do, any reference apps you like, the integrations you need, and your ideal launch timeframe."
+      ]
+    ],
     body: `
 <p>“How much will my app cost?” is the first question almost every business asks, and the honest answer is: <strong>it depends on what the app needs to do</strong>. Two apps that look similar on the surface can take very different amounts of work behind the scenes. This guide explains the main factors so you can plan a realistic budget and compare quotes fairly.</p>
 
@@ -212,6 +240,34 @@ export const POSTS = [
     imageAlt: "SECP company registration illustration",
     readMins: 7,
     service: ["secp-company-registration", "SECP Company Registration"],
+    summary: [
+      "To register a private limited company in Pakistan, you apply online to the <strong>Securities and Exchange Commission of Pakistan (SECP)</strong>.",
+      "The main steps are: choose the company type, reserve the company name, prepare the documents and director details, file the incorporation application, and receive the certificate of incorporation.",
+      "After incorporation, register the company with the <strong>FBR</strong> for a National Tax Number (NTN).",
+      "Registration is not the end: companies must file annual returns with the SECP and tax returns with the FBR every year."
+    ],
+    faqs: [
+      [
+            "How do I register a company in Pakistan?",
+            "Apply online to the SECP: reserve a company name, prepare the incorporation documents (including the Memorandum and Articles of Association) and director details, file the incorporation application with the prescribed fee, and receive your certificate of incorporation. Then register with the FBR for an NTN."
+      ],
+      [
+            "What is the difference between a private limited and a single member company?",
+            "Both are private companies registered with the SECP. A single member company has one shareholder and director, while a private limited company usually has two or more. Your choice depends on how many owners the business has and how you plan to grow."
+      ],
+      [
+            "Do I need an NTN after registering my company?",
+            "Yes. A newly incorporated company should register with the Federal Board of Revenue for a National Tax Number. You need it to open a business bank account, issue proper invoices and file tax returns."
+      ],
+      [
+            "How can someone verify that a company is registered with the SECP?",
+            "The SECP provides an online verification service where a company's registration details can be checked, which is useful when clients or banks want to confirm that a business is genuinely incorporated."
+      ],
+      [
+            "What do companies have to do every year after registration?",
+            "File annual returns with the SECP, keep proper books of account and company records, file income tax returns with the FBR on time, and report changes such as new directors or a new registered address."
+      ]
+    ],
     body: `
 <p>Registering your business as a private limited company gives it a separate legal identity, makes it easier to open business bank accounts and sign contracts, and builds trust with clients. In Pakistan, companies are registered with the <strong>Securities and Exchange Commission of Pakistan (SECP)</strong> under the Companies Act, 2017. Here is how the process works.</p>
 
@@ -282,6 +338,30 @@ export const POSTS = [
     imageAlt: "App interface on a laptop screen",
     readMins: 6,
     service: ["mobile-app-development", "Mobile App Development"],
+    summary: [
+      "<strong>Flutter</strong> (by Google) and <strong>React Native</strong> (by Meta) both let one codebase power apps for iPhone and Android, and both are proven in production.",
+      "Flutter draws its own interface, so apps look the same on every device. React Native uses each platform's native components and suits teams that already work in JavaScript and React.",
+      "Both perform well for typical business apps; the experience of the team matters more than the framework.",
+      "Kamboh Technologies uses Flutter as its default for new cross-platform apps, but the right choice depends on your product and team."
+    ],
+    faqs: [
+      [
+            "Which is better for a business app, Flutter or React Native?",
+            "Both are excellent, proven choices. Flutter gives a very consistent look on every device from one codebase, while React Native is a natural fit for teams already strong in JavaScript and React. The best choice depends on your product, your team and your maintenance plans."
+      ],
+      [
+            "Is Flutter faster than React Native?",
+            "For most business apps, both are fast enough that users will not notice a difference. Performance depends far more on how well the app is built than on which of the two frameworks is used."
+      ],
+      [
+            "Can one codebase really run on both iPhone and Android?",
+            "Yes. That is the main benefit of both Flutter and React Native. One codebase is built into apps for both platforms, which usually reduces development time and long-term maintenance."
+      ],
+      [
+            "Which framework does Kamboh Technologies use?",
+            "Flutter is our default for new cross-platform apps, because one codebase delivers a consistent, native-quality experience on both platforms and keeps maintenance simple. We still recommend what fits each project best."
+      ]
+    ],
     body: `
 <p>If you are planning a mobile app, you will probably hear two names: <strong>Flutter</strong> and <strong>React Native</strong>. Both let a team build one app that runs on iPhone and Android, which saves time and money compared with building two separate native apps. So which one is right for your business? Here is a plain-language comparison.</p>
 

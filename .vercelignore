@@ -4,3 +4,6 @@ brand-originals/
 serviceAccount*.json
 firestore.rules
 README.md
+
+# Master logo artwork (only needed locally by npm run brand)
+brand-source/

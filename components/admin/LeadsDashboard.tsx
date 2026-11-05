@@ -91,8 +91,8 @@ export default function LeadsDashboard({ email, api, onSignOut }: Props) {
       {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-white/[.06] bg-[#0A0D16] transition-transform lg:translate-x-0 ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex items-center gap-3 px-5 py-5">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-white">
-            <img src="/logo.png" alt="" width={28} height={31} />
+          <span className="grid h-10 w-10 place-items-center rounded-xl">
+            <img src="/brand/logo-dark.png" alt="" width={28} height={31} />
           </span>
           <div className="leading-tight">
             <p className="text-[15px] font-extrabold tracking-[.06em]">KAMBOH</p>

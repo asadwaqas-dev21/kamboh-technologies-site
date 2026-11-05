@@ -19,6 +19,8 @@ const PAGES = [
   ["projects.html", "/projects", "0.7", "monthly"],
   ["technologies.html", "/technologies", "0.6", "monthly"],
   ["contact.html", "/contact", "0.8", "yearly"],
+  ["pricing.html", "/pricing", "0.8", "monthly"],
+  ["reviews.html", "/reviews", "0.6", "monthly"],
   ["blog.html", "/blog", "0.7", "weekly"],
   ...listHtml("blog").map((f) => [f, toUrl(f), "0.6", "yearly"]),
   ...["privacy-policy", "terms-and-conditions", "cookie-policy", "accessibility", "contract-information", "disclaimer"].map((p) => [p + ".html", "/" + p, "0.3", "yearly"]),

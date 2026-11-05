@@ -9,16 +9,20 @@
     "lint": "eslint",
     "assets": "node scripts/build-assets.mjs",
     "optimize-images": "node scripts/optimize-images.mjs",
-    "prebuild": "node scripts/build-assets.mjs && node scripts/build-sitemap.mjs",
+    "prebuild": "node scripts/build-assets.mjs && node scripts/build-sitemap.mjs && node scripts/build-search-index.mjs",
     "service-pages": "node scripts/build-service-pages.mjs",
     "blog": "node scripts/build-blog.mjs",
     "sitemap": "node scripts/build-sitemap.mjs",
-    "legal": "node scripts/build-legal.mjs"
+    "legal": "node scripts/build-legal.mjs",
+    "search": "node scripts/build-search-index.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
+    "brand": "node scripts/build-brand.mjs",
+    "pages": "node scripts/build-pages.mjs"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",
     "firebase": "^13.2.0",
-    "firebase-admin": "^14.5.0",
+    "firebase-admin": "^13.10.0",
     "iconsax-react": "^0.0.8",
     "next": "16.4.4",
     "react": "19.3.0",
