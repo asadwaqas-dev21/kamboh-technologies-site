@@ -1959,3 +1959,46 @@ body{background:var(--bg);color:var(--ink)}
 /* text links: Cobalt is a fill colour; as text on dark cards use the readable light cobalt */
 .link-arrow{color:rgb(var(--acc,96,165,250))}
 [data-theme="light"] .link-arrow{color:rgb(var(--acc,29,78,216))}
+
+/* =========================================================
+   TEAM PROFILE PAGES (/team/<slug>)
+   ========================================================= */
+.tm-photo{margin:6px auto 22px;width:clamp(150px,18vw,200px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:3px solid var(--surface);box-shadow:0 0 0 1px var(--line-2),0 24px 50px -24px rgba(11,18,32,.6)}
+.tm-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.tm-hero .page-title{max-width:none}
+.tm-hero .page-actions .btn svg:not(.arr){width:18px;height:18px}
+.tm-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:clamp(28px,5vw,64px);align-items:start}
+.tm-main .h2{margin-top:14px}
+.tm-prose{margin-top:20px;max-width:64ch}
+.tm-h3{margin-top:32px;font-size:1.1rem}
+.tm-tags{margin-top:14px}
+.tm-side{display:grid;gap:16px;position:sticky;top:96px}
+.tm-card{padding:22px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--surface)}
+.tm-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px}
+.tm-list li{display:flex;gap:10px;align-items:flex-start;font-size:.94rem;color:var(--ink)}
+.tm-list svg{flex:none;margin-top:1px;color:var(--accent-text)}
+.tm-contact{list-style:none;margin:10px 0 18px;padding:0;display:grid;gap:10px}
+.tm-contact li{display:grid;gap:2px}
+.tm-contact span{font-size:.75rem;color:var(--faint);text-transform:uppercase;letter-spacing:.08em}
+.tm-contact a{color:var(--ink);font-weight:600;font-size:.94rem;word-break:break-word}
+.tm-contact a:hover{color:var(--accent-text)}
+.tm-card .btn{width:100%}
+.tm-others{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:clamp(28px,4vw,40px)}
+.tm-other{display:flex;align-items:center;gap:16px;padding:16px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--surface);transition:border-color .3s,transform .45s var(--ease)}
+.tm-other:hover{border-color:var(--primary);transform:translateY(-3px)}
+.tm-other-img{flex:none;width:72px;height:72px;border-radius:50%;overflow:hidden}
+.tm-other-img img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.tm-other-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+.tm-other-body small{font-size:.75rem;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.tm-other-body b{font-size:1.05rem;color:var(--ink)}
+.tm-other .link-arrow{font-size:.85rem;margin-top:2px}
+/* About page: linked names and profile link on the team cards */
+.m-name{color:inherit}
+.m-name:hover{color:var(--accent-text)}
+.m-profile{margin:10px 0 2px;font-size:.88rem}
+@media (max-width:960px){.tm-layout{grid-template-columns:1fr}.tm-side{position:static}.tm-others{grid-template-columns:1fr}}
+/* light theme: soft, pale glossy shape instead of the dark navy one */
+[data-theme="light"] .hx-blob{opacity:.9;background:radial-gradient(60% 50% at 30% 22%,rgba(255,255,255,.9),transparent 60%),radial-gradient(70% 60% at 78% 86%,rgba(37,99,235,.14),transparent 62%),radial-gradient(60% 55% at 18% 82%,rgba(14,116,144,.10),transparent 62%),linear-gradient(150deg,#EEF4FF,#F8FAFC 72%);box-shadow:inset 0 2px 1px rgba(255,255,255,.9),inset -18px -26px 50px rgba(37,99,235,.08),0 40px 80px -46px rgba(15,23,42,.25)}
+[data-theme="light"] .hx-orb{background:radial-gradient(circle at 32% 28%,#fff,rgba(255,255,255,.4) 28%,transparent 46%),radial-gradient(circle at 70% 75%,rgba(37,99,235,.22),transparent 55%),linear-gradient(160deg,#E0EAFF,#F8FAFC);box-shadow:inset -10px -14px 30px rgba(37,99,235,.10),0 24px 50px -30px rgba(15,23,42,.3)}
+/* team profile: section heading sized for longer role titles */
+.tm-main .h2{font-size:clamp(1.7rem,1.1rem + 1.8vw,2.6rem);max-width:22ch}

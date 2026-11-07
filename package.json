@@ -17,7 +17,8 @@
     "search": "node scripts/build-search-index.mjs",
     "indexnow": "node scripts/indexnow.mjs",
     "brand": "node scripts/build-brand.mjs",
-    "pages": "node scripts/build-pages.mjs"
+    "pages": "node scripts/build-pages.mjs",
+    "team": "node scripts/build-team.mjs"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",

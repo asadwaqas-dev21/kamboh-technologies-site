@@ -16,6 +16,7 @@ const PAGES = [
   ["services.html", "/services", "0.9", "monthly"],
   ...listHtml("services").map((f) => [f, toUrl(f), "0.8", "monthly"]),
   ["about.html", "/about", "0.8", "monthly"],
+  ...listHtml("team").map((f) => [f, toUrl(f), "0.5", "monthly"]),
   ["projects.html", "/projects", "0.7", "monthly"],
   ["technologies.html", "/technologies", "0.6", "monthly"],
   ["contact.html", "/contact", "0.8", "yearly"],

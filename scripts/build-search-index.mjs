@@ -5,7 +5,7 @@ import { join } from "node:path";
 
 const PUB = "public";
 const list = (dir) => (existsSync(join(PUB, dir)) ? readdirSync(join(PUB, dir)).filter((f) => f.endsWith(".html")).map((f) => (dir ? dir + "/" : "") + f) : []);
-const files = [...list(""), ...list("services"), ...list("blog")];
+const files = [...list(""), ...list("services"), ...list("blog"), ...list("team")];
 
 const decode = (s) => s.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;|&rsquo;|’/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&[a-z]+;/g, " ");
 const text = (s) => decode(s.replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();

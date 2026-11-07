@@ -130,6 +130,46 @@
     <image:image><image:loc>https://kambohtechnologies.com/team/faisal-naveed.webp</image:loc><image:title>Faisal Naveed</image:title></image:image>
   </url>
   <url>
+    <loc>https://kambohtechnologies.com/team/abdul-sattar</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/team/abdul-sattar.webp</image:loc><image:title>Abdul Sattar, Finance Manager at Kamboh Technologies</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/asad-waqas.webp</image:loc></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/ahmad-waqas.webp</image:loc></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/faisal-naveed.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/team/ahmad-waqas</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/team/ahmad-waqas.webp</image:loc><image:title>Ahmad Waqas, Director at Kamboh Technologies</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/asad-waqas.webp</image:loc></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/abdul-sattar.webp</image:loc></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/faisal-naveed.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/team/asad-waqas</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/team/asad-waqas.webp</image:loc><image:title>Asad Waqas, Chief Executive Officer at Kamboh Technologies</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/ahmad-waqas.webp</image:loc></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/abdul-sattar.webp</image:loc></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/faisal-naveed.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://kambohtechnologies.com/team/faisal-naveed</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <image:image><image:loc>https://kambohtechnologies.com/team/faisal-naveed.webp</image:loc><image:title>Faisal Naveed, Business Development Manager at Kamboh Technologies</image:title></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/asad-waqas.webp</image:loc></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/ahmad-waqas.webp</image:loc></image:image>
+    <image:image><image:loc>https://kambohtechnologies.com/team/abdul-sattar.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://kambohtechnologies.com/projects</loc>
     <lastmod>2026-11-05</lastmod>
     <changefreq>monthly</changefreq>

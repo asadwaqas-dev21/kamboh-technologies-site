@@ -18,6 +18,7 @@ const PAGES = [
   ...["privacy-policy", "terms-and-conditions", "cookie-policy", "accessibility", "contract-information", "disclaimer"].map((p) => join("public", p + ".html")).filter((f) => existsSync(f)),
   ...readdirSync("public/services").filter((f) => f.endsWith(".html")).map((f) => join("public/services", f)),
   ...(existsSync("public/blog.html") ? ["public/blog.html"] : []),
+  ...(existsSync("public/team") ? readdirSync("public/team").filter((f) => f.endsWith(".html")).map((f) => join("public/team", f)) : []),
   ...(existsSync("public/blog") ? readdirSync("public/blog").filter((f) => f.endsWith(".html")).map((f) => join("public/blog", f)) : []),
 ];
 const hash = (buf) => createHash("sha256").update(buf).digest("hex").slice(0, 10);
