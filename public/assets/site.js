@@ -458,7 +458,7 @@
         <div class="srch-panel" role="dialog" aria-modal="true" aria-label="Search the website" data-lenis-prevent>
           <div class="srch-bar">${ICON.search}
             <input type="search" class="srch-input" placeholder="Search services, articles and pages…" autocomplete="off" spellcheck="false"
-              role="combobox" aria-expanded="true" aria-controls="srchList" aria-autocomplete="list" aria-label="Search">
+              role="combobox" aria-expanded="true" aria-controls="srchList" aria-autocomplete="list" aria-label="Search" style="border:none;outline:none;box-shadow:none;">
             <button type="button" class="srch-esc" data-close aria-label="Close search">Esc</button>
           </div>
           <div class="srch-body"><ul class="srch-list" id="srchList" role="listbox" aria-label="Search results"></ul></div>

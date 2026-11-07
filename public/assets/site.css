@@ -1648,7 +1648,8 @@ main:focus{outline:none}
 .srch.show .srch-backdrop,.srch.show .srch-panel{opacity:1}
 .srch-bar{display:flex;align-items:center;gap:10px;padding:0 12px 0 16px;border-bottom:1px solid #24344F;color:#94A3B8}
 .srch-bar>svg{width:19px;height:19px;flex:none}
-.srch-input{flex:1;min-width:0;height:54px;border:0;outline:none;background:none;color:var(--ink);font:400 1rem var(--f-body)}
+.srch-input{flex:1;min-width:0;height:54px;border:0!important;outline:none!important;box-shadow:none!important;-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;color:var(--ink);font:400 1rem var(--f-body)}
+.srch-input:focus,.srch-input:focus-visible,.srch-input:hover,.srch-input:active{border:0!important;outline:none!important;box-shadow:none!important}
 .srch-input::placeholder{color:#94A3B8}
 .srch-input::-webkit-search-cancel-button{display:none}
 .srch-esc{font:500 .72rem var(--f-body);padding:4px 8px;border-radius:6px;border:1px solid #2B3D5C;background:none;color:#94A3B8;cursor:pointer}

@@ -6,7 +6,7 @@ export const TEAM = [
     slug: "asad-waqas",
     name: "Asad Waqas",
     role: "Chief Executive Officer",
-    photo: "/team/asad-waqas.webp", w: 720, h: 814,
+    photo: "/team/asad-waqas.webp", w: 720, h: 786,
     summary: "Full-stack mobile app and frontend web developer, building cross-platform apps with Flutter and Dart and web experiences with Next.js.",
     about: [
       "Asad Waqas is the Chief Executive Officer of Kamboh Technologies (Private) Limited, the software house he leads in Johar Town, Lahore.",
