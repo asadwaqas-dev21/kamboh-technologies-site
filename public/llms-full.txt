@@ -2,7 +2,7 @@
 
 > Software house in Johar Town, Lahore, Pakistan (SECP CUIN 0297023, FBR NTN G813109). Builds mobile apps, web applications, custom software and AI automation, and offers SECP company registration and company tax filing. This file is the text of every public page at https://kambohtechnologies.com, for AI assistants and search engines. A shorter summary is at https://kambohtechnologies.com/llms.txt.
 
-Generated: 2026-11-07
+Generated: 2026-11-09
 
 
 =====
@@ -62,10 +62,6 @@ Full-stack mobile app and frontend web developer, building cross-platform apps w
 
 View profile
 
-Portfolio
-LinkedIn
-GitHub
-
 Director
 
 ### Ahmad Waqas
@@ -73,9 +69,6 @@ Director
 Oversees the company's direction and client relationships.
 
 View profile
-
-+92 300 6597024
-Email
 
 Finance Manager
 
@@ -85,9 +78,6 @@ Manages the company's finances, budgeting and accounts.
 
 View profile
 
-+1 (416) 871-5643
-Email
-
 Business Development Manager
 
 ### Faisal Naveed
@@ -95,9 +85,6 @@ Business Development Manager
 Builds client partnerships and helps businesses find the right digital solution for their goals.
 
 View profile
-
-+92 308 2693172
-Email
 
 Why Kamboh
 
@@ -983,12 +970,6 @@ Yes. Clients in Pakistan are usually invoiced in Pakistani rupees and internatio
 
 Third-party costs such as hosting, domains, app store accounts, paid APIs and government fees for SECP or FBR filings are separate. We list them clearly in your estimate.
 
-## Get a clear estimate for your project.
-
-Tell us what you want to build. We reply with questions, a suggested approach and next steps.
-
-Get a Quote Ask Kamboh AI
-
 
 ---
 
@@ -1171,12 +1152,6 @@ Support
 Your client's words about life after launch: quick responses, regular updates and the improvements you keep shipping.
 
 Client name Company or role Sample
-
-## Worked with us? We'd love your feedback.
-
-Your review helps other businesses choose with confidence. Leave a review on Google or tell us directly.
-
-Get a Quote Ask Kamboh AI
 
 
 ---

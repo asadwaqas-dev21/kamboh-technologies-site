@@ -558,9 +558,13 @@ select.inp option{background:#0E1729;color:var(--ink)}
 .foot ul a{color:#CBD5E1;font-size:.94rem;transition:color .25s;position:relative}
 .foot ul a:hover{color:#fff}
 .foot .ph-li{color:#8494B2;font-size:.92rem}
-.socials{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
-.socials span{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px dashed var(--line-2);color:#8494B2;font-size:.8rem}
-.socials svg{width:15px;height:15px}
+.socials{display:flex;gap:10px;margin-top:20px;align-items:center;flex-wrap:wrap}
+.socials a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.06);color:#CBD5E1;transition:color .2s,background-color .2s,transform .2s}
+.socials a:hover{color:#fff;background:rgba(34,211,238,.18);transform:translateY(-1px)}
+.socials a.fb:hover{background:#1877F2;color:#fff}
+.socials a.ig:hover{background:linear-gradient(135deg,#F58529,#DD2A7B 50%,#8134AF);color:#fff}
+.socials a.li:hover{background:#0A66C2;color:#fff}
+.socials svg{width:18px;height:18px;flex:none}
 .foot-word{margin-top:clamp(48px,7vw,90px);font-family:var(--f-display);font-weight:800;font-size:clamp(3rem,13vw,13rem);letter-spacing:-.06em;line-height:.8;background:linear-gradient(180deg,rgba(148,163,184,.2),rgba(148,163,184,0));-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none;white-space:nowrap;text-align:center}
 .foot-bot{margin-top:28px;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;color:var(--faint);font-size:.85rem}
 .foot-bot a{color:#CBD5E1}
@@ -950,10 +954,12 @@ select.inp option{background:#0E1729;color:var(--ink)}
 .m-role{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgb(var(--c))}
 .member h3{font-size:1.3rem;letter-spacing:-.03em}
 .m-sub{color:var(--muted);font-size:.92rem}
-.m-links{margin-top:auto;padding-top:16px;display:flex;flex-wrap:wrap;gap:8px}
-.m-links a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid var(--line-2);font-size:.82rem;font-weight:600;color:var(--muted);transition:color .25s,border-color .25s,background-color .25s}
-.m-links a:hover{color:var(--ink);border-color:var(--cyan);background:rgba(34,211,238,.06)}
-.m-links svg{width:14px;height:14px;flex:none}
+.m-links{margin-top:auto;padding-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.m-links a{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:none;background:rgba(255,255,255,.06);color:var(--muted);transition:color .2s,background-color .2s,transform .2s}
+.m-links a:hover{color:var(--cyan);background:rgba(34,211,238,.16);transform:translateY(-1px)}
+.m-links svg{width:16px;height:16px;flex:none}
+[data-theme="light"] .m-links a{background:rgba(0,0,0,.05);color:var(--muted)}
+[data-theme="light"] .m-links a:hover{color:#0284c7;background:rgba(2,132,199,.12)}
 [data-theme="light"] .m-role{filter:brightness(.8)}
 
 /* home "Why Kamboh": company logo at the centre of the rings */
@@ -1022,11 +1028,6 @@ select.inp option{background:#0E1729;color:var(--ink)}
 .map-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 :root:not([data-theme="light"]) .map-frame iframe{filter:invert(.92) hue-rotate(180deg) saturate(.7) brightness(.95) contrast(.9)}
 @media (max-width:960px){.map-card{grid-template-columns:1fr}.map-frame{min-height:320px}}
-
-/* footer: live social links (placeholders stay dashed) */
-.socials a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid var(--line-2);color:var(--ink);font-size:.8rem;font-weight:600;transition:border-color .25s,color .25s,background-color .25s}
-.socials a:hover{border-color:var(--cyan);background:rgba(34,211,238,.08)}
-.socials a.ig:hover{border-color:#E1306C;color:#fff;background:linear-gradient(135deg,#F58529,#DD2A7B 50%,#8134AF)}
 
 /* ---------- COMPANY REGISTRATION ---------- */
 .reg-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -1224,6 +1225,8 @@ main > section:not(:first-child){content-visibility:auto;contain-intrinsic-size:
 .dd-ask:hover{color:var(--ink)}
 [data-theme="light"] .dd{background:rgba(255,255,255,.98);box-shadow:0 40px 80px -36px rgba(30,41,90,.45)}
 @media (max-width:1100px){.dd{width:600px}}
+.dd.dd-projects{width:580px}
+@media (max-width:1100px){.dd.dd-projects{width:540px}}
 
 /* Mobile menu: services sub-list */
 .mmenu{overflow-y:auto}

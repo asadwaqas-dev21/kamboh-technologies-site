@@ -187,7 +187,7 @@ const ctaBand = (title, text) => `
     ${faqBlock(FAQS, "pq")}
   </div>
 </section>
-` + ctaBand("Get a clear estimate for your project.", "Tell us what you want to build. We reply with questions, a suggested approach and next steps.");
+`;
   const html = pageHead({ title: "Pricing & Engagement Models | Kamboh Technologies", desc: "How Kamboh Technologies prices projects: fixed-scope projects, dedicated teams and monthly support, with a written scope and estimate for every project.", url, ld })
     + `<body data-page="pricing">` + navToMain + main + fromMainEnd;
   writeFileSync("public/pricing.html", html);
@@ -222,7 +222,7 @@ const ctaBand = (title, text) => `
     </div>
   </div>
 </section>
-` + ctaBand("Worked with us? We'd love your feedback.", `Your review helps other businesses choose with confidence. <a href="${google}" target="_blank" rel="noopener">Leave a review on Google</a> or tell us directly.`);
+`;
   const html = pageHead({ title: "Client Reviews | Kamboh Technologies", desc: "Read what clients say about working with Kamboh Technologies, a software house in Lahore building mobile apps, web platforms and custom software.", url, ld })
     + `<body data-page="reviews">` + navToMain + main + fromMainEnd;
   writeFileSync("public/reviews.html", html);
