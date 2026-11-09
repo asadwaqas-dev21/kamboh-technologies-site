@@ -59,25 +59,25 @@ export const SITE_PAGES: SitePage[] = [
     "u": "/team/abdul-sattar",
     "t": "Abdul Sattar, Finance Manager",
     "y": "Page",
-    "d": "Abdul Sattar is the Finance Manager of Kamboh Technologies, a software house in Lahore. Manages the company's finances, budgeting and accounts."
+    "d": "Abdul Sattar is the Finance Manager at Kamboh Technologies in Lahore, managing company budgeting, financial accounts and invoicing."
   },
   {
     "u": "/team/ahmad-waqas",
     "t": "Ahmad Waqas, Director",
     "y": "Page",
-    "d": "Ahmad Waqas is the Director of Kamboh Technologies, a software house in Lahore. Oversees the company's direction and client relationships."
+    "d": "Ahmad Waqas is the Director at Kamboh Technologies in Lahore, overseeing company direction, client partnerships and relationships."
   },
   {
     "u": "/team/asad-waqas",
     "t": "Asad Waqas, Chief Executive Officer",
     "y": "Page",
-    "d": "Asad Waqas is the Chief Executive Officer of Kamboh Technologies, a software house in Lahore. Full-stack mobile app and frontend web developer, building cross"
+    "d": "Asad Waqas is the CEO of Kamboh Technologies in Lahore, building mobile apps with Flutter and web experiences with Next.js."
   },
   {
     "u": "/team/faisal-naveed",
     "t": "Faisal Naveed, Business Development Manager",
     "y": "Page",
-    "d": "Faisal Naveed is the Business Development Manager of Kamboh Technologies, a software house in Lahore. Builds client partnerships and helps businesses find the"
+    "d": "Faisal Naveed is the Business Development Manager at Kamboh Technologies in Lahore, helping clients find the right digital solutions."
   },
   {
     "u": "/services/ai-automation",

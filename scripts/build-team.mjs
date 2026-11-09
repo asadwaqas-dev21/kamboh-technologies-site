@@ -22,7 +22,7 @@ for (const m of TEAM) {
   const url = `${SITE}/team/${m.slug}`;
   const first = m.name.split(" ")[0];
   const title = `${m.name}, ${m.role} | Kamboh Technologies`;
-  const desc = `${m.name} is the ${m.role} of Kamboh Technologies, a software house in Lahore. ${m.summary}`.slice(0, 158);
+  const desc = m.metaDesc || `${m.name} is the ${m.role} of Kamboh Technologies, a software house in Lahore. ${m.summary}`.slice(0, 158);
   const person = {
     "@type": "Person", "@id": `${url}#person`, name: m.name, jobTitle: m.role, image: SITE + m.photo, url,
     worksFor: { "@id": ORG }, description: m.summary,

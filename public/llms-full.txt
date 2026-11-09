@@ -1631,7 +1631,7 @@ These practices are part of every project, so quality doesn't depend on who happ
 
 Source: https://kambohtechnologies.com/team/abdul-sattar
 Title: Abdul Sattar, Finance Manager
-Summary: Abdul Sattar is the Finance Manager of Kamboh Technologies, a software house in Lahore. Manages the company's finances, budgeting and accounts.
+Summary: Abdul Sattar is the Finance Manager at Kamboh Technologies in Lahore, managing company budgeting, financial accounts and invoicing.
 
 Home Team Abdul Sattar
 
@@ -1693,7 +1693,7 @@ Business Development Manager Faisal Naveed View profile
 
 Source: https://kambohtechnologies.com/team/ahmad-waqas
 Title: Ahmad Waqas, Director
-Summary: Ahmad Waqas is the Director of Kamboh Technologies, a software house in Lahore. Oversees the company's direction and client relationships.
+Summary: Ahmad Waqas is the Director at Kamboh Technologies in Lahore, overseeing company direction, client partnerships and relationships.
 
 Home Team Ahmad Waqas
 
@@ -1755,7 +1755,7 @@ Business Development Manager Faisal Naveed View profile
 
 Source: https://kambohtechnologies.com/team/asad-waqas
 Title: Asad Waqas, Chief Executive Officer
-Summary: Asad Waqas is the Chief Executive Officer of Kamboh Technologies, a software house in Lahore. Full-stack mobile app and frontend web developer, building cross
+Summary: Asad Waqas is the CEO of Kamboh Technologies in Lahore, building mobile apps with Flutter and web experiences with Next.js.
 
 Home Team Asad Waqas
 
@@ -1821,7 +1821,7 @@ Business Development Manager Faisal Naveed View profile
 
 Source: https://kambohtechnologies.com/team/faisal-naveed
 Title: Faisal Naveed, Business Development Manager
-Summary: Faisal Naveed is the Business Development Manager of Kamboh Technologies, a software house in Lahore. Builds client partnerships and helps businesses find the
+Summary: Faisal Naveed is the Business Development Manager at Kamboh Technologies in Lahore, helping clients find the right digital solutions.
 
 Home Team Faisal Naveed
 
