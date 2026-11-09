@@ -597,4 +597,15 @@
     // Show the right shortcut hint (⌘K on Mac, Ctrl K elsewhere).
     if (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) $$('.search-btn kbd').forEach((k) => (k.textContent = '⌘K'));
   })();
+
+  /* ---------- clickable team cards ---------- */
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.member');
+    if (!card) return;
+    if (e.target.closest('.m-links a, .m-links button')) return;
+    const link = card.querySelector('.m-profile, .m-name');
+    if (link && !e.target.closest('a')) {
+      link.click();
+    }
+  });
 })();
